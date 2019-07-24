@@ -1,19 +1,15 @@
 <?php 
 
-	defined('BASEPATH') or exit('No se permite acceso directo');
-
-	require_once PATH_MODELS . 'Login/LoginModel.php';
-	require_once PATH_LIBS . 'Session.php';
-
-	class LoginController extends Controller
+	class Login extends Controller
 	{
 		private $model;
 		private $session;
 
 		public function __construct()
 		{
-			$this->model = new LoginModel("usuarios");
-			$this->session = new Session();
+			parent::__construct();
+			//$this->model = new LoginModel("usuarios");
+			//$this->session = new Session();
 		}
 
 		public function signin($request_params)
@@ -44,9 +40,8 @@
 			$this->render(__CLASS__, $parametros);
 		}
 		
-		public function exec()
-		{
-			$this->render(__CLASS__);
+		function exec(){
+			$this->view->render(__CLASS__);
 		}
 	}
 ?>

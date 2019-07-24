@@ -19,7 +19,7 @@
             $this->uri = explode('/', URI);
         }
         public function setController(){
-            $this->controller = $this->uri[2] === '' ? 'Home' : $this->uri[2];
+            $this->controller = $this->uri[2] === '' ? 'login' : $this->uri[2];
         }
         public function setMethod(){
             $this->method = !empty($this->uri[3]) ? $this->uri[3] : 'exec';

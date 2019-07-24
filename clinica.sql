@@ -1,15 +1,28 @@
 CREATE DATABASE IF NOT EXISTS clinica;
-USE drugstore;
+USE clinica;
+
+CREATE TABLE usuarios(
+	id              int(11) auto_increment not null,
+	nombre          varchar(100) not null,
+	apellido      	varchar(255),
+	email           varchar(255) not null,
+	pass	        varchar(255) not null,
+	rol             varchar(20),
+	imagen          varchar(255),
+	CONSTRAINT pk_usuarios PRIMARY KEY(id),
+	CONSTRAINT uq_email UNIQUE(email)  #que hace UNIQUE?
+)ENGINE=InnoDb;
+INSERT INTO usuarios VALUES(NULL, 'Admin', 'Admin', 'admin@admin.com', 'admin', 'admin', null);
 
 CREATE TABLE IF NOT EXISTS medicos(
-	id_medico INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    dni VARCHAR(10) NOT NULL,
-    especialidad VARCHAR(50) NOT NULL,
-    matricula VARCHAR(20) NOT NULL,
-    domicilio VARCHAR(50),
-    telefono VARCHAR(20),
-    celular VARCHAR(20),
+	id_medico 		INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre 			VARCHAR(50) NOT NULL,
+    dni 			VARCHAR(10) NOT NULL,
+    especialidad	VARCHAR(50) NOT NULL,
+    matricula 		VARCHAR(20) NOT NULL,
+    domicilio 		VARCHAR(50),
+    telefono 		VARCHAR(20),
+    celular 		VARCHAR(20),
     PRIMARY KEY(id_medico)
 )ENGINE=INNODB;
 
@@ -24,7 +37,7 @@ CREATE TABLE IF NOT EXISTS obras_sociales(
     domicilio VARCHAR(20),
     provincia VARCHAR(20),
     codigo_postal VARCHAR(20),
-    PRIMARY KEY(id)
+    PRIMARY KEY(id_obrasociales)
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS pacientes_externos(
@@ -33,7 +46,7 @@ CREATE TABLE IF NOT EXISTS pacientes_externos(
     dni VARCHAR(10) NOT NULL,
     id_historia VARCHAR(50) NOT NULL,
     estado VARCHAR(10),
-    PRIMARY KEY(id_pacientesinternos)
+    PRIMARY KEY(id_pinternos)
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS pacientes_internos(
@@ -46,7 +59,7 @@ CREATE TABLE IF NOT EXISTS pacientes_internos(
     estado VARCHAR(10),
 	fecha_ingreso DATE,
     fecha_egreso DATE,
-    PRIMARY KEY(id_pacientesinternos)
+    PRIMARY KEY(id_pexternos)
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS medicamentos(
@@ -64,5 +77,5 @@ CREATE TABLE IF NOT EXISTS historia_clinica(
 	graduacion VARCHAR(20),
     cronico VARCHAR(10),
     casual VARCHAR(10),
-    PRIMARY KEY(id_mediamento)
+    PRIMARY KEY(id_hclinica)
 )ENGINE=INNODB;

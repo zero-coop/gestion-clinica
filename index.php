@@ -13,14 +13,14 @@
     if(!CoreHelper::validateController($controlador))
         $controlador = 'ErrorPage';
 
+        
     require PATH_CONTROLLERS . "{$controlador}.php";
-
-    $controlador.='Controller';
 
     if(!CoreHelper::validateMethodController($controlador, $metodo))
         $metodo = 'exec'; //ejecuta el metodo exec de la clase correspondiente
 
-    $controller = new $controlador();
-
-    $controller->$metodo($parametro);
+    
+    $controlador = new $controlador();
+  
+    $controlador->$metodo($parametro);
 ?>

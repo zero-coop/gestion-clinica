@@ -1,5 +1,5 @@
 <?php 
-	class LoginModel extends Model
+	class Login extends Model
 	{
 		//private $table;
 		public function __construct()

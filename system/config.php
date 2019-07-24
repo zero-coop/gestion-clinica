@@ -4,7 +4,7 @@
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASSWORD', '');
-define('DB', 'drugstore');
+define('DB', 'clinica');
 
 //Define constaste para la URI
 define('URI', $_SERVER['REQUEST_URI']);
@@ -30,7 +30,7 @@ define('HELPER_PATH', 'system/helpers/');
 define('PATH_LIBS', 'system/libs/');
 
 //Define ruta Root
-define('FOLDER_PATH', '/Drugstore_mvc');
+define('FOLDER_PATH', '/gestion-clinica');
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 

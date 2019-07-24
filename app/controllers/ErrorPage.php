@@ -2,17 +2,16 @@
 /**
 * 
 */
-class ErrorPageController extends Controller
+class ErrorPage extends Controller
 {
-  public $path_inicio;
   
   public function __construct()
   {
-    $this->path_inicio = FOLDER_PATH;
+    parent::__construct();
+    //echo __CLASS__;
   }
-  
-  public function exec()
-  {
-    $this->render(__CLASS__, array('path_inicio' => $this->path_inicio));
+
+  function exec(){
+    $this->view->render(__CLASS__);
   }
 } 
