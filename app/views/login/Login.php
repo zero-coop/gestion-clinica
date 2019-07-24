@@ -69,13 +69,13 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin" method="POST" action="<?= FOLDER_PATH . '/Login/signin' ?>">
+  <form class="form-signin" method="POST" action="<?= 'Usuario/login' ?>">
     <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Por favor inicie sesion</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="idUser" name="nUser" class="form-control" placeholder="Nombre de Usuario" required autofocus>
+    <input type="email" id="" name="email" class="form-control" placeholder="Email" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="idPassword" name="nPassword" class="form-control" placeholder="Contraseña" required>
+    <input type="password" id="" name="password" class="form-control" placeholder="Contraseña" required>
     <?php !empty($error_message) ? print($error_message) : ''; ?>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesion</button>
   </form>

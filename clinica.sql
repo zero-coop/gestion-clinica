@@ -1,12 +1,13 @@
 CREATE DATABASE IF NOT EXISTS clinica;
 USE clinica;
+# DROP DATABASE clinica;
 
 CREATE TABLE usuarios(
 	id              int(11) auto_increment not null,
 	nombre          varchar(100) not null,
 	apellido      	varchar(255),
 	email           varchar(255) not null,
-	pass	        varchar(255) not null,
+	password        varchar(255) not null,
 	rol             varchar(20),
 	imagen          varchar(255),
 	CONSTRAINT pk_usuarios PRIMARY KEY(id),

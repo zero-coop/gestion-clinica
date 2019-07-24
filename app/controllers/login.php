@@ -8,9 +8,10 @@
 		public function __construct()
 		{
 			parent::__construct();
-			//$this->model = new LoginModel("usuarios");
-			//$this->session = new Session();
 		}
+
+
+		
 
 		public function signin($request_params)
 		{

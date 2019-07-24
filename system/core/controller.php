@@ -11,6 +11,13 @@
 			$this->view = new View();
 		}
 
+		public function loadModel(){
+			
+		}
+
+
+
+
 		abstract public function exec();
 	}
 ?>

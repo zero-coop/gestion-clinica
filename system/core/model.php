@@ -1,20 +1,18 @@
 <?php 
-
-	defined('BASEPATH') or exit('No se permite acceso directo');
 	
 	class Model
 	{
-		protected $conexiondb;
-		protected $table;
-
-
+		private $database;
+		
 		public function __construct()
 		{
-            $this->conexiondb=new mysqli(HOST, USER, PASSWORD, DB);
-        	if($this->conexiondb->connect_error){
-		        die("Ocurrió un error al intentar conectar la db");
-			}
+			$this->database = new Database();
 		}
+
+		
+
+
+
 
 		public function getBy($column, $value){
 			$sql=$this->conexiondb->query("SELECT * FROM $this->table WHERE $column='$value'");
