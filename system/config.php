@@ -30,7 +30,7 @@ define('HELPER_PATH', 'system/helpers/');
 define('PATH_LIBS', 'system/libs/');
 
 //Define ruta Root
-define('FOLDER_PATH', '/gestion-clinica');
+define('FOLDER_PATH', '/gestion-clinica/');
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 

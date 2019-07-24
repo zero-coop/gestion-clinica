@@ -69,14 +69,14 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin" method="POST" action="<?= 'Usuario/login' ?>">
+  <form class="form-signin" method="POST" action="<?= 'login/login' ?>">
     <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Por favor inicie sesion</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="" name="email" class="form-control" placeholder="Email" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="" name="password" class="form-control" placeholder="Contraseña" required>
-    <?php !empty($error_message) ? print($error_message) : ''; ?>
+    <?php !empty($_SESSION['error_login']) ? print($_SESSION['error_login']) : ''; ?>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesion</button>
   </form>
 </body>

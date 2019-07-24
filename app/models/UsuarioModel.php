@@ -1,6 +1,7 @@
 <?php
 
-class UsuarioModel{
+class UsuarioModel
+{
 	private $id;
 	private $nombre;
 	private $apellidos;
@@ -9,91 +10,108 @@ class UsuarioModel{
 	private $rol;
 	private $imagen;
 	private $db;
-	
-	public function __construct() {
+
+	public function __construct()
+	{
 		$this->db = Database::connect();
 	}
-	
-	function getId() {
+
+	function getId()
+	{
 		return $this->id;
 	}
 
-	function getNombre() {
+	function getNombre()
+	{
 		return $this->nombre;
 	}
 
-	function getApellidos() {
+	function getApellidos()
+	{
 		return $this->apellidos;
 	}
 
-	function getEmail() {
+	function getEmail()
+	{
 		return $this->email;
 	}
 
-	function getPassword() {
+	function getPassword()
+	{
 		return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
 	}
 
-	function getRol() {
+	function getRol()
+	{
 		return $this->rol;
 	}
 
-	function getImagen() {
+	function getImagen()
+	{
 		return $this->imagen;
 	}
 
-	function setId($id) {
+	function setId($id)
+	{
 		$this->id = $id;
 	}
 
-	function setNombre($nombre) {
+	function setNombre($nombre)
+	{
 		$this->nombre = $this->db->real_escape_string($nombre);
 	}
 
-	function setApellidos($apellidos) {
+	function setApellidos($apellidos)
+	{
 		$this->apellidos = $this->db->real_escape_string($apellidos);
 	}
 
-	function setEmail($email) {
+	function setEmail($email)
+	{
 		$this->email = $this->db->real_escape_string($email);
 	}
 
-	function setPassword($password) {
+	function setPassword($password)
+	{
 		$this->password = $password;
 	}
 
-	function setRol($rol) {
+	function setRol($rol)
+	{
 		$this->rol = $rol;
 	}
 
-	function setImagen($imagen) {
+	function setImagen($imagen)
+	{
 		$this->imagen = $imagen;
 	}
 
-	public function save(){
+	public function save()
+	{
 		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', 'user', null);";
 		$save = $this->db->query($sql);
-		
+
 		$result = false;
-		if($save){
+		if ($save) {
 			$result = true;
 		}
 		return $result;
 	}
-	
-	public function login(){
+
+	public function login()
+	{
 		$result = false;
 		$email = $this->email;
 		$password = $this->password;
-		
+
 		$sql = "SELECT * FROM usuarios WHERE email = '$email'";
 		$login = $this->db->query($sql);
-		
-		if($login && $login->num_rows == 1){
+
+		if ($login && $login->num_rows == 1) {
 			$usuario = $login->fetch_object();
 			$verify = password_verify($password, $usuario->password);
 
-			if($verify){
+			if ($verify) {
 				$result = $usuario;
 			}
 		}
