@@ -13,7 +13,7 @@ class Login extends Controller
 		$this->view->render(__CLASS__);
 	}
 
-	public function login()
+	public function sigin()
 	{
 		if (isset($_POST)) {
 			$usuario = new UsuarioModel();
@@ -32,7 +32,7 @@ class Login extends Controller
 				//echo "Correo: ". $_SESSION['identity']->email . "<br>";
 				//echo "ROL: ". $_SESSION['identity']->rol . "<br>";
 
-				//header('Location:'. PATH_CONTROLLERS . 'home');
+				header('Location:'. FOLDER_PATH . 'home');
 
 			} else {
 				$_SESSION['error_login'] = 'Datos erroneos';

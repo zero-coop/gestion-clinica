@@ -8,10 +8,10 @@
 
     $controlador = $router->getController();
     $metodo = $router->getMethod();
-    $parametro = $router->getParam();
+    $parametro = $router->getParameter();
 
     if(!CoreHelper::validateController($controlador)){
-        $controlador = 'ErrorPage';
+        $controlador = 'errorpage';
     }
         
     require PATH_CONTROLLERS . "{$controlador}.php";
@@ -19,8 +19,12 @@
     if(!CoreHelper::validateMethodController($controlador, $metodo)){
         $metodo = 'exec'; //ejecuta el metodo exec de la clase correspondiente
     }
-    //echo $controlador;
+
+    echo 'controlador: ' . $controlador . ',' . ' metodo: ' . $metodo. '</br>' ;
+    echo URI;
+
     $controlador = new $controlador();
     //echo $metodo;
     $controlador->$metodo($parametro);
-
+    
+    
