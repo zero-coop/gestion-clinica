@@ -13,7 +13,8 @@ CREATE TABLE usuarios(
 	CONSTRAINT pk_usuarios PRIMARY KEY(id),
 	CONSTRAINT uq_email UNIQUE(email)  #que hace UNIQUE?
 )ENGINE=InnoDb;
-INSERT INTO usuarios VALUES(NULL, 'Admin', 'Admin', 'admin@admin.com', 'admin', 'admin', null);
+INSERT INTO usuarios VALUES(NULL, 'Admin', 'Admin', 'admin@admin.com', '$2y$04$7sWb2/3LWRzPXqHViRlGCe/D4vck1BuxkkVJo49qeRcfQY9kzb0TC', 'admin', null);
+#contraseña encriptada (admin)
 
 CREATE TABLE IF NOT EXISTS medicos(
 	id_medico 		INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
