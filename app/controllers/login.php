@@ -33,6 +33,7 @@ class Login extends Controller
 				//echo "ROL: ". $_SESSION['identity']->rol . "<br>";
 
 				header('Location:'. FOLDER_PATH . 'home');
+				//var_dump($_SESSION['identity']);
 
 			} else {
 				$_SESSION['error_login'] = 'Datos erroneos';

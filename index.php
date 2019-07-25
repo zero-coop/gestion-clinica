@@ -20,11 +20,20 @@
         $metodo = 'exec'; //ejecuta el metodo exec de la clase correspondiente
     }
 
-    echo 'controlador: ' . $controlador . ',' . ' metodo: ' . $metodo. '</br>' ;
-    echo URI;
-
+    //echo 'controlador: ' . $controlador . ',' . ' metodo: ' . $metodo. '</br>' ;
+    //echo URI;
+    $hide = true;
+    if ($controlador != 'login'){
+        $hide = false;
+        require_once PATH_VIEWS . 'layout/header.php';
+        require_once PATH_VIEWS . 'layout/sidebar.php';
+    }
+    
     $controlador = new $controlador();
     //echo $metodo;
     $controlador->$metodo($parametro);
-    
+
+    if (!$hide){
+        require_once PATH_VIEWS . 'layout/footer.php';
+    }
     

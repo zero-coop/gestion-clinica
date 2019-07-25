@@ -42,7 +42,5 @@ class Usuario
             $_SESSION['register'] = "failed";
         }
         header("Location:" . base_url . 'usuario/registro');
-    }
-
-    
+    }    
 } // fin clase
