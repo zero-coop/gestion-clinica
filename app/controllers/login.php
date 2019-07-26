@@ -1,5 +1,5 @@
 <?php
-require_once PATH_MODELS . 'UsuarioModel.php';
+require_once PATH_MODELS . 'UserModel.php';
 
 class Login extends Controller
 {
@@ -16,7 +16,7 @@ class Login extends Controller
 	public function sigin()
 	{
 		if (isset($_POST)) {
-			$usuario = new UsuarioModel();
+			$usuario = new UserModel();
 			$usuario->setEmail($_POST['email']);
 			$usuario->setPassword($_POST['password']);
 			$identity = $usuario->login();

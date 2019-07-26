@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioModel
+class UserModel
 {
 	private $id;
 	private $nombre;
@@ -117,4 +117,12 @@ class UsuarioModel
 		}
 		return $result;
 	}
+
+	public function userExist($email){
+		$email = $this->db->real_escape_string($email);
+		$sql = "SELECT * FROM usuarios WHERE email = '$email'";
+        return ($this->db->query($sql)); 
+	}
+
+
 }

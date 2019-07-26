@@ -14,10 +14,7 @@
 		public function loadModel(){
 			
 		}
-
-
-
-
+		
 		abstract public function exec();
 	}
 ?>
