@@ -13,6 +13,7 @@ CREATE TABLE usuarios(
 	CONSTRAINT pk_usuarios PRIMARY KEY(id),
 	CONSTRAINT uq_email UNIQUE(email)  #que hace UNIQUE?
 )ENGINE=InnoDb;
+
 INSERT INTO usuarios VALUES(NULL, 'Admin', 'Admin', 'admin@admin.com', '$2y$04$7sWb2/3LWRzPXqHViRlGCe/D4vck1BuxkkVJo49qeRcfQY9kzb0TC', 'admin', null);
 #contraseña encriptada (admin)
 
@@ -42,27 +43,18 @@ CREATE TABLE IF NOT EXISTS obras_sociales(
     PRIMARY KEY(id_obrasociales)
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS pacientes_externos(
-	id_pinternos INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS pacientes(
+	id_paciente INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
     dni VARCHAR(10) NOT NULL,
-    id_historia VARCHAR(50) NOT NULL,
-    estado VARCHAR(10),
-    PRIMARY KEY(id_pinternos)
+    sexo VARCHAR(19) NOT NULL,
+    obra_social VARCHAR(50) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+
+    PRIMARY KEY(id_paciente)
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS pacientes_internos(
-	id_pexternos INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    dni VARCHAR(10) NOT NULL,
-    fecha_nacimiento VARCHAR (20),
-    id_historia VARCHAR(50) NOT NULL,
-	n_hitoriaclinica VARCHAR (20),
-    estado VARCHAR(10),
-	fecha_ingreso DATE,
-    fecha_egreso DATE,
-    PRIMARY KEY(id_pexternos)
-)ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS medicamentos(
 	id_mediamento INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
