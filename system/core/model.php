@@ -9,11 +9,6 @@
 			$this->database = new Database();
 		}
 
-		
-
-
-
-
 		public function getBy($column, $value){
 			$sql=$this->conexiondb->query("SELECT * FROM $this->table WHERE $column='$value'");
 			while($row = $sql->fetch_object()) {
@@ -30,5 +25,4 @@
 			}
 			return $resultSet;
 		}
-	
 	}

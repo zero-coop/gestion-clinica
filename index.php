@@ -13,7 +13,7 @@
     if(!CoreHelper::validateController($controlador)){
         $controlador = 'errorpage';
     }
-        
+
     require PATH_CONTROLLERS . "{$controlador}.php";
 
     if(!CoreHelper::validateMethodController($controlador, $metodo)){
@@ -29,7 +29,7 @@
     //    require_once PATH_VIEWS . 'layout/header.php';
     //    require_once PATH_VIEWS . 'layout/sidebar.php';
    // }
-    
+
     $controlador = new $controlador();
     //echo $metodo;
     $controlador->$metodo($parametro);

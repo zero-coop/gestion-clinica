@@ -16,7 +16,7 @@
 
     <!-- Nuestro css-->
     
-    <link rel="stylesheet" type="text/css" href="<?php echo PATH_VIEWS . "static/css/index.css" ?>" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" href="<?php echo PATH_VIEWS . "login/static/css/index.css" ?>" th:href="@{/css/index.css}">
     <!-- <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}"> -->
     
 
@@ -26,20 +26,17 @@
         <div class="col-sm-8 main-section">
             <div class="modal-content">
                 <div class="col-12 user-img">
-                    <img src="<?php echo PATH_VIEWS . "static/img/user.png" ?>" th:src="@{/img/user.png}"/>
+                    <img src="<?php echo PATH_VIEWS . "login/static/img/user.png" ?>" th:src="@{/img/user.png}"/>
                 </div>
-                <form class="col-12" th:action="@{/login}" method="get">
+                <form class="col-12" action="<?= FOLDER_PATH . 'Login/signin' ?>" method="POST">
                     <div class="form-group" id="user-group">
                         <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
                     </div>
                     <div class="form-group" id="contrasena-group">
-                        <input type="password" class="form-control" placeholder="Contrasena" name="password"/>
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
                 </form>
-                <div class="col-12 forgot">
-                    <a href="#">Recordar contrasena?</a>
-                </div>
                 <div th:if="${param.error}" class="alert alert-danger" role="alert">
 		            Invalid username and password.
 		        </div>

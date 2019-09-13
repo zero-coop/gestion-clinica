@@ -121,7 +121,7 @@ class UserModel
 	public function userExist($email){
 		$email = $this->db->real_escape_string($email);
 		$sql = "SELECT * FROM usuarios WHERE email = '$email'";
-        return ($this->db->query($sql)); 
+        return ($this->db->query($sql));
 	}
 
 

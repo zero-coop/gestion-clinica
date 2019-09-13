@@ -13,7 +13,7 @@ class Login extends Controller
 		$this->view->render(__CLASS__);
 	}
 
-	public function sigin()
+	public function signin()
 	{
 		if (isset($_POST)) {
 			$usuario = new UserModel();
