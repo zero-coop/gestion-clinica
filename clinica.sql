@@ -4,6 +4,7 @@ USE clinica;
 
 CREATE TABLE usuarios(
 	id              int(11) auto_increment not null,
+    nombre_usuario varchar(255) not null,
 	nombre          varchar(100) not null,
 	apellido      	varchar(255),
 	email           varchar(255) not null,
@@ -14,7 +15,7 @@ CREATE TABLE usuarios(
 	CONSTRAINT uq_email UNIQUE(email)  #que hace UNIQUE?
 )ENGINE=InnoDb;
 
-INSERT INTO usuarios VALUES(NULL, 'Admin', 'Admin', 'admin@admin.com', '$2y$04$7sWb2/3LWRzPXqHViRlGCe/D4vck1BuxkkVJo49qeRcfQY9kzb0TC', 'admin', null);
+INSERT INTO usuarios VALUES(NULL, 'admin','Admin', 'Admin', 'admin@admin.com', 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec', 'admin', null);
 #contraseña encriptada (admin)
 
 CREATE TABLE IF NOT EXISTS medicos(

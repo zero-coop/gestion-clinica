@@ -15,33 +15,21 @@ class Login extends Controller
 
 	public function signin()
 	{
-		if (isset($_POST)) {
-			$usuario = new UserModel();
-			$usuario->setEmail($_POST['email']);
-			$usuario->setPassword($_POST['password']);
-			$identity = $usuario->login();
-
-			if ($identity && is_object($identity)) {
-				$_SESSION['identity'] = $identity;
-				if ($identity->rol == 'admin') {
-					$_SESSION['admin'] = true;
-				}
-				//echo "SESSION INICIADA <br>";
-				//echo "Nombre: ". $_SESSION['identity']->nombre . "<br>";
-				//echo "Apellido: ". $_SESSION['identity']->apellido . "<br>";
-				//echo "Correo: ". $_SESSION['identity']->email . "<br>";
-				//echo "ROL: ". $_SESSION['identity']->rol . "<br>";
-
-				header('Location:'. FOLDER_PATH . 'home');
-				//var_dump($_SESSION['identity']);
-
-			} else {
-				$_SESSION['error_login'] = 'Datos erroneos';
-				$error_message = 'ERROR!';
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
+			$password = $_POST['password'];
+			$password = hash('sha512', $password);
+			// Nos conectamos a la base de datos
+			
+			$user = new UserModel();
+			$user->setUsuario($usuario);
+			$user->setPassword($password);
+			if ($user->login()){
+				header('Location: /gestion-clinica/user'); //reemplazar "gestion-clinica" x una CONSTANTE
+			}else{
+				$_SESSION['login_error'] = true;
 				$this->exec();
 			}
-		} else {
-			echo 'ERROR!';
 		}
 	}
 

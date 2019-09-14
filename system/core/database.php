@@ -2,10 +2,20 @@
 
 class Database
 {
-	public static function connect()
+	private $host = HOST;
+	private $db = DB;
+	private $user = USER;
+	private $pass = PASSWORD;
+
+	public function conexion()
 	{
-		$db = new PDO ("mysql:host=HOST;dbname=DB","USER","PASSWORD");
-		//$db->query("SET NAMES 'utf8'");
-		return $db;
+		try {
+			$conexion = new PDO('mysql:host=localhost;dbname=clinica', 'root', '');
+			return $conexion;
+		} catch (PDOException $e) {
+			echo "Error:" . $e->getMessage();
+		} 
 	}
+
+
 }

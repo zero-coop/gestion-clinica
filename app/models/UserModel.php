@@ -7,84 +7,25 @@ class UserModel
 	private $apellidos;
 	private $email;
 	private $password;
+	private $usuario;
 	private $rol;
 	private $imagen;
 	private $db;
+	private $conexion;
 
 	public function __construct()
 	{
-		$this->db = Database::connect();
+		$this->conexion = Database::conexion();
 	}
 
-	function getId()
-	{
-		return $this->id;
+	public function setPassword($pass){
+		$this->password = $pass;
 	}
 
-	function getNombre()
-	{
-		return $this->nombre;
+	public function setUsuario($usuario){
+		$this->usuario = $usuario;
 	}
 
-	function getApellidos()
-	{
-		return $this->apellidos;
-	}
-
-	function getEmail()
-	{
-		return $this->email;
-	}
-
-	function getPassword()
-	{
-		return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
-	}
-
-	function getRol()
-	{
-		return $this->rol;
-	}
-
-	function getImagen()
-	{
-		return $this->imagen;
-	}
-
-	function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	function setNombre($nombre)
-	{
-		$this->nombre = $this->db->real_escape_string($nombre);
-	}
-
-	function setApellidos($apellidos)
-	{
-		$this->apellidos = $this->db->real_escape_string($apellidos);
-	}
-
-	function setEmail($email)
-	{
-		$this->email = $this->db->real_escape_string($email);
-	}
-
-	function setPassword($password)
-	{
-		$this->password = $password;
-	}
-
-	function setRol($rol)
-	{
-		$this->rol = $rol;
-	}
-
-	function setImagen($imagen)
-	{
-		$this->imagen = $imagen;
-	}
 
 	public function save()
 	{
@@ -100,22 +41,39 @@ class UserModel
 
 	public function login()
 	{
-		$result = false;
-		$email = $this->email;
-		$password = $this->password;
+		$statement = $this->conexion->prepare('SELECT * FROM usuarios WHERE nombre_usuario = :usuario AND password = :password');
 
-		$sql = "SELECT * FROM usuarios WHERE email = '$email'";
-		$login = $this->db->query($sql);
+		$statement->execute(array(
+			':usuario' => $this->usuario,
+			':password' => $this->password
+		));
+		
+		$resultado = $statement->fetch();
 
-		if ($login && $login->num_rows == 1) {
-			$usuario = $login->fetch_object();
-			$verify = password_verify($password, $usuario->password);
-
-			if ($verify) {
-				$result = $usuario;
-			}
+		if ($resultado !== false) {
+			$_SESSION['usuario'] = $this->usuario;
+			return true;
+		} else {
+			return false;
 		}
-		return $result;
+
+
+		// $result = false;
+		// $email = $this->email;
+		// $password = $this->password;
+
+		// $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+		// $login = $this->db->query($sql);
+
+		// if ($login && $login->num_rows == 1) {
+		// 	$usuario = $login->fetch_object();
+		// 	$verify = password_verify($password, $usuario->password);
+
+		// 	if ($verify) {
+		// 		$result = $usuario;
+		// 	}
+		// }
+		// return $result;
 	}
 
 	public function userExist($email){

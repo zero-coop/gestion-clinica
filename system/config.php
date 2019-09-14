@@ -20,6 +20,9 @@ define('PATH_CONTROLLERS', 'app/controllers/');
 //Define ruta de vistas
 define('PATH_VIEWS', 'app/views/');
 
+//Define ruta de vistas
+define('VIEWS', '/gestion-clinica/app/views/');
+
 //Prueba carpeta Static
 define('STATICSS', 'static/css/');
 

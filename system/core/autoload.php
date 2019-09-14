@@ -6,6 +6,5 @@
         }
         if(is_file(HELPER_PATH . "$class.php"))
     		return require HELPER_PATH . "$class.php";
-    	
     })
 ?>
