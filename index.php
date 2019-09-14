@@ -21,8 +21,8 @@
     if(!CoreHelper::validateMethodController($controlador, $metodo)){
         $metodo = 'exec'; //metodo "por default" si no existe metodo en la url
     }
-    $hide = true;
 
+    $hide = true;
     if ($controlador != 'login' && $controlador != 'errorpage'){
        $hide = false;
        require_once PATH_VIEWS . 'layout/header.php';
