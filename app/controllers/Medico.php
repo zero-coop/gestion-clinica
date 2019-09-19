@@ -5,7 +5,12 @@ class Medico extends Controller {
 
     public function __construct()
         {
-            parent::__construct();
+			parent::__construct();
+	}
+	
+	public function exec()
+	{
+		$this->view->render(__CLASS__);
     }
 
     public function agregarMedico(){

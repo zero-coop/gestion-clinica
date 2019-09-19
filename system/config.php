@@ -15,7 +15,7 @@ define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']);
 define('CORE', 'system/core/');
 
 //Define ruta de controladores
-define('PATH_CONTROLLERS', 'app/controllers/');
+define('PATH_CONTROLLERS', '/app/controllers/');
 
 //Define ruta de vistas
 define('PATH_VIEWS', 'app/views/');

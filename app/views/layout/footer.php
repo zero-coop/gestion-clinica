@@ -4,7 +4,7 @@
 	<div class="col-6">
 	<ul class="">
 	<h4>Direccion</h4>
-  <li class="">Urquiza 150,A4400 Salta S.A</li>
+  <li class="">Urquiza 150 - A4400 Salta</li>
   
   
 </ul>
@@ -20,8 +20,6 @@
 </div>
 
 </footer>
-
-
 	  
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
