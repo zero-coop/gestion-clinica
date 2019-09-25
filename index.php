@@ -22,18 +22,14 @@
         $metodo = 'exec'; //metodo "por default" si no existe metodo en la url
     }
 
-    $hide = true;
     if ($controlador != 'login' && $controlador != 'errorpage'){
-       $hide = false;
        require_once PATH_VIEWS . 'layout/header.php';
        require_once PATH_VIEWS . 'layout/sidebar.php';
+       require_once PATH_VIEWS . 'layout/footer.php';
     }
 
     $controlador = new $controlador();
 
     $controlador->$metodo($parametro);
 
-    if (!$hide){
-       require_once PATH_VIEWS . 'layout/footer.php';
-    }
     
