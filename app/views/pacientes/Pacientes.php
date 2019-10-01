@@ -1,42 +1,30 @@
-<!DOCTYPE html>
 
-<head>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-8">
 
+                        <h1 class="text-center my-4">Gestionar Doctores</h1>
+                        <a href="<?= base_url ?>doctor/crear">
+                            <button class="btn btn-success">
+                                Nuevo doctor
+                            </button>
+                        </a>
+                        <table class="table mt-4 table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>CUIL</th>
+                                    <th>Sexo</th>
+                                </tr>
+                            </thead>
 
-</head>
+                        </table>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-<body>
-
-    <h2>Pacientes</h2>
-
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>CUIL</th>
-            <th>Sexo</th>
-        </tr>
-        <?php
-        foreach ($param as $muestra) {
-            echo '<tr>';
-
-            echo '<td >' . $muestra['id_paciente'] . '</td>';
-            echo '<td >' . $muestra['nombre'] . '</td>';
-            echo '<td >' . $muestra['apellido'] . '</td>';
-            echo '<td >' . $muestra['cuil'] . '</td>';
-            echo '<td >' . $muestra['sexo'] . '</td>';
-        }
-
-        ?>
-
-
-    </table>
-
-
-
-</body>
-
-<html>

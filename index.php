@@ -22,17 +22,18 @@ if (!CoreHelper::validateMethodController($controlador, $metodo)) {
     $metodo = 'exec'; //metodo "por default" si no existe metodo en la url
 }
 
+$footer = false;
 if ($controlador != 'login' && $controlador != 'errorpage') {
+    $footer = true;
     require_once PATH_VIEWS . 'layout/header.php';
-    // require_once PATH_VIEWS . 'layout/sidebar.php';
-    
+    require_once PATH_VIEWS . 'layout/sidebar.php';
 }
 
 $controlador = new $controlador();
 
 $controlador->$metodo($parametro);
 
-if ($controlador != 'login' && $controlador != 'errorpage') {
+if ($footer) {
 
     require_once PATH_VIEWS . 'layout/footer.php';
 }

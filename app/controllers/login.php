@@ -18,8 +18,7 @@ class Login extends Controller
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
 			$password = $_POST['password'];
-			$password = hash('sha512', $password);
-			// Nos conectamos a la base de datos
+
 			
 			$user = new UserModel();
 			$user->setUsuario($usuario);

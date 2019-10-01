@@ -41,39 +41,22 @@ class UserModel
 
 	public function login()
 	{
-		$statement = $this->conexion->prepare('SELECT * FROM usuarios WHERE nombre_usuario = :usuario AND password = :password');
-
-		$statement->execute(array(
-			':usuario' => $this->usuario,
-			':password' => $this->password
-		));
+	
+		$result = false;
+		$usuario = $this->usuario;
+		$password = $this->password;
 		
-		$resultado = $statement->fetch();
+		$sql = "SELECT * FROM usuarios WHERE nombre_usuario = '$usuario'";
+		$login = $this->conexion->query($sql);
+		if ($login && $login->num_rows == 1) {
+			$usuario = $login->fetch_object();
 
-		if ($resultado !== false) {
-			$_SESSION['usuario'] = $this->usuario;
-			return true;
-		} else {
-			return false;
+			if( password_verify($password, $usuario->password)){
+				$result = true;
+			}
+
 		}
-
-
-		// $result = false;
-		// $email = $this->email;
-		// $password = $this->password;
-
-		// $sql = "SELECT * FROM usuarios WHERE email = '$email'";
-		// $login = $this->db->query($sql);
-
-		// if ($login && $login->num_rows == 1) {
-		// 	$usuario = $login->fetch_object();
-		// 	$verify = password_verify($password, $usuario->password);
-
-		// 	if ($verify) {
-		// 		$result = $usuario;
-		// 	}
-		// }
-		// return $result;
+		return $result;
 	}
 
 	public function userExist($email){
