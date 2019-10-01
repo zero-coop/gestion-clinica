@@ -53,7 +53,7 @@ class User extends Controller
         } else {
             $_SESSION['register'] = "failed";
         }
-        //header("Location:" . base_url . 'usuario/registro');
+        
     } 
     
 

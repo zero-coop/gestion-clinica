@@ -1,5 +1,6 @@
 <?php
 define('BASEPATH', true);
+session_start();
 
 require 'system/config.php'; //define "constantes" para la conexion a la DB y una mejor navegacion por las carpetas
 require 'system/core/autoload.php'; //hace la carga de las clases y archivos de la carpeta core
@@ -21,6 +22,18 @@ require PATH_CONTROLLERS . "{$controlador}.php";
 if (!CoreHelper::validateMethodController($controlador, $metodo)) {
     $metodo = 'exec'; //metodo "por default" si no existe metodo en la url
 }
+
+if ($controlador == 'login' && $metodo != 'logout') {
+    if (isset($_SESSION['user'])) {
+        require PATH_CONTROLLERS . "pacientes.php";
+        $controlador = 'pacientes';
+    }
+} else {
+    if (!isset($_SESSION['user'])) {
+        die("ERROR");
+    }
+}
+
 
 $footer = false;
 if ($controlador != 'login' && $controlador != 'errorpage') {

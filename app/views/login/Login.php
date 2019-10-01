@@ -45,11 +45,11 @@
                         Usuario y/o contraseña incorrectos.
                     </div>
                 <?php endif; ?>
-                <?php if (!empty($_SESSION['logout'])) : ?>
+                <!-- <?php if (isset($_SESSION['logout'])) : ?>
                     <div class="alert alert-success" role="alert">
-                        You have been logged out.
+                        Se cerro sesion exitosamente.
                     </div>
-                <?php endif; ?>
+                <?php endif; ?> -->
             </div>
         </div>
     </div>

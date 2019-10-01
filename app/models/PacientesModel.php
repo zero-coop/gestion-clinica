@@ -18,12 +18,11 @@ class PacientesModel
 	{
 		$this->conexion = Database::conexion();
     }
-
-    public function getAll(){
-        $stm=$this->conexion->query('SELECT * FROM pacientes');
-        /*Almacenamos el resultado de fetchAll en una variable*/
-        $resultado=$stm->fetchAll(PDO::FETCH_ASSOC);
-        return $resultado;
-    }
+	
+	public function getAll(){
+		$pacientes = $this->conexion->query("SELECT * FROM pacientes");
+		// var_dump($pacientes);
+		return $pacientes;
+	}
     
 }
