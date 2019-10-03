@@ -3,7 +3,7 @@
         <div class="col-12">
 
             <h1 class="text-center my-4">Gestionar Pacientes</h1>
-            <a href="#">
+            <a href="<?= FOLDER_PATH . 'pacientes/editar'?>">
                 <button class="btn btn-success">
                     Nuevo paciente
                 </button>
@@ -11,7 +11,7 @@
             <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 </ul> -->
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" action="#">
                     <input class="form-control mr-sm-2" type="text" placeholder="Buscar paciente" aria-label="Search">
                     <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>

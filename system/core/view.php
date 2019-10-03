@@ -6,8 +6,13 @@
 		}
 
 		function render($clase, $param = null){
-
-			require PATH_VIEWS . "{$clase}/{$clase}.php";
+			if(is_array($param)){
+				if(!empty($param['pagina'])){
+					require PATH_VIEWS . "{$clase}/{$param['pagina']}.php";
+				}
+			} else {
+				require PATH_VIEWS . "{$clase}/{$clase}.php";
+			}
 		}
 
 		// function render($clase){

@@ -8,7 +8,7 @@
                     <ul class="list-group">
 
                         <li class="list-group-item"><a href="#">Gestionar doctores</a></li>
-                        <li class="list-group-item"><a href="#">Gestionar pacientes</a></li>
+                        <li class="list-group-item"><a href="<?= FOLDER_PATH . 'pacientes' ?>">Gestionar pacientes</a></li>
                         <li class="list-group-item"><a href="#">Gestionar pedidos</a></li>
 
 
