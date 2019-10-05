@@ -1,52 +1,44 @@
 <?php
-define('BASEPATH', true);
 session_start();
+require_once 'autoload.php';
+require_once 'config/db.php';
+require_once 'config/parameters.php';
+require_once 'helpers/utils.php';
+require_once 'views/layout/header.php';
+require_once 'views/layout/sidebar.php';
 
-require 'system/config.php'; //define "constantes" para la conexion a la DB y una mejor navegacion por las carpetas
-require 'system/core/autoload.php'; //hace la carga de las clases y archivos de la carpeta core
+function show_error(){
+	$error = new errorController();
+	$error->index();
+}
 
-$router = new Router();
+if(isset($_GET['controller'])){
+	$nombre_controlador = $_GET['controller'].'Controller';
 
-$controlador = $router->getController(); //obtiene solo con controlador desde la url
-$metodo = $router->getMethod(); //obtiene solo el metodo desde la url
-$parametro = $router->getParameter(); //obtiene solo el parametro desde la url
-
-// Accedemos a la funcion "validateController" de la clase "CoreHelper" y le pasame por parametro el controlador para verificar que exista tal, de lo contrario el controlador sera "errorpage"
-if (!CoreHelper::validateController($controlador)) {
-    $controlador = 'errorpage';
+}elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
+	$nombre_controlador = controller_default;
+	
+}else{
+	show_error();
+	exit();
 }
 
 
-require PATH_CONTROLLERS . "{$controlador}.php";
 
-if (!CoreHelper::validateMethodController($controlador, $metodo)) {
-    $metodo = 'exec'; //metodo "por default" si no existe metodo en la url
+if(class_exists($nombre_controlador)){	
+	$controlador = new $nombre_controlador();
+	
+	if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
+		$action = $_GET['action'];
+		$controlador->$action();
+	}elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
+		$action_default = action_default;
+		$controlador->$action_default();
+	}else{
+		show_error();
+	}
+}else{
+	show_error();
 }
 
-if ($controlador == 'login' && $metodo != 'logout') {
-    if (isset($_SESSION['user'])) {
-        require PATH_CONTROLLERS . "pacientes.php";
-        $controlador = 'pacientes';
-    }
-} else {
-    if (!isset($_SESSION['user'])) {
-        die("ERROR");
-    }
-}
-
-
-$footer = false;
-if ($controlador != 'login' && $controlador != 'errorpage') {
-    $footer = true;
-    require_once PATH_VIEWS . 'layout/header.php';
-    require_once PATH_VIEWS . 'layout/sidebar.php';
-}
-
-$controlador = new $controlador();
-
-$controlador->$metodo($parametro);
-
-if ($footer) {
-
-    require_once PATH_VIEWS . 'layout/footer.php';
-}
+require_once 'views/layout/footer.php';
