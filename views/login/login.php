@@ -18,7 +18,7 @@
     <!-- Nuestro css-->
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url . "views/login/static/css/index.css" ?>" th:href="@{/css/index.css}">
-    
+
 
 
 </head>
@@ -31,7 +31,7 @@
                     <img src="<?php echo base_url . "views/login/static/img/user.png" ?>" th:src="@{/img/user.png}" />
 
                 </div>
-                <form class="col-12" action="<?= FOLDER_PATH . 'login/signin' ?>" method="POST">
+                <form class="col-12" action="<?= base_url ?>usuario/login" method="POST">
                     <div class="form-group" id="user-group">
                         <input type="text" class="form-control" placeholder="Nombre de usuario" required name="usuario" />
                     </div>

@@ -4,7 +4,7 @@ class Usuario{
 	private $id;
 	private $nombre;
 	private $apellidos;
-	private $email;
+	private $usuario;
 	private $password;
 	private $rol;
 	private $imagen;
@@ -26,8 +26,8 @@ class Usuario{
 		return $this->apellidos;
 	}
 
-	function getEmail() {
-		return $this->email;
+	function getUsuario() {
+		return $this->usuario;
 	}
 
 	function getPassword() {
@@ -54,8 +54,8 @@ class Usuario{
 		$this->apellidos = $this->db->real_escape_string($apellidos);
 	}
 
-	function setEmail($email) {
-		$this->email = $this->db->real_escape_string($email);
+	function setUsuario($usuario) {
+		$this->usuario = $this->db->real_escape_string($usuario);
 	}
 
 	function setPassword($password) {
@@ -92,11 +92,11 @@ class Usuario{
 	
 	public function login(){
 		$result = false;
-		$email = $this->email;
+		$usuario = $this->usuario;
 		$password = $this->password;
 		
 		// Comprobar si existe el usuario
-		$sql = "SELECT * FROM usuarios WHERE email = '$email'";
+		$sql = "SELECT * FROM usuarios WHERE nombre_usuario = '$usuario'";
 		$login = $this->db->query($sql);
 		
 		
