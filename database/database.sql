@@ -340,7 +340,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `password`, `rol`, `imagen`) VALUES
-(1, 'admin', 'Admin', 'Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL);
+(1, 'admin', 'Nombre_Admin', 'Apellido_Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL);
 
 --
 -- Índices para tablas volcadas

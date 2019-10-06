@@ -1,6 +1,7 @@
 <?php
 
-class Paciente{
+class Paciente
+{
 	private $id;
 	private $doctor_id;
 	private $nombreyApellido;
@@ -13,154 +14,181 @@ class Paciente{
 	private $imagen;
 
 	private $db;
-	
-	public function __construct() {
+
+	public function __construct()
+	{
 		$this->db = Database::connect();
 	}
-	
-	function getId() {
+
+	function getId()
+	{
 		return $this->id;
 	}
 
-	function getDoctor_id() {
+	function getDoctor_id()
+	{
 		return $this->doctor_id;
 	}
 
-	function getNombreyApellido() {
+	function getNombreyApellido()
+	{
 		return $this->nombreyApellido;
 	}
 
-	function getDescripcion() {
+	function getDescripcion()
+	{
 		return $this->descripcion;
 	}
 
-	function getSexo() {
+	function getSexo()
+	{
 		return $this->sexo;
 	}
 
-	function getTelefono() {
+	function getTelefono()
+	{
 		return $this->telefono;
 	}
 
-	function getDireccion() {
+	function getDireccion()
+	{
 		return $this->direccion;
 	}
 
-	function getCiudad() {
+	function getCiudad()
+	{
 		return $this->ciudad;
 	}
 
-	function getFecha() {
+	function getFecha()
+	{
 		return $this->fecha;
 	}
 
-	function getImagen() {
+	function getImagen()
+	{
 		return $this->imagen;
 	}
 
-	function setId($id) {
+	function setId($id)
+	{
 		$this->id = $id;
 	}
 
-	function setDoctor_id($doctor_id) {
+	function setDoctor_id($doctor_id)
+	{
 		$this->doctor_id = $doctor_id;
 	}
 
-	function setNombreyApellido($nombreyApellido) {
+	function setNombreyApellido($nombreyApellido)
+	{
 		$this->nombreyApellido = $this->db->real_escape_string($nombreyApellido);
 	}
 
-	function setDescripcion($descripcion) {
+	function setDescripcion($descripcion)
+	{
 		$this->descripcion = $this->db->real_escape_string($descripcion);
 	}
 
-	function setSexo($sexo) {
+	function setSexo($sexo)
+	{
 		$this->sexo = $this->db->real_escape_string($sexo);
 	}
 
-	function setTelefono($telefono) {
+	function setTelefono($telefono)
+	{
 		$this->telefono = $this->db->real_escape_string($telefono);
 	}
 
-	function setDireccion($direccion) {
+	function setDireccion($direccion)
+	{
 		$this->direccion = $this->db->real_escape_string($direccion);
 	}
 
-	function setCiudad($ciudad) {
+	function setCiudad($ciudad)
+	{
 		$this->ciudad = $ciudad;
 	}
 
-	function setFecha($fecha) {
+	function setFecha($fecha)
+	{
 		$this->fecha = $fecha;
 	}
 
-	function setImagen($imagen) {
+	function setImagen($imagen)
+	{
 		$this->imagen = $imagen;
 	}
 
-	public function getAll(){
-		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id ASC");
+	public function getAll()
+	{
+		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente ASC");
 		return $pacientes;
 	}
-	
-	public function getAllDoctor(){
+
+	public function getAllDoctor()
+	{
 		$sql = "SELECT pacientes.*, doctores.nombreyApellido FROM pacientes"
-				. "INNER JOIN doctores ON doctores.id = pacientes.doctor_id "
-				. "WHERE pacientes.doctor_id = {$this->getDoctor_id()} "
-				. "ORDER BY id DESC";
+			. "INNER JOIN doctores ON doctores.id = pacientes.doctor_id "
+			. "WHERE pacientes.doctor_id = {$this->getDoctor_id()} "
+			. "ORDER BY id DESC";
 		$pacientes = $this->db->query($sql);
 		return $pacientes;
 	}
-	
-	public function getRandom($limit){
+
+	public function getRandom($limit)
+	{
 		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY RAND() LIMIT $limit");
 		return $pacientes;
 	}
-	
-	public function getOne(){
+
+	public function getOne()
+	{
 		$paciente = $this->db->query("SELECT * FROM pacientes WHERE id = {$this->getId()}");
 		return $paciente->fetch_object();
 	}
-	
-	public function save(){
+
+	public function save()
+	{
 		$sql = "INSERT INTO pacientes VALUES(NULL, {$this->getDoctor_id()}, '{$this->getNombreyApellido()}', '{$this->getDescripcion()}', '{$this->getSexo()}',{$this->getTelefono()}, '{$this->getDireccion()}', '{$this->getCiudad()}', CURDATE(), '{$this->getImagen()}');";
 		$save = $this->db->query($sql);
-		
+
 		$result = false;
-		if($save){
+		if ($save) {
 			$result = true;
 		}
 		return $result;
 	}
-	
-	public function edit(){
+
+	public function edit()
+	{
 		$sql = "UPDATE pacientes SET nombre='{$this->getNombreyApellido()}', descripcion='{$this->getDescripcion()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',ciudad='{$this->getCiudad()}';";
-		
-		if($this->getImagen() != null){
+
+		if ($this->getImagen() != null) {
 			$sql .= ", imagen='{$this->getImagen()}'";
 		}
-		
+
 		$sql .= " WHERE id={$this->id};";
-		
-		
+
+
 		$save = $this->db->query($sql);
-		
+
 		$result = false;
-		if($save){
+		if ($save) {
 			$result = true;
 		}
 		return $result;
 	}
-	
-	public function delete(){
+
+	public function delete()
+	{
 		$sql = "DELETE FROM pacientes WHERE id={$this->id}";
 		$delete = $this->db->query($sql);
-		
+
 		$result = false;
-		if($delete){
+		if ($delete) {
 			$result = true;
 		}
 		return $result;
 	}
-	
 }
