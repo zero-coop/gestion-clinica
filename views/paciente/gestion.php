@@ -41,21 +41,28 @@
 							<th>NOMBRE Y APELLIDO</th>
 							<th>CUIL</th>
 							<th>SEXO</th>
-							<!-- <th>FECHA</th> -->
+							<th>Obra Social</th>
 							<th>ACCIONES</th>
 						</tr>
 					</thead>
 					<tbody>
+					<?php 
+						require_once 'models/obrasocial.php';
+						$obrasocial = new ObraSocial();
+			
+					?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
 							<tr>
 								<td scope="row"><?= $pac->id_paciente; ?></td>
 								<td><?= $pac->nombre ." ". $pac->apellido; ?></td>
 								<td><?= $pac->cuil; ?></td>
 								<td><?= $pac->sexo; ?></td>
-								<!-- <td><?= $pac->fecha; ?></td> -->
+								<?php $obrasocial->getObraSocial($pac->id_paciente); ?>
+								<td><?php var_dump($obra);  ?></td>
 								<td>
 									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 								</td>
 							</tr>
 						<?php endwhile; ?>

@@ -70,7 +70,7 @@ class Paciente
 		return $this->imagen;
 	}
 
-	function setId($id)
+	function setId($id) //realy??? es AI
 	{
 		$this->id = $id;
 	}

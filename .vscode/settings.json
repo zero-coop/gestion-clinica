@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "clinica",
+            "dialect": "MySQL",
+            "name": "Clinica BD",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
