@@ -57,8 +57,11 @@
 								<td><?= $pac->nombre ." ". $pac->apellido; ?></td>
 								<td><?= $pac->cuil; ?></td>
 								<td><?= $pac->sexo; ?></td>
-								<?php $obrasocial->getObraSocial($pac->id_paciente); ?>
-								<td><?php var_dump($obra);  ?></td>
+								
+								<td><?php 
+									$obra = $obrasocial->getObraSocial($pac->id_paciente); 
+									echo $obra->nombre;
+								?></td>
 								<td>
 									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>

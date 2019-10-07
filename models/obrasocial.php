@@ -107,9 +107,9 @@ class ObraSocial
     
     public function getObraSocial($id_paciente)
     {
-      //$sql = "SELECT * FROM obras_sociales WHERE id_obrasociales = (SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = '$id_paciente')"; 
-      $sql = "SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = '$id_paciente'";
-      $temp = $this->db->query($sql);
-      var_dump($temp);
+      $sql = "SELECT * FROM obras_sociales WHERE id_obrasociales = (SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = $id_paciente)";
+      $result = $this->db->query($sql);
+      $r = $result->fetch_object();
+      return $r;
     }
 }
