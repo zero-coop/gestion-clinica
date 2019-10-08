@@ -1,94 +1,162 @@
-<?php if(isset($_SESSION['identity'])): ?>
-<div class="col-10">
+<?php if (isset($_SESSION['identity'])) : ?>
+	<div class="col-10">
 
-<div class="row">
-<div class="col-12">
+		<div class="row">
+			<div class="col-12">
 
-<?php if(isset($edit) && isset($pac) && is_object($pac)): ?>
-	<h1 class="text-center my-4">Editar paciente <?=$pac->nombreyApellido?></h1>
-	<?php $url_action = base_url."paciente/save&id=".$pac->id; ?>
-	
-<?php else: ?>
-	<h1 class="text-center my-4">Nuevo paciente</h1>
-	<?php $url_action = base_url."paciente/save"; ?>
-<?php endif; ?>
-</div>
+				<?php if (isset($edit) && isset($pac) && is_object($pac)) : ?>
+					<h1 class="text-center my-4">Editar paciente <?= $pac->nombreyApellido ?></h1>
+					<?php $url_action = base_url . "paciente/save&id=" . $pac->id; ?>
 
-<div class="offset-1 col-8">
-	
+				<?php else : ?>
+					<h1 class="text-center my-4">Nuevo paciente</h1>
+					<?php $url_action = base_url . "paciente/save"; ?>
+				<?php endif; ?>
+			</div>
+
+			<div class="offset-1 col-8">
 
 
-	
-	<form action="<?=$url_action?>" method="POST" enctype="multipart/form-data">
-<div class="form-group">		
-		<label for="nombre">Nombre y Apellido :</label>
-		<input type="text" class="form-control" name="nombre" value="<?=isset($pac) && is_object($pac) ? $pac->nombreyApellido : ''; ?>"/>
 
-</div>
-<div class="form-group">
-		<label for="descripcion">Descripción :</label>
-		<textarea class="form-control" name="descripcion"><?=isset($pac) && is_object($pac) ? $pac->descripcion : ''; ?></textarea>
 
-</div>
-<div class="form-group">
-		<label for="sexo">Sexo :</label>
-		<input type="text" class="form-control" name="sexo" value="<?=isset($pac) && is_object($pac) ? $pac->sexo : ''; ?>"/>
+				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="apellido">Apellido :</label>
+						<input type="text" class="form-control" name="apellido" value="<?= isset($pac) && is_object($pac) ? $pac->nombreyApellido : ''; ?>" />
+					</div>
+					<div class="form-group">
+						<label for="nombre">Nombre :</label>
+						<input type="text" class="form-control" name="nombre" value="<?= isset($pac) && is_object($pac) ? $pac->nombreyApellido : ''; ?>" />
+					</div>
+					<div class="form-group">
+						<label for="sexo">DNI :</label>
+						<input type="text" class="form-control" name="dni" value="<?= isset($pac) && is_object($pac) ? $pac->sexo : ''; ?>" />
 
-</div>
-<div class="form-group">
-		<label for="telefono">Telefono :</label>
-		<input type="number" class="form-control" name="telefono" value="<?=isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>"/>
+					</div>
+					<div class="form-group">
+						<label for="sexo">Sexo :</label>
+						<br>
+						<input class="form-control" type="radio" name="sexo" value="Masculino"> Masculino<br>
+						<input class="form-control" type="radio" name="sexo" value="Femenino"> Femenino<br>
+				
+					</div>
+					<div class="form-group">
+						<label for="telefono">Telefono :</label>
+						<input type="number" class="form-control" name="telefono" value="<?= isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>" />
 
-</div>
-<div class="form-group">
-		<label for="direccion">Direccion :</label>
-		<input type="text" class="form-control" name="direccion" value="<?=isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>"/>
+					</div>
+					<div class="form-group">
+						<label for="direccion">Direccion :</label>
+						<input type="text" class="form-control" name="direccion" value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
 
-</div>
-<div class="form-group">
-		<label for="ciudad">Ciudad :</label>
-		<input type="text" class="form-control" name="ciudad" value="<?=isset($pac) && is_object($pac) ? $pac->ciudad : ''; ?>"/>
+					</div>
+					<div class="form-group">
+						<label for="provincia">Provincia :</label>
+						<select class="form-control" name="provincia">
+							<option value="Buenos Aires">
+								Buenos Aires
+							</option>
+							<option value="Catamarca">
+								Catamarca
+							</option>
+							<option value="Chaco">
+								Chaco
+							</option>
+							<option value="Chubut">
+								Chubut
+							</option>
+							<option value="Codoba">
+								Córdoba
+							</option>
+							<option value="Corrientes">
+								Corrientes
+							</option>
+							<option value="Entre Rios">
+								Entre Ríos
+							</option>
+							<option value="Formosa">
+								Formosa
+							</option>
+							<option value="Jujuy">
+								Jujuy
+							</option>
+							<option value="La Pampa">
+								La Pampa
+							</option>
+							<option value="La Rioja">
+								La Rioja
+							</option>
+							<option value="Mendoza">
+								Mendoza
+							</option>
+							<option value="Misiones">
+								Misiones
+							</option>
+							<option value="Neuquen">
+								Neuquén
+							</option>
+							<option value="Rio Negro">
+								Río Negro
+							</option>
+							<option value="Salta" selected>
+								Salta
+							</option>
+							<option value="San Juan">
+								San Juan
+							</option>
+							<option value="San Luis">
+								San Luis
+							</option>
+							<option value="Santa Cruz">
+								Santa Cruz
+							</option>
+							<option value="Santa Fe">
+								Santa Fe
+							</option>
+							<option value="Santiago del Estero">
+								Santiago del Estero
+							</option>
+							<option value="Tierra del Fuego">
+								Tierra del Fuego
+							</option>
+							<option value="Tucuman">
+								Tucumán
+							</option>
 
-</div>
-<div class="form-group">
-		<label for="doctor">Doctor :</label>
-		<?php $doctores = Utils::showDoctores(); ?>
-		<select class="form-control" name="doctor">
-			<?php while ($doc = $doctores->fetch_object()): ?>
-				<option value="<?= $doc->id ?>" <?=isset($pac) && is_object($pac) && $doc->id == $pac->doctor_id ? 'selected' : ''; ?>>
-					<?= $doc->nombreyApellido ?>
-				</option>
-			<?php endwhile; ?>
-		</select>
+						</select>
 
-</div>
-<div class="form-group">		
-		<label for="imagen">Imagen :</label>
-		<?php if(isset($pac) && is_object($pac) && !empty($pac->imagen)): ?>
-			<img src="<?=base_url?>uploads/images/<?=$pac->imagen?>" class="thumb"/> 
-		<?php endif; ?>
-		<input type="file" class="form-control" name="imagen" />
+					</div>
+					<div class="form-group">
+						<label for="doctor">Obra Social :</label>
+						<?php $obras = Utils::showObras(); ?>
+						<select class="form-control" name="obrasocial">
+							<?php while ($obra = $obras->fetch_object()) : ?>
+								<option value="<?= $obra->id_obrasociales ?>" <?= isset($pac) && is_object($pac) && $doc->id == $pac->doctor_id ? 'selected' : ''; ?>>
+									<?= $obra->nombre ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+					</div>
 
-</div>
-<div class="form-group">
-<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>		
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>
+					</div>
+
+				</form>
+
+			</div>
 		</div>
-
-	</form>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<?php else: ?>
-<div class="col-10">
-	
-	<div class="alert alert-warning m-5" role="alert">
-		<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?=base_url?>"></a>
 	</div>
-</div>
+	</div>
+	</div>
+
+<?php else : ?>
+	<div class="col-10">
+
+		<div class="alert alert-warning m-5" role="alert">
+			<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?= base_url ?>"></a>
+		</div>
+	</div>
 
 
 <?php endif; ?>

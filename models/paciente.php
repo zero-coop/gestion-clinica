@@ -3,13 +3,14 @@
 class Paciente
 {
 	private $id;
-	private $doctor_id;
-	private $nombreyApellido;
-	private $descripcion;
+	private $id_obra;
+	private $apellido;
+	private $nombre;
+	private $dni;
 	private $sexo;
 	private $telefono;
 	private $direccion;
-	private $ciudad;
+	private $provincia;
 	private $fecha;
 	private $imagen;
 
@@ -25,19 +26,24 @@ class Paciente
 		return $this->id;
 	}
 
-	function getDoctor_id()
+	function getIdObra()
 	{
-		return $this->doctor_id;
+		return $this->id_obra;
 	}
 
-	function getNombreyApellido()
+	function getApellido()
 	{
-		return $this->nombreyApellido;
+		return $this->apellido;
 	}
 
-	function getDescripcion()
+	function getNombre()
 	{
-		return $this->descripcion;
+		return $this->nombre;
+	}	
+
+	function getDni()
+	{
+		return $this->dni;
 	}
 
 	function getSexo()
@@ -55,10 +61,11 @@ class Paciente
 		return $this->direccion;
 	}
 
-	function getCiudad()
+	function getProvincia()
 	{
-		return $this->ciudad;
+		return $this->provincia;
 	}
+
 
 	function getFecha()
 	{
@@ -70,24 +77,31 @@ class Paciente
 		return $this->imagen;
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////
+
 	function setId($id) //realy??? es AI
 	{
 		$this->id = $id;
 	}
 
-	function setDoctor_id($doctor_id)
+	function setIdObra($id_obra)
 	{
-		$this->doctor_id = $doctor_id;
+		$this->id_obra = $id_obra;
 	}
 
-	function setNombreyApellido($nombreyApellido)
+	function setApellido($apellido)
 	{
-		$this->nombreyApellido = $this->db->real_escape_string($nombreyApellido);
+		$this->apellido = $this->db->real_escape_string($apellido);
 	}
 
-	function setDescripcion($descripcion)
+	function setNombre($nombre)
 	{
-		$this->descripcion = $this->db->real_escape_string($descripcion);
+		$this->nombre = $this->db->real_escape_string($nombre);
+	}
+
+	function setDni($dni)
+	{
+		$this->dni = $this->db->real_escape_string($dni);
 	}
 
 	function setSexo($sexo)
@@ -105,9 +119,9 @@ class Paciente
 		$this->direccion = $this->db->real_escape_string($direccion);
 	}
 
-	function setCiudad($ciudad)
+	function setProvincia($provincia)
 	{
-		$this->ciudad = $ciudad;
+		$this->provincia = $provincia;
 	}
 
 	function setFecha($fecha)
@@ -150,11 +164,19 @@ class Paciente
 
 	public function save()
 	{
-		$sql = "INSERT INTO pacientes VALUES(NULL, {$this->getDoctor_id()}, '{$this->getNombreyApellido()}', '{$this->getDescripcion()}', '{$this->getSexo()}',{$this->getTelefono()}, '{$this->getDireccion()}', '{$this->getCiudad()}', CURDATE(), '{$this->getImagen()}');";
+		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '1', NULL, '0');";
 		$save = $this->db->query($sql);
+		$paciente="SELECT id_paciente from pacientes ORDER BY id_paciente LIMIT 1";
+		$query = $this->db->query($paciente);
+		$paciente_id = $query->fetch_object()->id_paciente;
+		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, $paciente_id, {$this->getIdObra()},null)";
+			$resultado = $this->db->query($insert);
+		
+
+
 
 		$result = false;
-		if ($save) {
+		if ($resultado) {
 			$result = true;
 		}
 		return $result;

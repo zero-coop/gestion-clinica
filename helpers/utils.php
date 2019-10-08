@@ -33,6 +33,13 @@ class Utils{
 		$doctores = $doctor->getAll();
 		return $doctores;
 	}
+
+	public static function showObras(){
+		require_once 'models/obrasocial.php';
+		$obra = new ObraSocial();
+		$obras = $obra->getAll();
+		return $obras;
+	}
 	
 	public static function statsCarrito(){
 		$stats = array(

@@ -38,30 +38,32 @@
 					<thead class="thead-light">
 						<tr>
 							<th>ID</th>
-							<th>NOMBRE Y APELLIDO</th>
-							<th>CUIL</th>
+							<th>APELLIDO Y NOMBRE</th>
+							<th>DNI</th>
+							<th>EDAD</th>
 							<th>SEXO</th>
 							<th>Obra Social</th>
 							<th>ACCIONES</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php 
-						require_once 'models/obrasocial.php';
-						$obrasocial = new ObraSocial();
-			
-					?>
+						<?php
+							require_once 'models/obrasocial.php';
+							$obrasocial = new ObraSocial();
+						?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
 							<tr>
 								<td scope="row"><?= $pac->id_paciente; ?></td>
-								<td><?= $pac->nombre ." ". $pac->apellido; ?></td>
-								<td><?= $pac->cuil; ?></td>
+								<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
+								<td><?= $pac->dni; ?></td>
+								<td><?php echo "edad"; ?></td>
 								<td><?= $pac->sexo; ?></td>
-								
-								<td><?php 
-									$obra = $obrasocial->getObraSocial($pac->id_paciente); 
-									echo $obra->nombre;
-								?></td>
+
+								<td><?php
+										$obra = $obrasocial->getObraSocial($pac->id_paciente);
+										echo $obra->nombre . " | Numero: ";
+									?>
+								</td>
 								<td>
 									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>

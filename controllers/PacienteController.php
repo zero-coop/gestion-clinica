@@ -4,7 +4,8 @@ require_once 'models/paciente.php';
 class pacienteController
 {
 
-	public function index(){
+	public function index()
+	{
 		$paciente = new Paciente();
 		$pacientes = $paciente->getAll();
 
@@ -45,24 +46,27 @@ class pacienteController
 	{
 		Utils::isAdmin();
 		if (isset($_POST)) {
+			$apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
-			$descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+			$dni = isset($_POST['dni']) ? $_POST['dni'] : false;
 			$sexo = isset($_POST['sexo']) ? $_POST['sexo'] : false;
 			$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
 			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
-			$ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : false;
-			$doctor = isset($_POST['doctor']) ? $_POST['doctor'] : false;
+			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
+			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
+
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
-			if ($nombre && $descripcion && $sexo && $telefono && $direccion && $ciudad && $doctor) {
+			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia && $obrasocial) {
 				$paciente = new Paciente();
-				$paciente->setNombreyApellido($nombre);
-				$paciente->setDescripcion($descripcion);
+				$paciente->setApellido($apellido);
+				$paciente->setNombre($nombre);
+				$paciente->setDni($dni);
 				$paciente->setSexo($sexo);
 				$paciente->setTelefono($telefono);
 				$paciente->setDireccion($direccion);
-				$paciente->setCiudad($ciudad);
-				$paciente->setDoctor_id($doctor);
+				$paciente->setProvincia($provincia);
+				$paciente->setIdObra($obrasocial);
 
 				// Guardar la imagen
 				if (isset($_FILES['imagen'])) {

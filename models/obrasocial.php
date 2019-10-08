@@ -57,10 +57,9 @@ class ObraSocial
 		return $this->descuento;
     }
 
-    public function getAll() 
-    {
-        $obrasocial = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales ASC");
-        return $obrasocial;
+    public function getAll(){
+      $obras = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales DESC;");
+      return $obras;
     }
 
     public function getOne()
@@ -107,7 +106,8 @@ class ObraSocial
     
     public function getObraSocial($id_paciente)
     {
-      $sql = "SELECT * FROM obras_sociales WHERE id_obrasociales = (SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = $id_paciente)";
+      $sql = "SELECT * FROM obras_sociales WHERE id_obrasociales = (SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = $id_paciente);";
+      //echo $sql; 
       $result = $this->db->query($sql);
       $r = $result->fetch_object();
       return $r;
