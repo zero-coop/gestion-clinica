@@ -39,7 +39,7 @@ class Paciente
 	function getNombre()
 	{
 		return $this->nombre;
-	}	
+	}
 
 	function getDni()
 	{
@@ -77,7 +77,7 @@ class Paciente
 		return $this->imagen;
 	}
 
-///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
 
 	function setId($id) //realy??? es AI
 	{
@@ -166,17 +166,14 @@ class Paciente
 	{
 		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '1', NULL, '0');";
 		$save = $this->db->query($sql);
-		$paciente="SELECT id_paciente from pacientes ORDER BY id_paciente LIMIT 1";
-		$query = $this->db->query($paciente);
-		$paciente_id = $query->fetch_object()->id_paciente;
-		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, $paciente_id, {$this->getIdObra()},null)";
-			$resultado = $this->db->query($insert);
-		
+		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},null)";
+		$save2 = $this->db->query($insert);
+
 
 
 
 		$result = false;
-		if ($resultado) {
+		if ($save && $save2) {
 			$result = true;
 		}
 		return $result;
@@ -204,7 +201,7 @@ class Paciente
 
 	public function delete()
 	{
-		$sql = "DELETE FROM pacientes WHERE id={$this->id}";
+		$sql = "DELETE FROM pacientes WHERE id_paciente={$this->id}";
 		$delete = $this->db->query($sql);
 
 		$result = false;

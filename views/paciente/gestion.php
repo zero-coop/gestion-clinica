@@ -61,13 +61,13 @@
 
 								<td><?php
 										$obra = $obrasocial->getObraSocial($pac->id_paciente);
-										echo $obra->nombre . " | Numero: ";
+										echo $obra->nombre . " | Numero: " ;
 									?>
 								</td>
 								<td>
-									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
-									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
-									<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id ?>"><button type="button" class="btn btn-warning">Editar</button></a>
+									
+									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+									
 								</td>
 							</tr>
 						<?php endwhile; ?>

@@ -34,29 +34,37 @@
 
 					</div>
 					<div class="form-group">
+						<label for="fecha">Fecha Nacimiento :</label>
+						<input type="date" name="fecha">
+
+					</div>
+					<div class="form-group">
 						<label for="sexo">Sexo :</label>
 						<br>
 						<input class="form-control" type="radio" name="sexo" value="Masculino"> Masculino<br>
 						<input class="form-control" type="radio" name="sexo" value="Femenino"> Femenino<br>
 				
 					</div>
+					
 					<div class="form-group">
 						<label for="telefono">Telefono :</label>
 						<input type="number" class="form-control" name="telefono" value="<?= isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>" />
 
 					</div>
+					
 					<div class="form-group">
 						<label for="direccion">Direccion :</label>
 						<input type="text" class="form-control" name="direccion" value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
 
 					</div>
+
 					<div class="form-group">
 						<label for="provincia">Provincia :</label>
 						<select class="form-control" name="provincia">
-							<option value="Buenos Aires">
+							<option value="1">
 								Buenos Aires
 							</option>
-							<option value="Catamarca">
+							<option value="2">
 								Catamarca
 							</option>
 							<option value="Chaco">
@@ -121,6 +129,9 @@
 							</option>
 							<option value="Tucuman">
 								Tucumán
+							</option>
+							<option value="0">
+								Extranjero
 							</option>
 
 						</select>

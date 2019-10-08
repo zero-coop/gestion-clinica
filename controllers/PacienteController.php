@@ -134,8 +134,8 @@ class pacienteController
 			$id = $_GET['id'];
 			$paciente = new Paciente();
 			$paciente->setId($id);
-
 			$delete = $paciente->delete();
+			
 			if ($delete) {
 				$_SESSION['delete'] = 'complete';
 			} else {
