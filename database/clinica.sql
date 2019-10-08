@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2019 a las 04:33:36
+-- Tiempo de generación: 08-10-2019 a las 04:06:37
 -- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- Versión de PHP: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,8 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `clinica`
 --
-CREATE DATABASE IF NOT EXISTS  clinica;
-USE clinica;
+
 -- --------------------------------------------------------
 
 --
@@ -216,7 +215,7 @@ CREATE TABLE `pacientes` (
   `id_paciente` int(10) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `cuil` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `dni` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
   `sexo` varchar(19) COLLATE utf8_spanish2_ci NOT NULL,
   `telefono` varchar(14) COLLATE utf8_spanish2_ci NOT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
@@ -229,10 +228,24 @@ CREATE TABLE `pacientes` (
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `cuil`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`) VALUES
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`) VALUES
 (1, 'damian', 'canonica', '2034285983', 'm', '4556677', '25 de mayo', 1, NULL, 0),
 (2, 'susana', 'gimenez', '2084533457', 'F', '4557788', 'buenos aires 20', 2, NULL, 0),
-(3, 'juan carlos', 'lopez', '20304545457', 'M', '4556677', 'la concha de la lora 666', 1, NULL, 0);
+(3, 'juan carlos', 'lopez', '20304545457', 'M', '4556677', 'la concha de la lora 666', 1, NULL, 0),
+(9, 'Javier', 'Lerma', '34', 'masculino', '388', 'coro', 1, NULL, 0),
+(10, 'javier', 'Lerm', '34', 'masculino', '388', 'coro', 1, NULL, 0),
+(11, 'yo', 'yo', '388', 'Masculino', '3885101082', 'coronel', 1, NULL, 0),
+(12, 'test1', 'test1', '34634', 'Masculino', '388', 'javi', 1, NULL, 0),
+(13, 'JSASKLJD', 'LLAKLF', '3434', 'Masculino', '3434', 'SFDDS', 1, NULL, 0),
+(14, 'Andrés', 'Haitit', '415306262', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(15, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(16, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(17, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(18, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(19, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
+(20, 'jklasdfkl', 'sdf', '343', 'Masculino', '388', 'coronel', 1, NULL, 0),
+(21, 'jklasdfkl', 'sdf', '343', 'Masculino', '388', 'coronel', 1, NULL, 0),
+(22, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -243,17 +256,18 @@ INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `cuil`, `sexo`, `t
 CREATE TABLE `pacientesxobrasociales` (
   `id_pacientexobrasocial` int(11) NOT NULL,
   `id_paciente` int(10) NOT NULL,
-  `id_obra_social` int(11) UNSIGNED NOT NULL
+  `id_obra_social` int(11) UNSIGNED NOT NULL,
+  `numero_socio` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `pacientesxobrasociales`
 --
 
-INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`) VALUES
-(1, 1, 1),
-(2, 1, 1),
-(3, 3, 5);
+INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`, `numero_socio`) VALUES
+(1, 1, 3, NULL),
+(2, 3, 1, NULL),
+(3, 2, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -503,13 +517,13 @@ ALTER TABLE `ordenes_atencion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
