@@ -29,17 +29,17 @@
 										<span class="navbar-toggler-icon"></span>
 									</button>
 
-									<div class="collapse navbar-collapse" id="navbarSupportedContent">
-										<!-- <ul class="navbar-nav mr-auto">
-											<?php //$doctores = Utils::showDoctores(); ?>
-  											<?php //while ($doc = $doctores->fetch_object()) : ?>
+									<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+										 <ul class="navbar-nav mr-auto">
+											<// ?php $doctores = Utils::showDoctores(); ?>
+  											<// ?php while ($doc = $doctores->fetch_object()) : ?>
       										<li class="nav-item active">
-        										<a class="nav-link text-white" href="<?= base_url ?>doctor/ver&id=<?= $doc->id ?>"><?= $doc->nombreyApellido ?> <span class="sr-only">(current)</span></a>
+        										<a class="nav-link text-white" href="<// ?= base_url ?>doctor/ver&id=< // ?= $doc->id ?>">< // ?= $doc->nombreyApellido ?> <span class="sr-only">(current)</span></a>
       										</li>
-	  										<?php // endwhile; ?>
-										</ul> -->
+	  										<// ?php endwhile; ?>
+										</ul>
 										
-									</div>
+									</div> -->
 								</nav>
 
 							</div>

@@ -1,56 +1,95 @@
-<?php if(isset($_SESSION['identity'])): ?>
-<div class="col-10">
+<?php if (isset($_SESSION['identity'])) : ?>
+	<div class="col-10">
+		<div class="row">
 
-<h1 class="text-center my-4">Gestionar Doctores</h1>
-<a href="<?=base_url?>doctor/crear">
-<button class="btn btn-success">
-	Nuevo doctor
-</button>
-</a>
-<table class="table mt-4 table-bordered">
-<thead class="thead-light">
-	<tr>
-		<th>ID</th>
-		<th>NOMBRE Y APELLIDO</th>
-		<th>ESPECIALIDAD</th>
-		<th>TELEFONO</th>
-		<th>DIRECCION</th>
-		<th>CIUDAD</th>
-		<th>ACCIONES</th>
-	</tr>
-	</thead>
-	<?php while($doc = $doctores->fetch_object()): ?>
-	<tbody>
-		<tr>
-			<td scope="row"><?=$doc->id;?></td>
-			<td><?=$doc->nombreyApellido;?></td>
-			<td><strong><?=$doc->especialidad;?></strong></td>
-			<td><?=$doc->telefono;?></td>
-			<td><?=$doc->direccion;?></td>
-			<td><?=$doc->ciudad;?></td>
-			<td>
-			<a href="<?=base_url?>doctor/editar&id=<?=$doc->id?>">
-			<button type="button" name="" id="" class="btn btn-warning" btn-lg btn-block">Editar</button>
-			</a>
-			<a href="<?=base_url?>doctor/eliminar&id=<?=$doc->id?>">
-			<button type="button" name="" id="" class="btn btn-danger" btn-lg btn-block">Eliminar</button>
-			</a>
-			</td>
-		</tr>
-	</tbody>
-	<?php endwhile; ?>
-</table>
+			<div class="col-12">
 
-</div>
-</div>
-</div>
+				.<div class="row">
+					<div class="col-12">
 
-<?php else: ?>
-<div class="col-10">
-	
-	<div class="alert alert-warning m-5" role="alert">
-		<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?=base_url?>"></a>
-	</div>
-</div>
 
-<?php endif;?>
+						<h1 class="text-center my-4">Gestión de Doctores</h1>
+					</div>
+					<div class="col-6">
+
+
+						<a href="<?= base_url ?>doctor/crear">
+							<button type="button" class="btn btn-success">Agregar Doctor</button>
+						</a>
+					</div>
+
+					<div class="offset-2 col-4">
+						<form class="form-inline my-2 my-lg-0">
+							<input class="form-control mr-sm-2" type="text" placeholder="Buscar Doctor" aria-label="Search">
+							<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-12">
+
+				<?php if (isset($_SESSION['doctor']) && $_SESSION['doctor'] == 'complete') : ?>
+					<div class="alert alert-success my-4" role="alert">
+						<strong>El doctor se ha agregado correctamente</strong>
+					</div>
+				<?php elseif (isset($_SESSION['doctor']) && $_SESSION['doctor'] != 'complete') : ?>
+					<div class="alert alert-danger my-4" role="alert">
+						<strong>El doctor NO se ha agregado correctamente</strong>
+					</div>
+				<?php endif; ?>
+				 <?php Utils::deleteSession('doctor'); ?> <!-- ver -->
+
+				<?php if (isset($_SESSION['delete']) && $_SESSION['delete'] == 'complete') : ?>
+					<div class="alert alert-info my-4" role="alert">
+						<strong>El doctor ha sido borrado correctamente</strong>
+					</div>
+				<?php elseif (isset($_SESSION['delete']) && $_SESSION['delete'] != 'complete') : ?>
+					<div class="alert alert-warning my-4" role="alert">
+						<strong>El doctor NO ha sido borrado correctamente</strong>
+					</div>
+				<?php endif; ?>
+				<?php Utils::deleteSession('delete'); ?>
+
+				<table class="table mt-4 table-bordered">
+					<thead class="thead-light">
+						<tr>
+							<th>Ver</th> <!-- ver -->
+							<th>ID</th>
+							<th>Apellido y Nombre</th>
+							<th>DNI</th>
+							<th>Especialidad</th>
+							<th>Matricula</th>
+							<th>Domicilio</th>
+							<th>Telefono</th>
+							<th>Celular</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php while ($doc = $doctores->fetch_object()) : ?>
+							<tr>
+								<th>O</th>
+								<td scope="row"><?= $doc->id_medico; ?></td>
+								<td><?= $doc->apellido . ", " . $doc->nombre; ?></td>
+								<td><?= $doc->dni; ?></td>
+								<td><?= $doc->especialidad; ?></td>
+								<td><?= $doc->matricula; ?></td>
+								<td><?= $doc->domicilio; ?></td>
+								<td><?= $doc->telefono; ?></td>
+								<td><?= $doc->celular; ?></td>
+								<td>
+									<a href="<?= base_url ?>doctor/eliminar&id=<?= $doc->id_medico ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+								</td>
+							</tr>
+						<?php endwhile; ?>
+						<t/body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
+
+							<div class="alert alert-warning m-5" role="alert">
+								<strong>Necesitas ser administrador.</strong> Inicia sesion aqui <a href="<?= base_url ?>"></a>
+							</div>
+			</div>
+
+
+		<?php endif; ?>
