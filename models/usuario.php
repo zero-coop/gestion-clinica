@@ -3,9 +3,11 @@
 class Usuario
 {
 	private $id;
+	private $nombre_usuario;
 	private $nombre;
 	private $apellido;
 	private $usuario;
+	private $email;
 	private $password;
 	private $rol;
 	private $imagen;
@@ -21,19 +23,23 @@ class Usuario
 		return $this->id;
 	}
 
+	function getNombre_usuario()
+	{
+		return $this->nombre_usuario;
+	}
 	function getNombre()
 	{
 		return $this->nombre;
 	}
 
-	function getapellido()
+	function getApellido()
 	{
 		return $this->apellido;
 	}
 
-	function getUsuario()
+	function getEmail()
 	{
-		return $this->usuario;
+		return $this->email;
 	}
 
 	function getPassword()
@@ -56,19 +62,23 @@ class Usuario
 		$this->id = $id;
 	}
 
+	function setNombre_usuario($nombre_usuario)
+	{
+		$this->nombre_usuario = $this->db->real_escape_string($nombre_usuario);
+	}
 	function setNombre($nombre)
 	{
 		$this->nombre = $this->db->real_escape_string($nombre);
 	}
 
-	function setapellido($apellido)
+	function setApellido($apellido)
 	{
 		$this->apellido = $this->db->real_escape_string($apellido);
 	}
 
-	function setUsuario($usuario)
+	function setEmail($email)
 	{
-		$this->usuario = $this->db->real_escape_string($usuario);
+		$this->email = $this->db->real_escape_string($email);
 	}
 
 	function setPassword($password)
@@ -92,13 +102,10 @@ class Usuario
 		return $usuarios;
 	}
 
-	public function edit()
-	{
-		$sql = "UPDATE pacientes SET nombre='{$this->getNombreyApellido()}', descripcion='{$this->getDescripcion()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',ciudad='{$this->getCiudad()}';";
-	}
+	
 	public function save()
 	{
-		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getapellido()}', '{$this->getEmail()}', '{$this->getPassword()}', 'admin', null);";
+		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre_usuario()}','{$this->getNombre()}', '{$this->getApellido()}', '{$this->getEmail()}', '{$this->getPassword()}', 'admin', null);";
 		$save = $this->db->query($sql);
 
 		$result = false;
@@ -111,11 +118,11 @@ class Usuario
 	public function login()
 	{
 		$result = false;
-		$usuario = $this->usuario;
+		$nombre_usuario = $this->nombre_usuario;
 		$password = $this->password;
 
 		// Comprobar si existe el usuario
-		$sql = "SELECT * FROM usuarios WHERE nombre_usuario = '$usuario'";
+		$sql = "SELECT * FROM usuarios WHERE nombre_usuario = '$nombre_usuario'";
 		$login = $this->db->query($sql);
 
 

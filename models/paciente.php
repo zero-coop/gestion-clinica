@@ -6,6 +6,7 @@ class Paciente
 	private $id_obra;
 	private $apellido;
 	private $nombre;
+	private $fecha_nacimiento;
 	private $dni;
 	private $sexo;
 	private $telefono;
@@ -44,6 +45,10 @@ class Paciente
 	function getDni()
 	{
 		return $this->dni;
+	}
+
+	function getFechaNacimiento(){
+		return $this->fecha_nacimiento;
 	}
 
 	function getSexo()
@@ -102,6 +107,11 @@ class Paciente
 	function setDni($dni)
 	{
 		$this->dni = $this->db->real_escape_string($dni);
+	}
+
+	function setFechaNacimiento($fecha)
+	{
+		$this->fecha_nacimiento = $this->db->real_escape_string($fecha);
 	}
 
 	function setSexo($sexo)
@@ -164,13 +174,10 @@ class Paciente
 
 	public function save()
 	{
-		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '1', NULL, '0');";
+		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}');";
 		$save = $this->db->query($sql);
 		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},null)";
 		$save2 = $this->db->query($insert);
-
-
-
 
 		$result = false;
 		if ($save && $save2) {
@@ -199,13 +206,13 @@ class Paciente
 		return $result;
 	}
 
-	public function delete()
-	{
+	public function delete(){
+
 		$sql = "DELETE FROM pacientes WHERE id_paciente={$this->id}";
 		$delete = $this->db->query($sql);
-
+		
 		$result = false;
-		if ($delete) {
+		if ($delete){
 			$result = true;
 		}
 		return $result;

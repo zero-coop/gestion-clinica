@@ -16,9 +16,6 @@
 
 			<div class="offset-1 col-8">
 
-
-
-
 				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="apellido">Apellido :</label>
@@ -29,13 +26,13 @@
 						<input type="text" class="form-control" name="nombre" value="<?= isset($pac) && is_object($pac) ? $pac->nombreyApellido : ''; ?>" />
 					</div>
 					<div class="form-group">
-						<label for="sexo">DNI :</label>
+						<label for="dni">DNI :</label>
 						<input type="text" class="form-control" name="dni" value="<?= isset($pac) && is_object($pac) ? $pac->sexo : ''; ?>" />
 
 					</div>
 					<div class="form-group">
 						<label for="fecha">Fecha Nacimiento :</label>
-						<input type="date" name="fecha">
+						<input type="date" name="fecha_nacimiento">
 
 					</div>
 					<div class="form-group">
@@ -43,15 +40,15 @@
 						<br>
 						<input class="form-control" type="radio" name="sexo" value="Masculino"> Masculino<br>
 						<input class="form-control" type="radio" name="sexo" value="Femenino"> Femenino<br>
-				
+
 					</div>
-					
+
 					<div class="form-group">
 						<label for="telefono">Telefono :</label>
 						<input type="number" class="form-control" name="telefono" value="<?= isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>" />
 
 					</div>
-					
+
 					<div class="form-group">
 						<label for="direccion">Direccion :</label>
 						<input type="text" class="form-control" name="direccion" value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
@@ -60,82 +57,14 @@
 
 					<div class="form-group">
 						<label for="provincia">Provincia :</label>
+						<?php $provincias = Utils::showProvincias(); ?>
 						<select class="form-control" name="provincia">
-							<option value="1">
-								Buenos Aires
-							</option>
-							<option value="2">
-								Catamarca
-							</option>
-							<option value="Chaco">
-								Chaco
-							</option>
-							<option value="Chubut">
-								Chubut
-							</option>
-							<option value="Codoba">
-								Córdoba
-							</option>
-							<option value="Corrientes">
-								Corrientes
-							</option>
-							<option value="Entre Rios">
-								Entre Ríos
-							</option>
-							<option value="Formosa">
-								Formosa
-							</option>
-							<option value="Jujuy">
-								Jujuy
-							</option>
-							<option value="La Pampa">
-								La Pampa
-							</option>
-							<option value="La Rioja">
-								La Rioja
-							</option>
-							<option value="Mendoza">
-								Mendoza
-							</option>
-							<option value="Misiones">
-								Misiones
-							</option>
-							<option value="Neuquen">
-								Neuquén
-							</option>
-							<option value="Rio Negro">
-								Río Negro
-							</option>
-							<option value="Salta" selected>
-								Salta
-							</option>
-							<option value="San Juan">
-								San Juan
-							</option>
-							<option value="San Luis">
-								San Luis
-							</option>
-							<option value="Santa Cruz">
-								Santa Cruz
-							</option>
-							<option value="Santa Fe">
-								Santa Fe
-							</option>
-							<option value="Santiago del Estero">
-								Santiago del Estero
-							</option>
-							<option value="Tierra del Fuego">
-								Tierra del Fuego
-							</option>
-							<option value="Tucuman">
-								Tucumán
-							</option>
-							<option value="0">
-								Extranjero
-							</option>
-
+							<?php while ($provincia = $provincias->fetch_object()) : ?>
+								<option value="<?= $provincia->id_provincia ?>" <?= isset($pac) && is_object($pac) && $doc->id == $pac->doctor_id ? 'selected' : ''; ?>>
+									<?= $provincia->nombre ?>
+								</option>
+							<?php endwhile; ?>
 						</select>
-
 					</div>
 					<div class="form-group">
 						<label for="doctor">Obra Social :</label>

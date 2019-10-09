@@ -40,6 +40,13 @@ class Utils{
 		$obras = $obra->getAll();
 		return $obras;
 	}
+
+	public static function showProvincias(){
+		require_once 'models/provincias.php';
+		$prov = new Provincias();
+		$provincias = $prov->getAll();
+		return $provincias;
+	}
 	
 	public static function statsCarrito(){
 		$stats = array(

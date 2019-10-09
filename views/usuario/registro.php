@@ -21,6 +21,10 @@
 <form action="<?=base_url?>usuario/save" method="POST">
 
 <div class="form-group">
+	<label for="nombre">Usuario</label>
+	<input class="form-control" type="text" name="nombre_usuario" required/>
+</div>
+<div class="form-group">
 	<label for="nombre">Nombre</label>
 	<input class="form-control" type="text" name="nombre" required/>
 </div>

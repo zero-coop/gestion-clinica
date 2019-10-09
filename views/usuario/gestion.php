@@ -14,6 +14,7 @@
 <thead class="thead-light">
 	<tr>
 		<th>ID</th>
+		<th>USUARIO</th>
 		<th>NOMBRE</th>
 		<th>APELLIDO</th>
 		<th>EMAIL</th>
@@ -24,8 +25,9 @@
 	<?php while($usuario = $usuarios->fetch_object()): ?>
 		<tr>
 			<td scope="row"><?=$usuario->id;?></td>
+			<td><?=$usuario->nombre_usuario;?></td>
 			<td><?=$usuario->nombre;?></td>
-			<td><?=$usuario->apellidos;?></td>
+			<td><?=$usuario->apellido;?></td>
 			<td><?=$usuario->email;?></td>
 			<td>
 				<a href="<?=base_url?>usuario/eliminar&id=<?=$usuario->id?>"><button type="button" class="btn btn-danger">Eliminar</button></a>

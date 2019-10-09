@@ -29,15 +29,17 @@ class usuarioController
 	{
 		if (isset($_POST)) {
 
+			$nombre_usuario = isset($_POST['nombre_usuario']) ? $_POST['nombre_usuario'] : false;
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
 			$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
 			$email = isset($_POST['email']) ? $_POST['email'] : false;
 			$password = isset($_POST['password']) ? $_POST['password'] : false;
 
-			if ($nombre && $apellidos && $email && $password) {
+			if ($nombre_usuario && $nombre && $apellidos && $email && $password) {
 				$usuario = new Usuario();
+				$usuario->setNombre_usuario($nombre_usuario);
 				$usuario->setNombre($nombre);
-				$usuario->setApellidos($apellidos);
+				$usuario->setApellido($apellidos);
 				$usuario->setEmail($email);
 				$usuario->setPassword($password);
 
@@ -62,7 +64,7 @@ class usuarioController
 			// Identificar al usuario
 			// Consulta a la base de datos
 			$usuario = new Usuario();
-			$usuario->setUsuario($_POST['usuario']);
+			$usuario->setNombre_usuario($_POST['usuario']);
 			$usuario->setPassword($_POST['password']);
 
 			/* echo $_POST['usuario'] . "-" . $_POST['password']; */

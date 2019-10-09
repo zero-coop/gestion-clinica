@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2019 a las 04:06:37
+-- Tiempo de generación: 09-10-2019 a las 04:56:44
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -79,14 +79,6 @@ CREATE TABLE `historias_clinicas` (
   `id_pacientexobrasocial` int(10) NOT NULL,
   `id_orden_atencion` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `historias_clinicas`
---
-
-INSERT INTO `historias_clinicas` (`id_historia_clinica`, `id_pacientexobrasocial`, `id_orden_atencion`) VALUES
-(3, 1, 9),
-(4, 2, 10);
 
 -- --------------------------------------------------------
 
@@ -221,31 +213,18 @@ CREATE TABLE `pacientes` (
   `direccion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `provincia` tinyint(2) UNSIGNED NOT NULL,
   `hijos` tinyint(1) DEFAULT NULL,
-  `historia_clinica` int(10) NOT NULL
+  `historia_clinica` int(10) NOT NULL,
+  `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`) VALUES
-(1, 'damian', 'canonica', '2034285983', 'm', '4556677', '25 de mayo', 1, NULL, 0),
-(2, 'susana', 'gimenez', '2084533457', 'F', '4557788', 'buenos aires 20', 2, NULL, 0),
-(3, 'juan carlos', 'lopez', '20304545457', 'M', '4556677', 'la concha de la lora 666', 1, NULL, 0),
-(9, 'Javier', 'Lerma', '34', 'masculino', '388', 'coro', 1, NULL, 0),
-(10, 'javier', 'Lerm', '34', 'masculino', '388', 'coro', 1, NULL, 0),
-(11, 'yo', 'yo', '388', 'Masculino', '3885101082', 'coronel', 1, NULL, 0),
-(12, 'test1', 'test1', '34634', 'Masculino', '388', 'javi', 1, NULL, 0),
-(13, 'JSASKLJD', 'LLAKLF', '3434', 'Masculino', '3434', 'SFDDS', 1, NULL, 0),
-(14, 'Andrés', 'Haitit', '415306262', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(15, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(16, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(17, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(18, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(19, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0),
-(20, 'jklasdfkl', 'sdf', '343', 'Masculino', '388', 'coronel', 1, NULL, 0),
-(21, 'jklasdfkl', 'sdf', '343', 'Masculino', '388', 'coronel', 1, NULL, 0),
-(22, 'Andrés', 'Haitit', '41530626', 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0);
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`) VALUES
+(1, 'damian', 'canonica', '2034285983', 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08'),
+(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08'),
+(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09');
 
 -- --------------------------------------------------------
 
@@ -265,7 +244,7 @@ CREATE TABLE `pacientesxobrasociales` (
 --
 
 INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`, `numero_socio`) VALUES
-(1, 1, 3, NULL),
+(1, 1, 3, 24324),
 (2, 3, 1, NULL),
 (3, 2, 5, NULL);
 
@@ -286,9 +265,30 @@ CREATE TABLE `provincias` (
 --
 
 INSERT INTO `provincias` (`id_provincia`, `nombre`, `codigo_postal`) VALUES
-(1, 'salta', '4400'),
-(2, 'jujuy', '4600'),
-(5, 'tucuman', '4455');
+(1, 'Buenos Aires', '4400'),
+(2, 'Catamarca', '4600'),
+(4, 'Chaco', '4455'),
+(5, 'Chubut', ''),
+(6, 'Córdoba', ''),
+(7, 'Corrientes', ''),
+(8, 'Entre Ríos', ''),
+(9, 'Formosa', ''),
+(10, 'Jujuy', ''),
+(11, 'La Pampa', ''),
+(12, 'La Rioja', ''),
+(13, 'Mendoza', ''),
+(14, 'Misiones', ''),
+(15, 'Neuquén', ''),
+(16, 'Río Negro', ''),
+(17, 'Salta', ''),
+(18, 'San Juan', ''),
+(19, 'San Luis', ''),
+(20, 'Santa Cruz', ''),
+(21, 'Santa Fe', ''),
+(22, 'Santiago del Estero', ''),
+(23, 'Tierra del Fuego', ''),
+(24, 'Tucumán', ''),
+(25, 'Extranjero', '');
 
 -- --------------------------------------------------------
 
@@ -354,7 +354,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `password`, `rol`, `imagen`) VALUES
-(1, 'admin', 'Nombre_Admin', 'Apellido_Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL);
+(1, 'admin', 'Nombre_Admin', 'Apellido_Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL),
+(2, 'andreshaitit', 'Andrés', 'Haitit', 'andreshaitit99@gmail.com', '$2y$04$893h4BKUICRL5jZVsTyfeeIVVnrRWTVZq8Ck.f/b0OYTDLUYp/8jG', 'admin', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -517,19 +518,19 @@ ALTER TABLE `ordenes_atencion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
 --
 ALTER TABLE `provincias`
-  MODIFY `id_provincia` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_provincia` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `recibos`
@@ -547,7 +548,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -577,7 +578,7 @@ ALTER TABLE `historias_clinicas`
 -- Filtros para la tabla `obras_sociales`
 --
 ALTER TABLE `obras_sociales`
-  ADD CONSTRAINT `obras_sociales_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`);
+  ADD CONSTRAINT `obras_sociales_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `ordenes_atencion`
@@ -593,14 +594,14 @@ ALTER TABLE `ordenes_atencion`
 -- Filtros para la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`);
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  ADD CONSTRAINT `pacientesxobrasociales_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`),
-  ADD CONSTRAINT `pacientesxobrasociales_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obras_sociales` (`id_obrasociales`);
+  ADD CONSTRAINT `pacientesxobrasociales_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pacientesxobrasociales_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obras_sociales` (`id_obrasociales`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `recibos`

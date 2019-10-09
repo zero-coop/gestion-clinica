@@ -4,6 +4,7 @@
 			<div class="col-12">
 				<h1 class="text-center my-5">Nuestros pacientes</h1>
 			</div>
+			
 
 			<?php while ($pacient = $pacientes->fetch_object()) : ?>
 				<!-- <a href="<?= base_url ?>paciente/ver&id=<?= $pacient->id ?>">

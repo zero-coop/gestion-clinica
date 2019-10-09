@@ -54,6 +54,7 @@ class pacienteController
 			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
 			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
 			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
+			$fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : false;
 
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
@@ -67,6 +68,7 @@ class pacienteController
 				$paciente->setDireccion($direccion);
 				$paciente->setProvincia($provincia);
 				$paciente->setIdObra($obrasocial);
+				$paciente->setFechaNacimiento($fecha_nacimiento);
 
 				// Guardar la imagen
 				if (isset($_FILES['imagen'])) {
@@ -135,7 +137,7 @@ class pacienteController
 			$paciente = new Paciente();
 			$paciente->setId($id);
 			$delete = $paciente->delete();
-			
+
 			if ($delete) {
 				$_SESSION['delete'] = 'complete';
 			} else {
