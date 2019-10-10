@@ -28,7 +28,7 @@ class pacienteController
 
 	public function gestion()
 	{
-		Utils::isAdmin();
+		//Utils::isAdmin();
 
 		$paciente = new Paciente();
 		$pacientes = $paciente->getAll();

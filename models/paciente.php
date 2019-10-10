@@ -13,6 +13,7 @@ class Paciente
 	private $direccion;
 	private $provincia;
 	private $fecha;
+	private $habilitado;
 	private $imagen;
 
 	private $db;
@@ -71,10 +72,14 @@ class Paciente
 		return $this->provincia;
 	}
 
-
 	function getFecha()
 	{
 		return $this->fecha;
+	}
+
+	function getHabilitado()
+	{
+		return $this->habilitado;
 	}
 
 	function getImagen()
@@ -137,6 +142,11 @@ class Paciente
 	function setFecha($fecha)
 	{
 		$this->fecha = $fecha;
+	}
+
+	function setHabilitado($habilitado)
+	{
+		$this->habilitado = $habilitado;
 	}
 
 	function setImagen($imagen)
