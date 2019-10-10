@@ -53,7 +53,7 @@ class Doctor{
 	}
 
 	function setId_medico($id_medico) {
-		$this->id_medico = $id;
+		$this->id_medico = $id_medico;
 	}
 
 	function setNombre($nombre) {
@@ -99,7 +99,7 @@ class Doctor{
 	}
 	
 	public function save(){
-		$sql = "INSERT INTO medicos VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}',{$this->getEspecialidad()},'{$this->getMatricula()}','{$this->getDomicilio()}, '{$this->getTelefono()}, '{$this->getCelular()}');";
+		$sql = "INSERT INTO medicos VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', {$this->getDni()}, '{$this->getEspecialidad()}','{$this->getMatricula()}','{$this->getDomicilio()}', {$this->getTelefono()}, {$this->getCelular()});";
 		$save = $this->db->query($sql);
 		
 		$result = false;
@@ -110,7 +110,7 @@ class Doctor{
 	}
 
 	public function edit(){
-		$sql = "UPDATE medicos SET nombreyApellido='{$this->getNombreyApellido()}', '{$this->getEspecialidad()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}', ciudad='{$this->getCiudad()}' WHERE id=$this->id";
+		$sql = "UPDATE medicos SET apellido='{$this->getApellido()}', nombre='{$this->getNombre()}',dni={$this->getDni()},especialidad='{$this->getEspecialidad()}', matricula='{$this->getMatricula()}',domicilio='{$this->getDomicilio()}',telefono={$this->getTelefono()}, celular={$this->getCelular()} WHERE id=$this->id_medico";
 		
 		
 		// $sql .= " WHERE id={$this->id};";

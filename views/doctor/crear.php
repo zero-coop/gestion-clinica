@@ -38,16 +38,16 @@
 						<input type="text" class="form-control" name="matricula" value="<?= isset($doc) && is_object($doc) ? $doc->matricula : ''; ?>" />
 					</div>
 					<div class="form-group">
-						<label for="dni">Domicilio:</label>
+						<label for="domicilio">Domicilio:</label>
 						<input type="text" class="form-control" name="domicilio" value="<?= isset($doc) && is_object($doc) ? $doc->domicilio : ''; ?>" />
 					</div>
 					<div class="form-group">
-						<label for="dni">Telefono:</label>
-						<input type="text" class="form-control" name="telefono" value="<?= isset($doc) && is_object($doc) ? $doc->telefono : ''; ?>" />
+						<label for="telefono">Telefono:</label>
+						<input type="number" class="form-control" name="telefono" value="<?= isset($doc) && is_object($doc) ? $doc->telefono : ''; ?>" />
 					</div>
 					<div class="form-group">
-						<label for="dni">Celular:</label>
-						<input type="text" class="form-control" name="celular" value="<?= isset($doc) && is_object($doc) ? $doc->celular : ''; ?>" />
+						<label for="celular">Celular:</label>
+						<input type="number" class="form-control" name="celular" value="<?= isset($doc) && is_object($doc) ? $doc->celular : ''; ?>" />
 					</div>														
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>

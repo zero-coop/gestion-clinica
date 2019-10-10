@@ -94,6 +94,7 @@
 		
 				<li class="list-group-item"><a href="<?=base_url?>doctor/index">Gestionar doctores</a></li>
 				<li class="list-group-item"><a href="<?=base_url?>paciente/gestion">Gestionar pacientes</a></li>
+				<li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion">Gestionar Obras Sociales</a></li>
 				<li class="list-group-item"><a href="<?=base_url?>pedido/gestion">Gestionar atenciones</a></li>
 				<li class="list-group-item"><a href="<?=base_url?>usuario/gestion">Gestiona usuarios</a></li>
 		

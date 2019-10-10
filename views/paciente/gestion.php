@@ -61,13 +61,13 @@
 							<th>DNI</th>
 							<th>EDAD</th>
 							<th>SEXO</th>
-							<th>Obra Social</th>
+							<th>OBRA SOCIAL</th>
 							<th>ACCIONES</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							require_once 'models/obrasocial.php';
+							require_once 'models/obrasociales.php';
 							$obrasocial = new ObraSocial();
 							?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
