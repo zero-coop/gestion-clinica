@@ -167,7 +167,7 @@ CREATE TABLE `obras_sociales` (
   `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` tinyint(2) UNSIGNED NOT NULL,
-  `descuento` tinyint(2) NOT NULL
+  `descuento` tinyint(2) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
