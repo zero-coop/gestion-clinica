@@ -13,7 +13,7 @@
 					<div class="col-6">
 
 
-						<a href="<?= base_url ?>paciente/crear">
+						<a href="<?= base_url ?>obrasociales/crear">
 							<button type="button" class="btn btn-success">Agregar obra social</button>
 						</a>
 					</div>

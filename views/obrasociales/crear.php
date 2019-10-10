@@ -4,13 +4,13 @@
 		<div class="row">
 			<div class="col-12">
 
-				<?php if (isset($edit) && isset($pac) && is_object($pac)) : ?>
-					<h1 class="text-center my-4">Editar paciente <?= $pac->nombreyApellido ?></h1>
-					<?php $url_action = base_url . "paciente/save&id=" . $pac->id; ?>
+				<?php if (isset($edit) && isset($obra) && is_object($obra)) : ?>
+					<h1 class="text-center my-4">Editar obra social <?= $obra->nombre ?></h1>
+					<?php $url_action = base_url . "obrasociales/save&id=" . $obra->id_obrasociales; ?>
 
 				<?php else : ?>
-					<h1 class="text-center my-4">Nuevo paciente</h1>
-					<?php $url_action = base_url . "paciente/save"; ?>
+					<h1 class="text-center my-4">Nueva Obra Social</h1>
+					<?php $url_action = base_url . "obrasociales/save"; ?>
 				<?php endif; ?>
 			</div>
 
@@ -19,28 +19,27 @@
 				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="nombre">Nombre :</label>
-						<input type="text" class="form-control" name="nombre" value="<?= isset($pac) && is_object($pac) ? $pac->nombreyApellido : ''; ?>" />
+						<input type="text" class="form-control" name="nombre" value="<?= isset($obra) && is_object($obra) ? $obra->nombre : ''; ?>" />
 					</div>
 					<div class="form-group">
 						<label for="dni">Cuit :</label>
-						<input type="text" class="form-control" name="dni" value="<?= isset($pac) && is_object($pac) ? $pac->sexo : ''; ?>" />
+						<input type="text" class="form-control" name="dni" value="<?= isset($obra) && is_object($obra) ? $obra->cuit : ''; ?>" />
 
 					</div>
 					<div class="form-group">
 						<label for="email">Correo :</label>
-						<input type="email" class="form-control" name="correo">
+						<input type="email" class="form-control" name="correo" value="<?= isset($obra) && is_object($obra) ? $obra->correo : ''; ?>">
 
-					</div>
 					</div>
 					<div class="form-group">
 						<label for="telefono">Telefono :</label>
-						<input type="number" class="form-control" name="telefono">
+						<input type="number" class="form-control" name="telefono" value="<?= isset($obra) && is_object($obra) ? $obra->telefono : ''; ?>">
 
 					</div>
 
 					<div class="form-group">
 						<label for="direccion">Direccion :</label>
-						<input type="text" class="form-control" name="direccion" value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
+						<input type="text" class="form-control" name="direccion" value="<?= isset($direccion) && is_object($direccion) ? $obra->direccion : ''; ?>" />
 
 					</div>
 
@@ -49,7 +48,7 @@
 						<?php $provincias = Utils::showProvincias(); ?>
 						<select class="form-control" name="provincia">
 							<?php while ($provincia = $provincias->fetch_object()) : ?>
-								<option value="<?= $provincia->id_provincia ?>" <?= isset($pac) && is_object($pac) && $doc->id == $pac->doctor_id ? 'selected' : ''; ?>>
+								<option value="<?= $provincia->id_provincia ?>" <?= isset($obra) && is_object($obra) && $doc->id == $obra->doctor_id ? 'selected' : ''; ?>>
 									<?= $provincia->nombre ?>
 								</option>
 							<?php endwhile; ?>
