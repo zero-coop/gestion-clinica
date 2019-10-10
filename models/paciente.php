@@ -72,7 +72,6 @@ class Paciente
 		return $this->provincia;
 	}
 
-
 	function getFecha()
 	{
 		return $this->fecha;
@@ -157,7 +156,7 @@ class Paciente
 
 	public function getAll()
 	{
-		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente DESC");
+		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente ASC");
 		return $pacientes;
 	}
 

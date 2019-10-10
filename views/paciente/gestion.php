@@ -4,7 +4,7 @@
 
 			<div class="col-12">
 
-				.<div class="row">
+				<div class="row">
 					<div class="col-12">
 
 
@@ -66,12 +66,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php
+						<?php  // instanciamos obrasocial
 							require_once 'models/obrasociales.php';
 							$obrasocial = new ObraSocial();
 							?>
-						<?php while ($pac = $pacientes->fetch_object()) : ?>
-						<?php if ($pac->habilitado && Utils::isAdmin()) :?>
+					<?php while ($pac = $pacientes->fetch_object()) : ?>
+						<?php if (Utils::isAdmin()) : ?> <!-- comprobamos si es 'admin' y listamos todas las entradas de la tabla pacientes  -->
 							<tr>
 								<th>O</th>
 								<td scope="row"><?= $pac->id_paciente; ?></td>
@@ -99,9 +99,35 @@
 
 								</td>
 							</tr>
-							<?php endif; ?>
-						<?php endwhile; ?>
-						<t/body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
+							<?php elseif (!Utils::isAdmin() && $pac->habilitado) : ?> <!-- comprobamos que *no* sea admin y listamos solo los pacientes habilitados. Flag 1 en la base de datos -->
+							<tr>
+								<th>O</th>
+								<td scope="row"><?= $pac->id_paciente; ?></td>
+								<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
+								<td><?= $pac->dni; ?></td>
+								<td>
+									<?php
+										$cumpleanos = new DateTime($pac->fecha_nacimiento);
+										$hoy = new DateTime();
+										$annos = $hoy->diff($cumpleanos);
+										echo $annos->y;;
+									?>
+								</td>
+								<td><?= $pac->sexo; ?></td>
+								<td><?php
+											$obra = $obrasocial->getObraSocial($pac->id_paciente);
+											echo $obra->nombre . " | Numero: ";
+											?>
+								</td>
+								<td>
+									<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+								</td>
+							</tr>	
+							<?php endif; ?> <!-- termina el if de la vista pacientes -->
+							<?php endwhile ; ?>
+
+
+						</body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
 
 							<div class="alert alert-warning m-5" role="alert">
 								<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?= base_url ?>"></a>
