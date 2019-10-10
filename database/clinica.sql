@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2019 a las 03:07:49
+-- Tiempo de generación: 09-10-2019 a las 04:56:44
 -- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- Versión de PHP: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -118,12 +118,12 @@ CREATE TABLE `medicos` (
   `id_medico` int(11) UNSIGNED NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `dni` int(11) NOT NULL DEFAULT 0,
+  `dni` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `especialidad` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `matricula` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `domicilio` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `telefono` int(11) DEFAULT NULL,
-  `celular` int(11) DEFAULT NULL
+  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `celular` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -131,9 +131,8 @@ CREATE TABLE `medicos` (
 --
 
 INSERT INTO `medicos` (`id_medico`, `nombre`, `apellido`, `dni`, `especialidad`, `matricula`, `domicilio`, `telefono`, `celular`) VALUES
-(1, 'pedro', 'robatodo', 23444555, 'ginecoloco', '564322', 'caseros 1767', 4889933, 2147483647),
-(2, 'andres', 'lopez', 21999888, 'cirujano', '876543', 'zuviria 43', 4887755, 2147483647),
-(3, 'Andrés', 'Haitit', 41530626, 'Cirujano', 'A4430', '25 De Mayo, Vicente Lopez 96', 2147483647, 2147483647);
+(1, 'pedro', 'robatodo', '23444555', 'ginecoloco', '564322', 'caseros 1767', '4889933', '3875777666'),
+(2, 'andres', 'lopez', '21999888', 'cirujano', '876543', 'zuviria 43', '4887755', '3875212333');
 
 -- --------------------------------------------------------
 
@@ -165,10 +164,10 @@ CREATE TABLE `obras_sociales` (
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `cuit` varchar(13) COLLATE utf8_spanish2_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `telefono` int(11) DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` tinyint(2) UNSIGNED NOT NULL,
-  `descuento` tinyint(2) NOT NULL,
+  `descuento` tinyint(2) NOT NULL
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -217,23 +216,24 @@ CREATE TABLE `pacientes` (
   `id_paciente` int(10) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `cuil` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `dni` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
   `sexo` varchar(19) COLLATE utf8_spanish2_ci NOT NULL,
   `telefono` varchar(14) COLLATE utf8_spanish2_ci NOT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `provincia` tinyint(2) UNSIGNED NOT NULL,
   `hijos` tinyint(1) DEFAULT NULL,
-  `historia_clinica` int(10) NOT NULL
+  `historia_clinica` int(10) NOT NULL,
+  `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `cuil`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`) VALUES
-(1, 'damian', 'canonica', '2034285983', 'm', '4556677', '25 de mayo', 1, NULL, 0),
-(2, 'susana', 'gimenez', '2084533457', 'F', '4557788', 'buenos aires 20', 2, NULL, 0),
-(3, 'juan carlos', 'lopez', '20304545457', 'M', '4556677', 'la concha de la lora 666', 1, NULL, 0);
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`) VALUES
+(1, 'damian', 'canonica', '2034285983', 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08'),
+(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08'),
+(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09');
 
 -- --------------------------------------------------------
 
@@ -244,17 +244,18 @@ INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `cuil`, `sexo`, `t
 CREATE TABLE `pacientesxobrasociales` (
   `id_pacientexobrasocial` int(11) NOT NULL,
   `id_paciente` int(10) NOT NULL,
-  `id_obra_social` int(11) UNSIGNED NOT NULL
+  `id_obra_social` int(11) UNSIGNED NOT NULL,
+  `numero_socio` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `pacientesxobrasociales`
 --
 
-INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`) VALUES
-(1, 1, 1),
-(2, 1, 1),
-(3, 3, 5);
+INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`, `numero_socio`) VALUES
+(1, 1, 3, 24324),
+(2, 3, 1, NULL),
+(3, 2, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -273,9 +274,30 @@ CREATE TABLE `provincias` (
 --
 
 INSERT INTO `provincias` (`id_provincia`, `nombre`, `codigo_postal`) VALUES
-(1, 'salta', '4400'),
-(2, 'jujuy', '4600'),
-(5, 'tucuman', '4455');
+(1, 'Buenos Aires', '4400'),
+(2, 'Catamarca', '4600'),
+(4, 'Chaco', '4455'),
+(5, 'Chubut', ''),
+(6, 'Córdoba', ''),
+(7, 'Corrientes', ''),
+(8, 'Entre Ríos', ''),
+(9, 'Formosa', ''),
+(10, 'Jujuy', ''),
+(11, 'La Pampa', ''),
+(12, 'La Rioja', ''),
+(13, 'Mendoza', ''),
+(14, 'Misiones', ''),
+(15, 'Neuquén', ''),
+(16, 'Río Negro', ''),
+(17, 'Salta', ''),
+(18, 'San Juan', ''),
+(19, 'San Luis', ''),
+(20, 'Santa Cruz', ''),
+(21, 'Santa Fe', ''),
+(22, 'Santiago del Estero', ''),
+(23, 'Tierra del Fuego', ''),
+(24, 'Tucumán', ''),
+(25, 'Extranjero', '');
 
 -- --------------------------------------------------------
 
@@ -511,13 +533,13 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
 --
 ALTER TABLE `provincias`
-  MODIFY `id_provincia` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_provincia` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `recibos`
@@ -565,7 +587,7 @@ ALTER TABLE `historias_clinicas`
 -- Filtros para la tabla `obras_sociales`
 --
 ALTER TABLE `obras_sociales`
-  ADD CONSTRAINT `obras_sociales_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`);
+  ADD CONSTRAINT `obras_sociales_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `ordenes_atencion`
@@ -581,14 +603,14 @@ ALTER TABLE `ordenes_atencion`
 -- Filtros para la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`);
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  ADD CONSTRAINT `pacientesxobrasociales_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`),
-  ADD CONSTRAINT `pacientesxobrasociales_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obras_sociales` (`id_obrasociales`);
+  ADD CONSTRAINT `pacientesxobrasociales_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pacientesxobrasociales_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obras_sociales` (`id_obrasociales`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `recibos`

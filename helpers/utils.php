@@ -35,7 +35,7 @@ class Utils{
 	}
 
 	public static function showObras(){
-		require_once 'models/obrasocial.php';
+		require_once 'models/obrasociales.php';
 		$obra = new ObraSocial();
 		$obras = $obra->getAll();
 		return $obras;
