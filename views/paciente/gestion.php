@@ -71,17 +71,18 @@
 							$obrasocial = new ObraSocial();
 							?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
+						<?php if ($pac->habilitado && Utils::isAdmin()) :?>
 							<tr>
 								<th>O</th>
 								<td scope="row"><?= $pac->id_paciente; ?></td>
 								<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
 								<td><?= $pac->dni; ?></td>
 								<td>
-									<?php 
+									<?php
 										$cumpleanos = new DateTime($pac->fecha_nacimiento);
 										$hoy = new DateTime();
 										$annos = $hoy->diff($cumpleanos);
-										echo $annos->y;; 
+										echo $annos->y;;
 									?>
 								</td>
 
@@ -98,6 +99,7 @@
 
 								</td>
 							</tr>
+							<?php endif; ?>
 						<?php endwhile; ?>
 						<t/body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
 

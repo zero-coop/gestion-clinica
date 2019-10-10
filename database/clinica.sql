@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2019 a las 04:56:44
+-- Tiempo de generación: 10-10-2019 a las 05:30:01
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -176,9 +176,9 @@ CREATE TABLE `obras_sociales` (
 --
 
 INSERT INTO `obras_sociales` (`id_obrasociales`, `nombre`, `cuit`, `correo`, `telefono`, `direccion`, `provincia`, `descuento`, `fecha`) VALUES
-(1, 'IPS', '20333333333', 'ips@ips.com', 4223344, 'belgrano 990', 1, 40, '2019-10-10 00:36:57'),
-(3, 'ospe', '308776547', 'admin@ospe.com', 4567788, 'alvarado 7777', 1, 70, '2019-10-10 00:36:57'),
-(4, 'boreal', '308789998', 'contacto@boreal.com', 4332222, 'españa 220', 1, 40, '2019-10-10 00:36:57'),
+(1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 'belgrano 990', 1, 40, '2019-10-10 00:36:57'),
+(3, 'ospe', '308776547', 'admin@ospe.com', '4567788', 'alvarado 7777', 1, 70, '2019-10-10 00:36:57'),
+(4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 'españa 220', 1, 40, '2019-10-10 00:36:57'),
 (5, 'sin obra social', '000000000', 'tiene_que_ser_null@null.com', NULL, NULL, 1, 0, '2019-10-10 00:36:57');
 
 -- --------------------------------------------------------
@@ -223,17 +223,19 @@ CREATE TABLE `pacientes` (
   `provincia` tinyint(2) UNSIGNED NOT NULL,
   `hijos` tinyint(1) DEFAULT NULL,
   `historia_clinica` int(10) NOT NULL,
-  `fecha_nacimiento` date DEFAULT NULL
+  `fecha_nacimiento` date DEFAULT NULL,
+  `habilitado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`) VALUES
-(1, 'damian', 'canonica', '2034285983', 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08'),
-(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08'),
-(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09');
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`, `habilitado`) VALUES
+(1, 'damian', 'canonica', '2034285983', 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08', 1),
+(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08', 1),
+(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09', 0),
+(7, 'juan', 'cabrera', '66666666', 'Masculino', '466677788', 'alvarado 888', 19, NULL, 0, '1980-07-29', 0);
 
 -- --------------------------------------------------------
 
@@ -255,7 +257,8 @@ CREATE TABLE `pacientesxobrasociales` (
 INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `id_obra_social`, `numero_socio`) VALUES
 (1, 1, 3, 24324),
 (2, 3, 1, NULL),
-(3, 2, 5, NULL);
+(3, 2, 5, NULL),
+(30, 7, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -364,7 +367,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `password`, `rol`, `imagen`) VALUES
 (1, 'admin', 'Nombre_Admin', 'Apellido_Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL),
-(2, 'andreshaitit', 'Andrés', 'Haitit', 'andreshaitit99@gmail.com', '$2y$04$9YT6zXCS1BNl3DHYf9ByKerRXVbDShC1ouhFK1YtMOXWZBhSI3BnK', 'admin', NULL);
+(2, 'andreshaitit', 'Andrés', 'Haitit', 'andreshaitit99@gmail.com', '$2y$04$9YT6zXCS1BNl3DHYf9ByKerRXVbDShC1ouhFK1YtMOXWZBhSI3BnK', 'admin', NULL),
+(3, 'dfsdf', 'dfdf', 'dfdf', 'demian.douyou@gmail.com', '$2y$04$wgLmtlmMrQ15fDlHCk4R1OHilafSTry5m0AToHYERtAn6bUKPrVAq', 'admin', NULL),
+(4, 'juancjuan', 'juan', 'lopez', 'juancjuan@gmail.com', '$2y$04$G1NAqFp/Ys.mjw6qb8oo8.1l10RFOJ5eTz.Y3.mziuNipOBXr31eO', 'admin', NULL),
+(5, 'damian', 'damian', 'damian', 'damian@gmail.com', '$2y$04$.NdD5OOol5SwVwuWnqq0ZOkTLamUZAkecR4EI8ixrxmYTBGWJ1Ily', 'user', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -527,13 +533,13 @@ ALTER TABLE `ordenes_atencion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
@@ -557,7 +563,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -580,7 +586,7 @@ ALTER TABLE `hijos`
 -- Filtros para la tabla `historias_clinicas`
 --
 ALTER TABLE `historias_clinicas`
-  ADD CONSTRAINT `historias_clinicas_ibfk_1` FOREIGN KEY (`id_pacientexobrasocial`) REFERENCES `pacientesxobrasociales` (`id_pacientexobrasocial`),
+  ADD CONSTRAINT `historias_clinicas_ibfk_1` FOREIGN KEY (`id_pacientexobrasocial`) REFERENCES `pacientesxobrasociales` (`id_pacientexobrasocial`) ON DELETE CASCADE,
   ADD CONSTRAINT `historias_clinicas_ibfk_2` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`) ON DELETE CASCADE;
 
 --

@@ -13,6 +13,7 @@ class Paciente
 	private $direccion;
 	private $provincia;
 	private $fecha;
+	private $habilitado;
 	private $imagen;
 
 	private $db;
@@ -77,6 +78,11 @@ class Paciente
 		return $this->fecha;
 	}
 
+	function getHabilitado()
+	{
+		return $this->habilitado;
+	}
+
 	function getImagen()
 	{
 		return $this->imagen;
@@ -139,6 +145,11 @@ class Paciente
 		$this->fecha = $fecha;
 	}
 
+	function setHabilitado($habilitado)
+	{
+		$this->habilitado = $habilitado;
+	}
+
 	function setImagen($imagen)
 	{
 		$this->imagen = $imagen;
@@ -146,7 +157,7 @@ class Paciente
 
 	public function getAll()
 	{
-		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente ASC");
+		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente DESC");
 		return $pacientes;
 	}
 
