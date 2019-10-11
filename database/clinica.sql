@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2019 a las 05:30:01
+-- Tiempo de generación: 11-10-2019 a las 05:28:13
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -233,8 +233,8 @@ CREATE TABLE `pacientes` (
 
 INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`, `habilitado`) VALUES
 (1, 'damian', 'canonica', '2034285983', 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08', 1),
-(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08', 1),
-(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09', 0),
+(2, 'susana', 'gimenez', '2084533457', 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08', 0),
+(3, 'juan carlos', 'lopez', '20304545457', 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09', 1),
 (7, 'juan', 'cabrera', '66666666', 'Masculino', '466677788', 'alvarado 888', 19, NULL, 0, '1980-07-29', 0);
 
 -- --------------------------------------------------------
@@ -370,7 +370,9 @@ INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `
 (2, 'andreshaitit', 'Andrés', 'Haitit', 'andreshaitit99@gmail.com', '$2y$04$9YT6zXCS1BNl3DHYf9ByKerRXVbDShC1ouhFK1YtMOXWZBhSI3BnK', 'admin', NULL),
 (3, 'dfsdf', 'dfdf', 'dfdf', 'demian.douyou@gmail.com', '$2y$04$wgLmtlmMrQ15fDlHCk4R1OHilafSTry5m0AToHYERtAn6bUKPrVAq', 'admin', NULL),
 (4, 'juancjuan', 'juan', 'lopez', 'juancjuan@gmail.com', '$2y$04$G1NAqFp/Ys.mjw6qb8oo8.1l10RFOJ5eTz.Y3.mziuNipOBXr31eO', 'admin', NULL),
-(5, 'damian', 'damian', 'damian', 'damian@gmail.com', '$2y$04$.NdD5OOol5SwVwuWnqq0ZOkTLamUZAkecR4EI8ixrxmYTBGWJ1Ily', 'user', NULL);
+(5, 'damian', 'damian', 'damian', 'damian@gmail.com', '$2y$04$.NdD5OOol5SwVwuWnqq0ZOkTLamUZAkecR4EI8ixrxmYTBGWJ1Ily', 'user', NULL),
+(6, 'javi', 'javi', 'lerma', 'javilerma89@gmail.com', '$2y$04$U//s6EmKy6zKbtmapSZ0ku0BoyNuYmbgyBZ98GLHIs9IlKHXzpAYu', 'user', NULL),
+(7, 'user', 'user', 'user', 'user@user.com', '$2y$04$NKODCeTU1GOFwJ.ZmwmxVuAOeRenDQNMhGBcLzy5oHNG3sUYWnzCy', 'user', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -563,7 +565,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

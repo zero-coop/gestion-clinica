@@ -26,6 +26,16 @@ class pacienteController
 		require_once 'views/paciente/ver.php';
 	}
 
+	public function dashboard()
+	{
+		//Utils::isAdmin();
+
+		$paciente = new Paciente();
+		$pacientes = $paciente->getOne();
+
+		require_once 'views/paciente/dashboard.php';
+	}
+
 	public function gestion()
 	{
 		//Utils::isAdmin();
@@ -112,16 +122,14 @@ class pacienteController
 
 	public function editar()
 	{
-		Utils::isAdmin();
+		//Utils::isAdmin();
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$edit = true;
 
 			$paciente = new Paciente();
 			$paciente->setId($id);
-
 			$pac = $paciente->getOne();
-
 			require_once 'views/paciente/crear.php';
 		} else {
 			header('Location:' . base_url . 'paciente/gestion');
@@ -130,8 +138,7 @@ class pacienteController
 
 	public function eliminar()
 	{
-		Utils::isAdmin();
-
+		//Utils::isAdmin();
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$paciente = new Paciente();
@@ -145,6 +152,28 @@ class pacienteController
 			}
 		} else {
 			$_SESSION['delete'] = 'failed';
+		}
+
+		header('Location:' . base_url . 'paciente/gestion');
+	}
+
+	public function habilitar()
+	{
+		Utils::isAdmin();
+
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$paciente = new Paciente();
+			$paciente->setId($id);
+			$delete = $paciente->habiliar();
+
+			if ($delete) {
+				$_SESSION['update'] = 'complete';
+			} else {
+				$_SESSION['update'] = 'failed';
+			}
+		} else {
+			$_SESSION['update'] = 'failed';
 		}
 
 		header('Location:' . base_url . 'paciente/gestion');

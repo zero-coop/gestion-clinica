@@ -13,7 +13,15 @@ class Utils{
 	
 	public static function isAdmin(){
 		if(!isset($_SESSION['admin'])){
-//			header("Location:".base_url);
+			header("Location:".base_url);
+		}else{
+			return true;
+		}
+	}
+
+	public static function showAdmin(){
+		if(!isset($_SESSION['admin'])){
+			return false;
 		}else{
 			return true;
 		}
@@ -39,6 +47,13 @@ class Utils{
 		$obra = new ObraSocial();
 		$obras = $obra->getAll();
 		return $obras;
+	}
+
+	public static function getObra($id_paciente){
+		require_once 'models/obrasociales.php';
+		$obrasocial = new ObraSocial();
+		$obra = $obrasocial->getObraSocial($id_paciente);
+		return $obra;
 	}
 
 	public static function showProvincias(){

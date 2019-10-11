@@ -156,7 +156,7 @@ class Paciente
 
 	public function getAll()
 	{
-		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente ASC");
+		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente DESC");
 		return $pacientes;
 	}
 
@@ -178,7 +178,7 @@ class Paciente
 
 	public function getOne()
 	{
-		$paciente = $this->db->query("SELECT * FROM pacientes WHERE id = {$this->getId()}");
+		$paciente = $this->db->query("SELECT * FROM pacientes WHERE id_paciente = {$this->getId()}");
 		return $paciente->fetch_object();
 	}
 
@@ -198,7 +198,7 @@ class Paciente
 
 	public function edit()
 	{
-		$sql = "UPDATE pacientes SET nombre='{$this->getNombreyApellido()}', descripcion='{$this->getDescripcion()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',ciudad='{$this->getCiudad()}';";
+		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', descripcion='{$this->getDescripcion()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',ciudad='{$this->getCiudad()}';";
 
 		if ($this->getImagen() != null) {
 			$sql .= ", imagen='{$this->getImagen()}'";
@@ -218,11 +218,23 @@ class Paciente
 
 	public function delete(){
 
-		$sql = "DELETE FROM pacientes WHERE id_paciente={$this->id}";
+		$sql = "UPDATE pacientes SET habilitado='0' WHERE id_paciente={$this->id}";
 		$delete = $this->db->query($sql);
 		
 		$result = false;
 		if ($delete){
+			$result = true;
+		}
+		return $result;
+	}
+
+	public function habiliar(){
+
+		$sql = "UPDATE pacientes SET habilitado='1' WHERE id_paciente={$this->id}";
+		$update = $this->db->query($sql);
+		
+		$result = false;
+		if ($update){
 			$result = true;
 		}
 		return $result;
