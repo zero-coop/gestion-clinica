@@ -32,14 +32,14 @@
 					</div>
 					<div class="form-group">
 						<label for="fecha">Fecha Nacimiento :</label>
-						<input type="date" name="fecha_nacimiento">
+						<input type="date" name="fecha_nacimiento" value="<?= isset($pac) && is_object($pac) ? $pac->fecha_nacimiento : ''; ?>">
 
 					</div>
 					<div class="form-group">
 						<label for="sexo">Sexo :</label>
 						<br>
-						<input type="radio" name="sexo" value="Masculino"> Masculino<br>
-						<input type="radio" name="sexo" value="Femenino"> Femenino<br>
+						<input type="radio" name="sexo" value="Masculino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Masculino" ? 'checked' : ''; ?>> Masculino<br>
+						<input type="radio" name="sexo" value="Femenino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Femenino" ? 'checked' : ''; ?>> Femenino<br>
 
 					</div>
 

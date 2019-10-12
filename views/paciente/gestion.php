@@ -79,7 +79,7 @@
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
 						<?php if ($pac->habilitado || Utils::showAdmin()) :?>
 							<tr>
-								<th><a href="<?=base_url?>paciente/dashboard&id=<?=$pac->id_paciente?>"><button type="button" class="btn btn-warning">dashboard</button></a></th>
+								<th><a href="<?=base_url?>paciente/dashboard&id=<?=$pac->id_paciente?>"><button type="button" class="btn btn-primary">Detalle</button></a></th>
 								<td scope="row"><?= $pac->id_paciente; ?></td>
 								<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
 								<td><?= $pac->dni; ?></td>
@@ -97,7 +97,12 @@
 								<td>
 									<?php
 										$obra = $obrasocial->getObraSocial($pac->id_paciente);
-										echo $obra->nombre . " | Numero: ";
+										if ($obra->id_obrasociales != 0 ){
+										$numero_socio = $obrasocial->getNumeroObraSocial($pac->id_paciente);
+										echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+										} else {
+											echo $obra->nombre;	
+										}
 									?>
 								</td>
 								<td>

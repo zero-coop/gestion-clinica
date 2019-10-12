@@ -28,12 +28,18 @@ class pacienteController
 
 	public function dashboard()
 	{
-		//Utils::isAdmin();
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			//$edit = true;
 
-		$paciente = new Paciente();
-		$pacientes = $paciente->getOne();
+			$paciente = new Paciente();
+			$paciente->setId($id);
+			$pac = $paciente->getOne();
+			require_once 'views/paciente/dashboard.php';
+		} else {
+			header('Location:' . base_url . 'paciente/gestion');
+		}
 
-		require_once 'views/paciente/dashboard.php';
 	}
 
 	public function gestion()

@@ -114,14 +114,23 @@ class ObraSocial
     {
         $obrasocial = $this->db->query("SELECT * FROM obras_sociales WHERE id = {$this->getId_obrasociales()}");
     }
+
     public function getObraSocial($id_paciente)
     {
       $sql = "SELECT * FROM obras_sociales WHERE id_obrasociales = (SELECT id_obra_social FROM pacientesxobrasociales WHERE id_paciente = $id_paciente);";
-      //echo $sql; 
       $result = $this->db->query($sql);
       $r = $result->fetch_object();
       return $r;
     }
+
+    public function getNumeroObraSocial($id_paciente)
+    {
+      $sql = "SELECT numero_socio FROM pacientesxobrasociales WHERE id_paciente = $id_paciente;";
+      $result = $this->db->query($sql);
+      $r = $result->fetch_object();
+      return $r;
+    }
+
     public function save()
 	{
 		$sql = "INSERT INTO obras_sociales VALUES(NULL, '{$this->getNombre()}', '{$this->getCuit()}', '{$this->getDireccion()}', {$this->getProvincia()},'{$this->getDescuento()}',CURTIME();";

@@ -184,7 +184,7 @@ class Paciente
 
 	public function save()
 	{
-		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}');";
+		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}', 1);";
 		$save = $this->db->query($sql);
 		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},null)";
 		$save2 = $this->db->query($insert);
@@ -198,14 +198,11 @@ class Paciente
 
 	public function edit()
 	{
-		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', descripcion='{$this->getDescripcion()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',ciudad='{$this->getCiudad()}';";
+		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', apellido='{$this->getApellido()}', dni='{$this->getDni()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}', hijos=NULL, historia_clinica=0, fecha_nacimiento ='{$this->getFechaNacimiento()}' WHERE id_paciente={$this->id};";
 
 		if ($this->getImagen() != null) {
 			$sql .= ", imagen='{$this->getImagen()}'";
 		}
-
-		$sql .= " WHERE id={$this->id};";
-
 
 		$save = $this->db->query($sql);
 
