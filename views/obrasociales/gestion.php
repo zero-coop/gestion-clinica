@@ -73,7 +73,8 @@
 								<td><?= $obra->direccion; ?></td>
 								<td>
 
-									<a href="<?= base_url ?>obrasocial/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+									<a href="<?= base_url ?>obrasocial/eliminar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+									<a href="<?= base_url ?>obrasocial/editar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 
 								</td>
 							</tr>

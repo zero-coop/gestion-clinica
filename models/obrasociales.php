@@ -7,7 +7,7 @@ class ObraSocial
     private $cuit;
     private $correo;
     private $telefono;
-    private $domicilio;
+    private $direccion;
     private $provincia;
     private $descuento;
     private $fecha;
@@ -43,9 +43,9 @@ class ObraSocial
 		return $this->telefono;
     }
 
-    function getDomicilio()
+    function getDireccion()
 	{
-		return $this->domicilio;
+		return $this->direccion;
     }
 
     function getProvincia()
@@ -81,7 +81,7 @@ class ObraSocial
 
     function setCorreo()
 	{
-		$this->corre = $this->db->real_escape_string($correo);
+		$this->correo = $this->db->real_escape_string($correo);
     }
 
     function setTelefono()
@@ -89,8 +89,8 @@ class ObraSocial
 		$this->telefono = $this->db->real_escape_string($telefono);
     }
 
-    function setDomicilio(){
-		  $this->domicilio = $this->db->real_escape_string($domicilio);
+    function setDireccion(){
+		  $this->direccion = $this->db->real_escape_string($direccion);
     }
     
     function setProvincia(){
@@ -133,7 +133,7 @@ class ObraSocial
 
     public function save()
 	{
-		$sql = "INSERT INTO obras_sociales VALUES(NULL, '{$this->getNombre()}', '{$this->getCuit()}', '{$this->getDireccion()}', {$this->getProvincia()},'{$this->getDescuento()}',CURTIME();";
+		$sql = "INSERT INTO obras_sociales VALUES(NULL, '{$this->getNombre()}', '{$this->getCuit()}', '{$this->getCorreo()}', {$this->getTelefono()},'{$this->getDireccion()}',{$this->getProvincia()},{$this->getDescuento()},CURTIME();";
 		$save = $this->db->query($sql);
 
 		$result = false;

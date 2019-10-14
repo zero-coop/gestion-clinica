@@ -1,7 +1,7 @@
 <?php
 require_once 'models/obrasociales.php';
 
-class obrasocialesController
+class obraSocialesController
 {
 
 
@@ -10,10 +10,10 @@ class obrasocialesController
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 
-			$paciente = new Paciente();
-			$paciente->setId($id);
+			$obra = new ObraSocial();
+			$obra->setId($id);
 
-			$pacient = $paciente->getOne();
+			$obr = $obra->getOne();
 		}
 		require_once 'views/paciente/ver.php';
 	}
@@ -38,46 +38,42 @@ class obrasocialesController
 	{
 		Utils::isAdmin();
 		if (isset($_POST)) {
-			$apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
-			$dni = isset($_POST['dni']) ? $_POST['dni'] : false;
-			$sexo = isset($_POST['sexo']) ? $_POST['sexo'] : false;
+			$cuit = isset($_POST['cuit']) ? $_POST['cuit'] : false;
+			$correo = isset($_POST['correo']) ? $_POST['correo'] : false;
 			$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
 			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
 			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
-			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
-			$fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : false;
+			$descuento = isset($_POST['descuento']) ? $_POST['descuento'] : false;
 
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
-			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia && $obrasocial) {
-				$obra = new Paciente();
-				$obra->setApellido($apellido);
+			if ($nombre && $cuit && $correo && $telefono && $direccion && $provincia && $descuento) {
+				$obra = new ObraSocial();
 				$obra->setNombre($nombre);
-				$obra->setDni($dni);
-				$obra->setSexo($sexo);
+				$obra->setCuit($cuit);
+				$obra->setCorreo($correo);
 				$obra->setTelefono($telefono);
 				$obra->setDireccion($direccion);
 				$obra->setProvincia($provincia);
-				$obra->setIdObra($obrasocial);
-				$obra->setFechaNacimiento($fecha_nacimiento);
+				$obra->setDescuento($descuento);
 
 				// Guardar la imagen
-				if (isset($_FILES['imagen'])) {
-					$file = $_FILES['imagen'];
-					$filename = $file['name'];
-					$mimetype = $file['type'];
+				// if (isset($_FILES['imagen'])) {
+				// 	$file = $_FILES['imagen'];
+				// 	$filename = $file['name'];
+				// 	$mimetype = $file['type'];
 
-					if ($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif') {
+				// 	if ($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif') {
 
-						if (!is_dir('uploads/images')) {
-							mkdir('uploads/images', 0777, true);
-						}
+				// 		if (!is_dir('uploads/images')) {
+				// 			mkdir('uploads/images', 0777, true);
+				// 		}
 
-						$obra->setImagen($filename);
-						move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
-					}
-				}
+				// 		$obra->setImagen($filename);
+				// 		move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
+				// 	}
+				// }
 
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
@@ -99,7 +95,7 @@ class obrasocialesController
 		} else {
 			$_SESSION['obra'] = "failed";
 		}
-		header('Location:' . base_url . 'paciente/gestion');
+		header('Location:' . base_url . 'obrasociales/gestion');
 	}
 
 	public function editar()
@@ -112,7 +108,7 @@ class obrasocialesController
 			$obra = new ObraSocial();
 			$obra->setId($id);
 
-			$pac = $paciente->getOne();
+			$obr = $obra->getOne();
 
 			require_once 'views/obrasociales/crear.php';
 		} else {

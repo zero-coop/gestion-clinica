@@ -23,7 +23,7 @@
 					</div>
 					<div class="form-group">
 						<label for="dni">Cuit :</label>
-						<input type="text" class="form-control" name="dni" value="<?= isset($obra) && is_object($obra) ? $obra->cuit : ''; ?>" />
+						<input type="text" class="form-control" name="cuit" value="<?= isset($obra) && is_object($obra) ? $obra->cuit : ''; ?>" />
 
 					</div>
 					<div class="form-group">
@@ -48,11 +48,16 @@
 						<?php $provincias = Utils::showProvincias(); ?>
 						<select class="form-control" name="provincia">
 							<?php while ($provincia = $provincias->fetch_object()) : ?>
-								<option value="<?= $provincia->id_provincia ?>" <?= isset($obra) && is_object($obra) && $doc->id == $obra->doctor_id ? 'selected' : ''; ?>>
+								<option value="<?= $provincia->id_provincia ?>">
 									<?= $provincia->nombre ?>
 								</option>
 							<?php endwhile; ?>
 						</select>
+					</div>
+					<div class="form-group">
+						<label for="direccion">Descuento % :</label>
+						<input type="number" class="form-control" name="descuento" value="<?= isset($descuento) && is_object($descuento) ? $obra->descuento : ''; ?>" />
+
 					</div>
 
 					<div class="form-group">
