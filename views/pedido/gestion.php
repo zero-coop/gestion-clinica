@@ -1,10 +1,16 @@
-<?php if(isset($_SESSION['identity'])): ?>
-<div class="col-10">
-<?php if (isset($gestion)): ?>
-	<h1 class="text-center my-4">Gestionar atenciones</h1>
-<?php else: ?>
-	<h1 class="text-center my-4">Atenciones</h1>
-<?php endif; ?>
+<?php if (isset($_SESSION['identity'])) : ?>
+	<div class="col-10">
+		<div class="row">
+
+			<div class="col-12">
+
+				.<div class="row">
+					<div class="col-12">
+
+
+						<h1 class="text-center my-4">Gestión de Pedidos de atención</h1>
+					</div>
+
 <table class="table table-bordered">
   <thead>
 	<tr>
