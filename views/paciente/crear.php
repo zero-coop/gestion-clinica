@@ -17,35 +17,49 @@
 			<div class="offset-1 col-8">
 
 				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
+					
 					<div class="form-group">
-						<label for="apellido">Apellido :</label>
-						<input type="text" class="form-control" name="apellido" value="<?= isset($pac) && is_object($pac) ? $pac->apellido : ''; ?>" />
+						<label for="nombre">Nombres :</label>
+						<input type="text" class="form-control" name="nombre" required value="<?= isset($pac) && is_object($pac) ? $pac->nombre : ''; ?>" />
 					</div>
 					<div class="form-group">
-						<label for="nombre">Nombre :</label>
-						<input type="text" class="form-control" name="nombre" value="<?= isset($pac) && is_object($pac) ? $pac->nombre : ''; ?>" />
+						<label for="apellido">Apellidos :</label>
+						<input type="text" class="form-control" name="apellido" required value="<?= isset($pac) && is_object($pac) ? $pac->apellido : ''; ?>" />
 					</div>
+
 					<div class="form-group">
 						<label for="dni">DNI :</label>
-						<input type="text" class="form-control" name="dni" value="<?= isset($pac) && is_object($pac) ? $pac->dni : ''; ?>" />
-
+						<input type="text" class="form-control" name="dni" pattern="[0-9.,]+" maxlength="10" required value="<?= isset($pac) && is_object($pac) ? $pac->dni : ''; ?>" />
 					</div>
+
 					<div class="form-group">
 						<label for="fecha">Fecha Nacimiento :</label>
-						<input type="date" name="fecha_nacimiento" value="<?= isset($pac) && is_object($pac) ? $pac->fecha_nacimiento : ''; ?>">
+						<input type="date" name="fecha_nacimiento" max="<?= date('Y-m-d'); ?>" required value="<?= isset($pac) && is_object($pac) ? $pac->fecha_nacimiento : ''; ?>">
 
 					</div>
 					<div class="form-group">
 						<label for="sexo">Sexo :</label>
 						<br>
-						<input type="radio" name="sexo" value="Masculino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Masculino" ? 'checked' : ''; ?>> Masculino<br>
-						<input type="radio" name="sexo" value="Femenino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Femenino" ? 'checked' : ''; ?>> Femenino<br>
+						<input type="radio" name="sexo" required value="Masculino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Masculino" ? 'checked' : ''; ?>> Masculino<br>
+						<input type="radio" name="sexo" required value="Femenino" <?= isset($pac) && is_object($pac) && $pac->sexo == "Femenino" ? 'checked' : ''; ?>> Femenino<br>
 
 					</div>
 
 					<div class="form-group">
+						<label for="grupo_sanguineo">Grupo Sanguíneo :</label>
+						<?php $grupos = Utils::showGrupos(); ?>
+						<select class="form-control" name="grupo_sanguineo">
+							<?php while ($grupo = $grupos->fetch_object()) : ?>
+								<option value="<?= $grupo->id_grupo ?>" <?= isset($pac) && is_object($pac) && $pac->grupo_sanguineo == $grupo->id_grupo ? 'selected' : ''; ?>>
+									<?= $grupo->nombre ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+					</div>
+
+					<div class="form-group">
 						<label for="telefono">Telefono :</label>
-						<input type="number" class="form-control" name="telefono" value="<?= isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>" />
+						<input type="number" class="form-control" name="telefono" required value="<?= isset($pac) && is_object($pac) ? $pac->telefono : ''; ?>" />
 
 					</div>
 

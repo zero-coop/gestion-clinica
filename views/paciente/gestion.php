@@ -25,6 +25,7 @@
 						</form>
 					</div>
 				</div>
+				<hr/>
 			</div>
 
 

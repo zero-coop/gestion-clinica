@@ -62,6 +62,13 @@ class Utils{
 		$provincias = $prov->getAll();
 		return $provincias;
 	}
+
+	public static function showGrupos(){
+		require_once 'models/gruposanguineo.php';
+		$grupo = new GrupoSanguineo();
+		$grupos = $grupo->getAll();
+		return $grupos;
+	}
 	
 	public static function statsCarrito(){
 		$stats = array(

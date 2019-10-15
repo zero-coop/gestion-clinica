@@ -137,4 +137,26 @@ class obraSocialesController
 
 		header('Location:' . base_url . 'obrasociales/gestion');
 	}
+
+	public function habilitar()
+	{
+		Utils::isAdmin();
+
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$obra = new ObraSocial();
+			$obra->setId($id);
+			$result = $obra->habiliar();
+
+			if ($result) {
+				$_SESSION['update'] = 'complete';
+			} else {
+				$_SESSION['update'] = 'failed';
+			}
+		} else {
+			$_SESSION['update'] = 'failed';
+		}
+
+		header('Location:' . base_url . 'obrasociales/gestion');
+	}
 }

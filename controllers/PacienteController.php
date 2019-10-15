@@ -54,13 +54,12 @@ class pacienteController
 
 	public function crear()
 	{
-		Utils::isAdmin();
+		//Utils::isAdmin();
 		require_once 'views/paciente/crear.php';
 	}
 
 	public function save()
 	{
-		Utils::isAdmin();
 		if (isset($_POST)) {
 			$apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
@@ -71,10 +70,11 @@ class pacienteController
 			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
 			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
 			$fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : false;
+			$grupo_sanguineo = isset($_POST['grupo_sanguineo']) ? $_POST['grupo_sanguineo'] : false;
 
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
-			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia && $obrasocial) {
+			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
 				$paciente = new Paciente();
 				$paciente->setApellido($apellido);
 				$paciente->setNombre($nombre);
@@ -85,6 +85,7 @@ class pacienteController
 				$paciente->setProvincia($provincia);
 				$paciente->setIdObra($obrasocial);
 				$paciente->setFechaNacimiento($fecha_nacimiento);
+				$paciente->setGrupoSanguineo($grupo_sanguineo);
 
 				// Guardar la imagen
 				if (isset($_FILES['imagen'])) {
@@ -171,9 +172,9 @@ class pacienteController
 			$id = $_GET['id'];
 			$paciente = new Paciente();
 			$paciente->setId($id);
-			$delete = $paciente->habiliar();
+			$result = $paciente->habiliar();
 
-			if ($delete) {
+			if ($result) {
 				$_SESSION['update'] = 'complete';
 			} else {
 				$_SESSION['update'] = 'failed';

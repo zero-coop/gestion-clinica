@@ -83,7 +83,7 @@
 
 			 
 		
-		</div>
+    </div>
 
 <div class="container-fluid">
 	<div class="row">
@@ -92,12 +92,14 @@
 
 		<ul class="list-group mt-4">
 		
-				<li class="list-group-item"><a href="<?=base_url?>doctor/index">Gestionar doctores</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>paciente/gestion">Gestionar pacientes</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion">Gestionar Obras Sociales</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>pedido/gestion">Gestionar atenciones</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>usuario/gestion">Gestiona usuarios</a></li>
-		
+				
+        <li class="list-group-item"><a href="<?=base_url?>paciente/gestion">Gestionar pacientes</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>pedido/gestion">Gestionar atenciones</a></li>
+        <?php if(Utils::showAdmin()): ?>
+          <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion">Gestionar Obras Sociales</a></li>
+          <li class="list-group-item"><a href="<?=base_url?>doctor/index">Gestionar doctores</a></li>				
+				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion">Gestiona usuarios</a></li>
+        <?php endif; ?>
 
 			
 				<li class="list-group-item"><a href="<?=base_url?>pedido/mis_pedidos">Mis atenciones</a></li>

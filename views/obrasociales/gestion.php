@@ -46,6 +46,13 @@
 				<?php endif; ?>
 				<?php Utils::deleteSession('delete'); ?>
 
+				<?php if (isset($_SESSION['update']) && $_SESSION['update'] == 'complete') : ?>
+					<div class="alert alert-info my-4" role="alert">
+						<strong>La obra social ha sido actualizado correctamente</strong>
+					</div>
+				<?php endif; ?>
+				<?php Utils::deleteSession('update'); ?>
+
 				<table class="table mt-4 table-bordered">
 					<thead class="thead-light">
 						<tr>
@@ -64,6 +71,7 @@
 							$obrasocial = new ObraSocial();
 							?>
 						<?php while ($obra = $obras->fetch_object()) : ?>
+						<?php if ($obra->habilitado || Utils::showAdmin()) :?>
 							<tr>
 								<td scope="row"><?= $obra->id_obrasociales; ?></td>
 								<td><?= $obra->nombre; ?></td>
@@ -72,12 +80,15 @@
 								<td><?= $obra->telefono; ?></td>
 								<td><?= $obra->direccion; ?></td>
 								<td>
-
-									<a href="<?= base_url ?>obrasocial/eliminar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
-									<a href="<?= base_url ?>obrasocial/editar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-warning">Editar</button></a>
-
+									<?php if ($obra->habilitado) :?>
+										<a href="<?= base_url ?>obrasociales/eliminar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+										<a href="<?= base_url ?>obrasociales/editar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-warning">Editar</button></a>
+									<?php elseif (!$obra->habilitado || Utils::showAdmin()) : ?>
+										<a href="<?= base_url ?>obrasociales/habilitar&id=<?= $obra->id_obrasociales ?>"><button type="button" class="btn btn-secondary">Habilitar</button></a>
+									<?php endif; ?>
 								</td>
 							</tr>
+							<?php endif; ?>
 						<?php endwhile; ?>
 						<t/body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
 

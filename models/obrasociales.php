@@ -64,9 +64,9 @@ class ObraSocial
     }
 
     
-    function setId_obrasociales() 
+    function setId($id) 
 	{
-		return $this->id_obrasociales;
+		  $this->id_obrasociales = $id;
     }
     
     function setNombre($nombre)
@@ -106,7 +106,7 @@ class ObraSocial
     }
     
     public function getAll(){
-      $obrasociales = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales DESC;");
+      $obrasociales = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales ASC;");
       return $obrasociales;
     }
 
@@ -165,11 +165,23 @@ class ObraSocial
 
 	public function delete(){
 
-		$sql = "DELETE FROM obras_sociales WHERE id_obrasociales={$this->id_obrasociales}";
+		$sql = "UPDATE obras_sociales SET habilitado='0' WHERE id_obrasociales={$this->id_obrasociales}";
 		$delete = $this->db->query($sql);
 		
 		$result = false;
 		if ($delete){
+			$result = true;
+		}
+		return $result;
+  }
+  
+  public function habiliar(){
+
+		$sql = "UPDATE obras_sociales SET habilitado='1' WHERE id_obrasociales={$this->id_obrasociales}";
+		$update = $this->db->query($sql);
+		
+		$result = false;
+		if ($update){
 			$result = true;
 		}
 		return $result;

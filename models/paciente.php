@@ -12,6 +12,7 @@ class Paciente
 	private $telefono;
 	private $direccion;
 	private $provincia;
+	private $grupo_sanguineo;
 	private $fecha;
 	private $habilitado;
 	private $imagen;
@@ -72,6 +73,11 @@ class Paciente
 		return $this->provincia;
 	}
 
+	function getGrupoSanguineo()
+	{
+		return $this->grupo_sanguineo;
+	}
+
 	function getFecha()
 	{
 		return $this->fecha;
@@ -122,6 +128,10 @@ class Paciente
 	function setSexo($sexo)
 	{
 		$this->sexo = $this->db->real_escape_string($sexo);
+	}
+
+	function setGrupoSanguineo($grupo_sanguineo){
+		$this->grupo_sanguineo = $this->db->real_escape_string($grupo_sanguineo);
 	}
 
 	function setTelefono($telefono)
@@ -184,7 +194,7 @@ class Paciente
 
 	public function save()
 	{
-		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}', 1);";
+		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getGrupoSanguineo()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}', 1);";
 		$save = $this->db->query($sql);
 		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},null)";
 		$save2 = $this->db->query($insert);
@@ -198,7 +208,7 @@ class Paciente
 
 	public function edit()
 	{
-		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', apellido='{$this->getApellido()}', dni='{$this->getDni()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}', hijos=NULL, historia_clinica=0, fecha_nacimiento ='{$this->getFechaNacimiento()}' WHERE id_paciente={$this->id};";
+		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', apellido='{$this->getApellido()}', dni='{$this->getDni()}', grupo_sanguineo='{$this->getGrupoSanguineo()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}', hijos=NULL, historia_clinica=0, fecha_nacimiento ='{$this->getFechaNacimiento()}' WHERE id_paciente={$this->id};";
 
 		if ($this->getImagen() != null) {
 			$sql .= ", imagen='{$this->getImagen()}'";
