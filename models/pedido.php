@@ -10,7 +10,7 @@ class Pedido
     private $id_recibo;
     private $descripcion;
     private $fecha;
-    //public $db;
+    public $db;
     
     public function __construct()
     {
@@ -114,16 +114,43 @@ class Pedido
     public static function getPaciente($id)
     {
 		$db = Database::connect();
-		$sql = "SELECT nombre FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id} LIMIT 1;";
+        $sql = "SELECT nombre FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id};";
 		$result = $db->query($sql);
-		//$result = Database::query($sql);
 		$r = $result->fetch_object();
-		return $r;
-		//echo $sql[nombre];
-		//$id_proveedor = $pro['id'];
-	}
+        return $r->nombre;
+    }
+   
+    public static function getMedico($id)
+    {
+		$db = Database::connect();
+        $sql = "SELECT nombre FROM medicos INNER JOIN ordenes_atencion ON medicos.id_medico = {$id};";
+		$result = $db->query($sql);
+		$r = $result->fetch_object();
+        return $r->nombre;
+    }
+
+    public static function getMedicamento($id)
+    {
+		$db = Database::connect();
+        $sql = "SELECT nombre FROM medicamentos INNER JOIN ordenes_atencion ON medicamentos.id_medicamento = {$id};";
+		$result = $db->query($sql);
+		$r = $result->fetch_object();
+        return $r->nombre;
+    }
+
+
+    public static function getServicio($id)
+    {
+		$db = Database::connect();
+        $sql = "SELECT servicios.descripcion FROM servicios INNER JOIN ordenes_atencion ON servicios.id_servicio = {$id};";
+        $result = $db->query($sql);
+        $r = $result->fetch_assoc();
+		//$r = $result->fetch_object();
+        print_r ("nombre");
+    }
+
     
-    public function getOneByUser()
+    /* public function getOneByUser()
     {
         $sql = "SELECT p.id, p.precio FROM ordenes_atencion p "
                 //. "INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id "
@@ -199,5 +226,5 @@ class Pedido
             $result = true;
         }
         return $result;
-    }
-}
+    }*/
+} 
