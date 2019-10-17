@@ -96,6 +96,15 @@
 							<?php endwhile; ?>
 						</select>
 					</div>
+					<div class="form-group">
+						<?php 
+							if(isset($pac) && is_object($pac)){
+								$n = ObraSocial::getNumeroObraSocial($pac->id_paciente);
+							}
+						?>
+						<label for="numero_socio">Numero de Afiliado :</label>
+						<input type="text" class="form-control" name="numero_afiliado" required value="<?= isset($pac) && is_object($pac) ? $n->numero_socio : 'S/N'; ?>" />
+					</div>
 
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>

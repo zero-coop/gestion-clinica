@@ -69,8 +69,12 @@
 							<td>
 							<?php
 								$obra = $obrasocial->getObraSocial($pac->id_paciente);
-							    		$numero_socio = $obrasocial->getNumeroObraSocial($pac->id_paciente);
-										echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+										$numero_socio = $obrasocial->getNumeroObraSocial($pac->id_paciente);
+										if ($obra->id_obrasociales != 0 ){
+											echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+										} else {
+											echo $obra->nombre;	
+										}
 							?>
 						</tr>
 						</tbody>

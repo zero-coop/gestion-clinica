@@ -1,156 +1,203 @@
 <?php
 
-class Pedido{
-	private $id;
-	private $usuario_id;
-	private $obra_social;
-	private $precio;
-	private $estado;
-	private $fecha;
-	private $hora;
+class Pedido
+{
+    private $id_orden_atencion;
+    private $id_medico;
+    private $id_pacientexobrasocial;
+    private $id_medicamento;
+    private $id_servicio;
+    private $id_recibo;
+    private $descripcion;
+    private $fecha;
+    //public $db;
+    
+    public function __construct()
+    {
+        $this->db = Database::connect();
+    }
+    
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	private $db;
-	
-	public function __construct() {
-		$this->db = Database::connect();
-	}
-	
-	function getId() {
-		return $this->id;
-	}
+    public function getIdMedico()
+    {
+        return $this->id_medico;
+    }
 
-	function getUsuario_id() {
-		return $this->usuario_id;
-	}
+    public function getIdPacientexObraSocial()
+    {
+        return $this->id_pacientexobrasocial;
+    }
 
-	function getObraSocial() {
-		return $this->obra_social;
-	}
+    public function getIdMedicamento()
+    {
+        return $this->id_medicamento;
+    }
 
-	function getPrecio() {
-		return $this->precio;
-	}
+    public function getIdServicio()
+    {
+        return $this->id_servicio;
+    }
 
-	function getEstado() {
-		return $this->estado;
-	}
+    public function getIdRecibo()
+    {
+        return $this->id_recibo;
+    }
 
-	function getFecha() {
-		return $this->fecha;
-	}
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
 
-	function getHora() {
-		return $this->hora;
-	}
-
-	function setId($id) {
-		$this->id = $id;
-	}
-
-	function setUsuario_id($usuario_id) {
-		$this->usuario_id = $usuario_id;
-	}
-
-	function setObraSocial($obra_social) {
-		$this->obra_social = $this->db->real_escape_string($obra_social);
-	}
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
 
 
-	function setPrecio($precio) {
-		$this->precio = $precio;
-	}
+    public function setId($id_orden_atencion)
+    {
+        $this->id_orden_atencion = $id_orden_atencion;
+    }
 
-	function setEstado($estado) {
-		$this->estado = $estado;
-	}
+    public function setIdMedico($id_medico)
+    {
+        $this->id_medico = $id_medico;
+    }
 
-	function setFecha($fecha) {
-		$this->fecha = $fecha;
-	}
+    public function setIdPacientexObraSocial($id_pacientexobrasocial)
+    {
+        $this->id_pacientexobrasocial = $id_pacientexobrasocial;
+    }
 
-	function setHora($hora) {
-		$this->hora = $hora;
-	}
 
-	public function getAll(){
-		$productos = $this->db->query("SELECT * FROM pedidos ORDER BY id DESC");
-		return $productos;
+    public function setIdMedicamento($id_medicamento)
+    {
+        $this->id_medicamento = $id_medicamento;
+    }
+
+    public function setIdServicio($id_servicio)
+    {
+        $this->id_servicio = $id_servicio;
+    }
+
+    public function setIdRecibo($id_recibo)
+    {
+        $this->id_recibo = $id_recibo;
+    }
+
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $this->db->real_escape_string($descripcion);
+    }
+
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    }
+
+    public function getAll()
+    {
+        $pedidos = $this->db->query("SELECT * FROM ordenes_atencion ORDER BY id_orden_atencion DESC;");
+        return $pedidos;
+    }
+    
+    public function getOne()
+    {
+        $pedidos = $this->db->query("SELECT * FROM ordenes_atencion WHERE id_orden_atencion = {$this->getId()}");
+        return $pedidos->fetch_object();
+    }
+    
+    public static function getPaciente($id)
+    {
+		$db = Database::connect();
+		$sql = "SELECT nombre FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id} LIMIT 1;";
+		$result = $db->query($sql);
+		//$result = Database::query($sql);
+		$r = $result->fetch_object();
+		return $r;
+		//echo $sql[nombre];
+		//$id_proveedor = $pro['id'];
 	}
-	
-	public function getOne(){
-		$producto = $this->db->query("SELECT * FROM pedidos WHERE id = {$this->getId()}");
-		return $producto->fetch_object();
-	}
-	
-	public function getOneByUser(){
-		$sql = "SELECT p.id, p.precio FROM pedidos p "
-				//. "INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id "
-				. "WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC LIMIT 1";
-			
-		$pedido = $this->db->query($sql);
-			
-		return $pedido->fetch_object();
-	}
-	
-	public function getAllByUser(){
-		$sql = "SELECT p.* FROM pedidos p "
-				. "WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC";
-			
-		$pedido = $this->db->query($sql);
-			
-		return $pedido;
-	}
-	
-	
-	public function getPacientesByPedido($id){
-		$sql = "SELECT * FROM pacientes WHERE id IN (SELECT paciente_id FROM lineas_pedidos WHERE pedido_id={$id})";
-	
-// 	$sql = "SELECT pacientes.*,lineas_pedidos.* FROM pacientes INNER JOIN lineas_pedidos ON pacientes.id=lineas_pedidos.paciente_id WHERE lineas_pedidos.pedido_id={$id}";
-				
-		$pacientes = $this->db->query($sql);
-			
-		return $pacientes;
-	}
-	
-	public function save(){
-		$sql = "INSERT INTO pedidos VALUES(NULL, {$this->getUsuario_id()}, '{$this->getObraSocial()}', {$this->getPrecio()}, 'confirm', CURDATE(), CURTIME());";
-		$save = $this->db->query($sql);
-		
-		$result = false;
-		if($save){
-			$result = true;
-		}
-		return $result;
-	}
-	
-	public function save_linea(){
-		$sql = "SELECT LAST_INSERT_ID() as 'pedido';";
-		$query = $this->db->query($sql);
-		$pedido_id = $query->fetch_object()->pedido;
-		
-		foreach($_SESSION['carrito'] as $elemento){
-			$paciente = $elemento['paciente'];
-			
-			$insert = "INSERT INTO lineas_pedidos VALUES(NULL, {$pedido_id}, {$paciente->id})";
-			$save = $this->db->query($insert);
-			
-// //			var_dump($producto);
+    
+    public function getOneByUser()
+    {
+        $sql = "SELECT p.id, p.precio FROM ordenes_atencion p "
+                //. "INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id "
+                . "WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC LIMIT 1";
+            
+        $pedido = $this->db->query($sql);
+            
+        return $pedido->fetch_object();
+    }
+    
+    public function getAllByUser()
+    {
+        $sql = "SELECT p.* FROM ordenes_atencion p "
+                . "WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC";
+            
+        $pedido = $this->db->query($sql);
+            
+        return $pedido;
+    }
+    
+    
+    public function getPacientesByPedido($id)
+    {
+        $sql = "SELECT * FROM pacientes WHERE id IN (SELECT paciente_id FROM lineas_pedidos WHERE pedido_id={$id})";
+    
+        // 	$sql = "SELECT pacientes.*,lineas_pedidos.* FROM pacientes INNER JOIN lineas_pedidos ON pacientes.id=lineas_pedidos.paciente_id WHERE lineas_pedidos.pedido_id={$id}";
+                
+        $pacientes = $this->db->query($sql);
+            
+        return $pacientes;
+    }
+    
+    public function save()
+    {
+        $sql = "INSERT INTO pedidos VALUES(NULL, {$this->getUsuario_id()}, '{$this->getObraSocial()}', {$this->getPrecio()}, 'confirm', CURDATE(), CURTIME());";
+        $save = $this->db->query($sql);
+        
+        $result = false;
+        if ($save) {
+            $result = true;
+        }
+        return $result;
+    }
+    
+    public function save_linea()
+    {
+        $sql = "SELECT LAST_INSERT_ID() as 'pedido';";
+        $query = $this->db->query($sql);
+        $pedido_id = $query->fetch_object()->pedido;
+        
+        foreach ($_SESSION['carrito'] as $elemento) {
+            $paciente = $elemento['paciente'];
+            
+            $insert = "INSERT INTO lineas_pedidos VALUES(NULL, {$pedido_id}, {$paciente->id})";
+            $save = $this->db->query($insert);
+            
+            // //			var_dump($producto);
 // //			var_dump($insert);
 // //			echo $this->db->error;
-// // //	
-		} 
-	}
-	
-	public function edit(){
-		$sql = "UPDATE pedidos SET estado='{$this->getEstado()}' ";
-		$sql .= " WHERE id={$this->getId()};";
-		
-		$save = $this->db->query($sql);
-		
-		$result = false;
-		if($save){
-			$result = true;
-		}
-		return $result;
-	}
+// // //
+        }
+    }
+    
+    public function edit()
+    {
+        $sql = "UPDATE pedidos SET estado='{$this->getEstado()}' ";
+        $sql .= " WHERE id={$this->getId()};";
+        
+        $save = $this->db->query($sql);
+        
+        $result = false;
+        if ($save) {
+            $result = true;
+        }
+        return $result;
+    }
 }

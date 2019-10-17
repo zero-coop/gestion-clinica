@@ -71,7 +71,7 @@ class pacienteController
 			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
 			$fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : false;
 			$grupo_sanguineo = isset($_POST['grupo_sanguineo']) ? $_POST['grupo_sanguineo'] : false;
-
+			$numero_afiliado = isset($_POST['numero_afiliado']) ? $_POST['numero_afiliado'] : false;
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
 			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
@@ -86,7 +86,7 @@ class pacienteController
 				$paciente->setIdObra($obrasocial);
 				$paciente->setFechaNacimiento($fecha_nacimiento);
 				$paciente->setGrupoSanguineo($grupo_sanguineo);
-
+				$paciente->setNumeroAfiliado($numero_afiliado);
 				// Guardar la imagen
 				if (isset($_FILES['imagen'])) {
 					$file = $_FILES['imagen'];
@@ -115,8 +115,10 @@ class pacienteController
 
 				if ($save) {
 					$_SESSION['paciente'] = "complete";
+					header('Location:'.base_url .'paciente/dashboard&id='.$paciente->id_paciente);
 				} else {
 					$_SESSION['paciente'] = "failed";
+					header('Location:'.base_url .'paciente/gestion');
 				}
 			} else {
 				$_SESSION['paciente'] = "failed";
@@ -124,7 +126,9 @@ class pacienteController
 		} else {
 			$_SESSION['paciente'] = "failed";
 		}
-		header('Location:' . base_url . 'paciente/gestion');
+		$paciente = Paciente::getUltimoPaciente();
+
+		
 	}
 
 	public function editar()

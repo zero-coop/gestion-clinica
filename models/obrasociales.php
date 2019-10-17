@@ -123,13 +123,16 @@ class ObraSocial
       return $r;
     }
 
-    public function getNumeroObraSocial($id_paciente)
+    public static function getNumeroObraSocial($id_paciente)
     {
+      $db = Database::connect();
       $sql = "SELECT numero_socio FROM pacientesxobrasociales WHERE id_paciente = $id_paciente;";
-      $result = $this->db->query($sql);
+      $result = $db->query($sql);
       $r = $result->fetch_object();
       return $r;
     }
+
+    
 
     public function save()
 	{

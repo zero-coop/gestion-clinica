@@ -4,6 +4,7 @@ class Paciente
 {
 	private $id;
 	private $id_obra;
+	private $numero_afiliado;
 	private $apellido;
 	private $nombre;
 	private $fecha_nacimiento;
@@ -32,6 +33,11 @@ class Paciente
 	function getIdObra()
 	{
 		return $this->id_obra;
+	}
+
+	function getNumeroAfiliado()
+	{
+		return $this->numero_afiliado;
 	}
 
 	function getApellido()
@@ -103,6 +109,11 @@ class Paciente
 	function setIdObra($id_obra)
 	{
 		$this->id_obra = $id_obra;
+	}
+
+	function setNumeroAfiliado($id)
+	{
+		$this->numero_afiliado = $id;
 	}
 
 	function setApellido($apellido)
@@ -192,11 +203,18 @@ class Paciente
 		return $paciente->fetch_object();
 	}
 
+	public function getUltimoPaciente(){
+		$db = Database::connect();
+		$sql = "SELECT * FROM pacientes WHERE id_paciente=(SELECT MAX(id_paciente) FROM pacientes)";
+		$result = $db->query($sql);
+		return $result->fetch_object();
+	}
+
 	public function save()
 	{
 		$sql = "INSERT INTO pacientes VALUES(NULL, '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getDni()}', '{$this->getGrupoSanguineo()}', '{$this->getSexo()}','{$this->getTelefono()}', '{$this->getDireccion()}', '{$this->getProvincia()}', NULL, '0', '{$this->getFechaNacimiento()}', 1);";
 		$save = $this->db->query($sql);
-		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},null)";
+		$insert = "INSERT INTO pacientesxobrasociales VALUES(NULL, (SELECT MAX(id_paciente) FROM pacientes), {$this->getIdObra()},'{$this->getNumeroAfiliado()}')";
 		$save2 = $this->db->query($insert);
 
 		$result = false;

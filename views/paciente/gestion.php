@@ -76,7 +76,7 @@
 						<?php
 							require_once 'models/obrasociales.php';
 							$obrasocial = new ObraSocial();
-							?>
+						?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
 						<?php if ($pac->habilitado || Utils::showAdmin()) :?>
 							<tr>
@@ -99,8 +99,8 @@
 									<?php
 										$obra = $obrasocial->getObraSocial($pac->id_paciente);
 										if ($obra->id_obrasociales != 0 ){
-										$numero_socio = $obrasocial->getNumeroObraSocial($pac->id_paciente);
-										echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+											$numero_socio = ObraSocial::getNumeroObraSocial($pac->id_paciente);
+											echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
 										} else {
 											echo $obra->nombre;	
 										}
