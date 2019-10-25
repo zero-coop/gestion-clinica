@@ -76,7 +76,7 @@ class pacienteController
 			$paciente = new Paciente();
 			$result = $paciente->pacienteExiste($dni);
 
-			if (!$result->num_rows > 0 || ($result->num_rows > 0 && (isset($_GET['id'])))){
+			if ((isset($_GET['id']) && !$result->num_rows > 0) || !$result->num_rows > 0 ){
 
 				if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
 
