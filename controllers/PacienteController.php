@@ -39,7 +39,6 @@ class pacienteController
 		} else {
 			header('Location:' . base_url . 'paciente/gestion');
 		}
-
 	}
 
 	public function gestion()
@@ -74,61 +73,68 @@ class pacienteController
 			$numero_afiliado = isset($_POST['numero_afiliado']) ? $_POST['numero_afiliado'] : false;
 			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
 
-			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
-				$paciente = new Paciente();
-				$paciente->setApellido($apellido);
-				$paciente->setNombre($nombre);
-				$paciente->setDni($dni);
-				$paciente->setSexo($sexo);
-				$paciente->setTelefono($telefono);
-				$paciente->setDireccion($direccion);
-				$paciente->setProvincia($provincia);
-				$paciente->setIdObra($obrasocial);
-				$paciente->setFechaNacimiento($fecha_nacimiento);
-				$paciente->setGrupoSanguineo($grupo_sanguineo);
-				$paciente->setNumeroAfiliado($numero_afiliado);
-				// Guardar la imagen
-				if (isset($_FILES['imagen'])) {
-					$file = $_FILES['imagen'];
-					$filename = $file['name'];
-					$mimetype = $file['type'];
+			$paciente = new Paciente();
+			$result = $paciente->pacienteExiste($dni);
 
-					if ($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif') {
+			if (!$result->num_rows > 0 || ($result->num_rows > 0 && (isset($_GET['id'])))){
 
-						if (!is_dir('uploads/images')) {
-							mkdir('uploads/images', 0777, true);
+				if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
+
+					$paciente->setApellido($apellido);
+					$paciente->setNombre($nombre);
+					$paciente->setDni($dni);
+					$paciente->setSexo($sexo);
+					$paciente->setTelefono($telefono);
+					$paciente->setDireccion($direccion);
+					$paciente->setProvincia($provincia);
+					$paciente->setIdObra($obrasocial);
+					$paciente->setFechaNacimiento($fecha_nacimiento);
+					$paciente->setGrupoSanguineo($grupo_sanguineo);
+					$paciente->setNumeroAfiliado($numero_afiliado);
+					// Guardar la imagen
+					if (isset($_FILES['imagen'])) {
+						$file = $_FILES['imagen'];
+						$filename = $file['name'];
+						$mimetype = $file['type'];
+
+						if ($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif') {
+
+							if (!is_dir('uploads/images')) {
+								mkdir('uploads/images', 0777, true);
+							}
+
+							$paciente->setImagen($filename);
+							move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
 						}
-
-						$paciente->setImagen($filename);
-						move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
 					}
-				}
 
-				if (isset($_GET['id'])) {
-					$id = $_GET['id'];
-					$paciente->setId($id);
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+						$paciente->setId($id);
 
-					$save = $paciente->edit();
-				} else {
-					$save = $paciente->save();
-				}
+						$save = $paciente->edit();
+					} else {
+						$save = $paciente->save();
+					}
 
-				if ($save) {
-					$_SESSION['paciente'] = "complete";
-					header('Location:'.base_url .'paciente/dashboard&id='.$paciente->id_paciente);
+					if ($save) {
+						$_SESSION['paciente'] = "complete";
+						header('Location:' . base_url . 'paciente/gestion');
+					} else {
+						$_SESSION['paciente'] = "failed";
+						header('Location:' . base_url . 'paciente/gestion');
+					}
 				} else {
 					$_SESSION['paciente'] = "failed";
-					header('Location:'.base_url .'paciente/gestion');
 				}
 			} else {
-				$_SESSION['paciente'] = "failed";
+				$_SESSION['paciente'] = "existe";
 			}
 		} else {
 			$_SESSION['paciente'] = "failed";
 		}
-		$paciente = Paciente::getUltimoPaciente();
-
-		
+		//$paciente = Paciente::getUltimoPaciente();
+		header('Location:' . base_url . 'paciente/gestion');
 	}
 
 	public function editar()

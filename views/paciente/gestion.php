@@ -25,7 +25,7 @@
 						</form>
 					</div>
 				</div>
-				<hr/>
+				<hr />
 			</div>
 
 
@@ -35,9 +35,17 @@
 					<div class="alert alert-success my-4" role="alert">
 						<strong>El paciente se ha agregado correctamente</strong>
 					</div>
-				<?php elseif (isset($_SESSION['paciente']) && $_SESSION['paciente'] != 'complete') : ?>
+				<?php endif; ?>
+
+				<?php if (isset($_SESSION['paciente']) && $_SESSION['paciente'] == 'failed') : ?>
 					<div class="alert alert-danger my-4" role="alert">
 						<strong>El paciente NO se ha agregado correctamente</strong>
+					</div>
+				<?php endif; ?>
+
+				<?php if (isset($_SESSION['paciente']) && $_SESSION['paciente'] == 'existe') : ?>
+					<div class="alert alert-danger my-4" role="alert">
+						<strong>El paciente ya esta en la BASE DE DATOS</strong>
 					</div>
 				<?php endif; ?>
 				<?php Utils::deleteSession('paciente'); ?>
@@ -52,7 +60,7 @@
 					</div>
 				<?php endif; ?>
 				<?php Utils::deleteSession('delete'); ?>
-				
+
 				<?php if (isset($_SESSION['update']) && $_SESSION['update'] == 'complete') : ?>
 					<div class="alert alert-info my-4" role="alert">
 						<strong>El paciente ha sido actualizado correctamente</strong>
@@ -76,49 +84,49 @@
 						<?php
 							require_once 'models/obrasociales.php';
 							$obrasocial = new ObraSocial();
-						?>
+							?>
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
-						<?php if ($pac->habilitado || Utils::showAdmin()) :?>
-							<tr>
-								<th><a href="<?=base_url?>paciente/dashboard&id=<?=$pac->id_paciente?>"><button type="button" class="btn btn-primary">Detalle</button></a></th>
-								<td scope="row"><?= $pac->id_paciente; ?></td>
-								<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
-								<td><?= $pac->dni; ?></td>
-								<td>
-									<?php
-										$cumpleanos = new DateTime($pac->fecha_nacimiento);
-										$hoy = new DateTime();
-										$annos = $hoy->diff($cumpleanos);
-										echo $annos->y;;
-									?>
-								</td>
+							<?php if ($pac->habilitado || Utils::showAdmin()) : ?>
+								<tr>
+									<th><a href="<?= base_url ?>paciente/dashboard&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-primary">Detalle</button></a></th>
+									<td scope="row"><?= $pac->id_paciente; ?></td>
+									<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
+									<td><?= $pac->dni; ?></td>
+									<td>
+										<?php
+													$cumpleanos = new DateTime($pac->fecha_nacimiento);
+													$hoy = new DateTime();
+													$annos = $hoy->diff($cumpleanos);
+													echo $annos->y;;
+													?>
+									</td>
 
-								<td><?= $pac->sexo; ?></td>
+									<td><?= $pac->sexo; ?></td>
 
-								<td>
-									<?php
-										$obra = $obrasocial->getObraSocial($pac->id_paciente);
-										if ($obra->id_obrasociales != 0 ){
-											$numero_socio = ObraSocial::getNumeroObraSocial($pac->id_paciente);
-											echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
-										} else {
-											echo $obra->nombre;	
-										}
-									?>
-								</td>
-								<td>
-									<?php if ($pac->habilitado) :?>
-										<a href="<?=base_url?>paciente/editar&id=<?=$pac->id_paciente?>"><button type="button" class="btn btn-warning">Editar</button></a>
-										<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
-									<?php elseif (!$pac->habilitado || Utils::showAdmin()) : ?>
-										<a href="<?= base_url ?>paciente/habilitar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-secondary">Habilitar</button></a>
-									<?php endif; ?>
-								</td>
-							</tr>
+									<td>
+										<?php
+													$obra = $obrasocial->getObraSocial($pac->id_paciente);
+													if ($obra->id_obrasociales != 0) {
+														$numero_socio = ObraSocial::getNumeroObraSocial($pac->id_paciente);
+														echo $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+													} else {
+														echo $obra->nombre;
+													}
+													?>
+									</td>
+									<td>
+										<?php if ($pac->habilitado) : ?>
+											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
+											<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+										<?php elseif (!$pac->habilitado || Utils::showAdmin()) : ?>
+											<a href="<?= base_url ?>paciente/habilitar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-secondary">Habilitar</button></a>
+										<?php endif; ?>
+									</td>
+								</tr>
 							<?php endif; ?>
 						<?php endwhile; ?>
 						<t/body> </table> </div> </div> </div> </div> </div> <?php else : ?> <div class="col-10">
-						
+
 							<div class="alert alert-warning m-5" role="alert">
 								<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?= base_url ?>"></a>
 							</div>

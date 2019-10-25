@@ -203,6 +203,11 @@ class Paciente
 		return $paciente->fetch_object();
 	}
 
+	public function pacienteExiste($dni){
+		$result = $this->db->query("SELECT dni FROM pacientes WHERE dni = $dni");
+		return $result;
+	}
+
 	public function getUltimoPaciente(){
 		$db = Database::connect();
 		$sql = "SELECT * FROM pacientes WHERE id_paciente=(SELECT MAX(id_paciente) FROM pacientes)";
