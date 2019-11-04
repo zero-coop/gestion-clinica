@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2019 a las 04:24:28
+-- Tiempo de generación: 18-10-2019 a las 15:02:22
 -- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.8
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -125,14 +125,6 @@ CREATE TABLE `medicamentos` (
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `valor` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `medicamentos`
---
-
-INSERT INTO `medicamentos` (`id_medicamento`, `nombre`, `valor`) VALUES
-(1, 'dipirona inyectable', '150'),
-(2, 'ibuprofeno comprimidos', '200');
 
 -- --------------------------------------------------------
 

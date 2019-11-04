@@ -88,9 +88,12 @@ class Doctor{
 		$this->celular = $this->db->real_escape_string($celular);
 	}
 
-	public function getAll(){
-		$medicos = $this->db->query("SELECT * FROM medicos ORDER BY id_medico DESC;");
-		return $medicos;
+	public static function getAllNombre(){
+		$db = Database::connect();
+		$sql = "SELECT nombre FROM medicos ORDER BY id_medico DESC;";
+		$result = $db->query($sql);
+		$r = $result->fetch_object();
+        return $r;
 	}
 	
 	public function getOne(){

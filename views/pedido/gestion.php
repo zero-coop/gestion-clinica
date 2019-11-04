@@ -21,9 +21,37 @@
                     </form>
                 </div>
             </div>
+            <hr/>
         </div>
 
+        <?php if (isset($_SESSION['pedido']) && $_SESSION['pedido'] == 'complete') : ?>
+					<div class="alert alert-success my-4" role="alert">
+						<strong>El pedido se creo correctamente</strong>
+					</div>
+				<?php elseif (isset($_SESSION['pedido']) && $_SESSION['pedido'] != 'complete') : ?>
+					<div class="alert alert-danger my-4" role="alert">
+						<strong>Error al crear el pedido</strong>
+					</div>
+                    <?php endif; ?>
+				<?php Utils::deleteSession('pedido'); ?>
 
+                <?php if (isset($_SESSION['delete']) && $_SESSION['delete'] == 'complete') : ?>
+					<div class="alert alert-info my-4" role="alert">
+						<strong>El pedido ha sido borrado correctamente</strong>
+					</div>
+				<?php elseif (isset($_SESSION['delete']) && $_SESSION['delete'] != 'complete') : ?>
+					<div class="alert alert-warning my-4" role="alert">
+						<strong>Error al borrar el pedido</strong>
+					</div>
+				<?php endif; ?>
+				<?php Utils::deleteSession('delete'); ?>
+				
+				<?php if (isset($_SESSION['update']) && $_SESSION['update'] == 'complete') : ?>
+					<div class="alert alert-info my-4" role="alert">
+						<strong>El pedido ha sido actualizado correctamente</strong>
+					</div>
+				<?php endif; ?>
+				<?php Utils::deleteSession('update'); ?>
 
         <table class="table mt-4 table-bordered">
             <thead class="thead-light">

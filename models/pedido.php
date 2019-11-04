@@ -10,7 +10,7 @@ class Pedido
     private $id_recibo;
     private $descripcion;
     private $fecha;
-    public $db;
+    private $db;
     
     public function __construct()
     {
