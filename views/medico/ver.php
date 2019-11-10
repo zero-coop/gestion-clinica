@@ -3,8 +3,8 @@
 <div class="row">
 <div class="col-12">
 
-<?php if (isset($doctor)): ?>
-	<h1 class="text-center my-4"><?= $doctor->nombreyApellido ?></h1>
+<?php if (isset($medico)): ?>
+	<h1 class="text-center my-4"><?= $medico->nombreyApellido ?></h1>
 	<?php if ($pacientes->num_rows == 0): ?>
 		<p>No hay pacientes para mostrar</p>
 	<?php else: ?>

@@ -13,7 +13,7 @@
 					<div class="col-6">
 
 
-						<a href="<?= base_url ?>doctor/crear">
+						<a href="<?= base_url ?>medico/crear">
 							<button type="button" class="btn btn-success">Agregar Doctor</button>
 						</a>
 					</div>
@@ -30,16 +30,16 @@
 
 			<div class="col-12">
 
-				<?php if (isset($_SESSION['doctor']) && $_SESSION['doctor'] == 'complete') : ?>
+				<?php if (isset($_SESSION['medico']) && $_SESSION['medico'] == 'complete') : ?>
 					<div class="alert alert-success my-4" role="alert">
 						<strong>El doctor se ha agregado correctamente</strong>
 					</div>
-				<?php elseif (isset($_SESSION['doctor']) && $_SESSION['doctor'] != 'complete') : ?>
+				<?php elseif (isset($_SESSION['medico']) && $_SESSION['medico'] != 'complete') : ?>
 					<div class="alert alert-danger my-4" role="alert">
 						<strong>El doctor NO se ha agregado correctamente</strong>
 					</div>
 				<?php endif; ?>
-				 <?php Utils::deleteSession('doctor'); ?> <!-- ver -->
+				 <?php Utils::deleteSession('medico'); ?> <!-- ver -->
 
 				<?php if (isset($_SESSION['delete']) && $_SESSION['delete'] == 'complete') : ?>
 					<div class="alert alert-info my-4" role="alert">
@@ -68,19 +68,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php while ($doc = $medicos->fetch_object()) : ?>
+						<?php while ($med = $medicos->fetch_object()) : ?>
 							<tr>
 								<th>O</th>
-								<td scope="row"><?= $doc->id_medico; ?></td>
-								<td><?= $doc->apellido . " , " . $doc->nombre; ?></td>
-								<td><?= $doc->dni; ?></td>
-								<td><?= $doc->especialidad; ?></td>
-								<td><?= $doc->matricula; ?></td>
-								<td><?= $doc->domicilio; ?></td>
-								<td><?= $doc->telefono; ?></td>
-								<td><?= $doc->celular; ?></td>
+								<td scope="row"><?= $med->id_medico; ?></td>
+								<td><?= $med->apellido . " , " . $med->nombre; ?></td>
+								<td><?= $med->dni; ?></td>
+								<td><?= $med->especialidad; ?></td>
+								<td><?= $med->matricula; ?></td>
+								<td><?= $med->domicilio; ?></td>
+								<td><?= $med->telefono; ?></td>
+								<td><?= $med->celular; ?></td>
 								<td>
-									<a href="<?= base_url ?>doctor/eliminar&id=<?= $doc->id_medico ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
+									<a href="<?= base_url ?>medico/eliminar&id=<?= $med->id_medico ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
 								</td>
 							</tr>
 						<?php endwhile; ?>

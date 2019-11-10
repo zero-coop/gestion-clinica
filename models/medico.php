@@ -1,6 +1,6 @@
 <?php
 
-class Doctor{
+class Medico{
 	private $id_medico;
 	private $nombre;
 	private $apellido;

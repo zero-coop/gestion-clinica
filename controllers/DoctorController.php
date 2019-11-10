@@ -1,16 +1,16 @@
 <?php
-require_once 'models/doctor.php';
+require_once 'models/medico.php';
 require_once 'models/paciente.php';
 
-class DoctorController{
+class MedicoController{
 	
 	public function index()
 	{
-		$medico = new Doctor();
+		$medico = new Medico();
 		$medicos = $medico->getAll();
 		
 		//carga la vista
-		require_once 'views/doctor/index.php';
+		require_once 'views/medico/index.php';
 	}
 	
 	public function ver()
@@ -19,9 +19,9 @@ class DoctorController{
 			$id = $_GET['id'];
 			
 			// Conseguir doctor
-			$doctor = new Doctor();
-			$doctor->setId($id);
-			$doctor = $doctor->getOne();
+			$medico = new Medico();
+			$medico->setId($id);
+			$medico = $medico->getOne();
 			
 			// Conseguir pacientes;
 			//$paciente = new Paciente();
@@ -29,22 +29,22 @@ class DoctorController{
 			//$pacientes = $paciente->getAll();
 		}
 		
-		require_once 'views/doctor/ver.php';
+		require_once 'views/medico/ver.php';
 	}
 
 	public function gestion()
 	{
 		Utils::isAdmin();
 
-		$doctor = new Doctor();
-		$doctores = $doctor->getAll();
+		$medico = new Doctor();
+		$medicos = $medico->getAll();
 
-		require_once 'views/doctor/index.php';
+		require_once 'views/medico/index.php';
 	}
 	
 	public function crear(){
 		Utils::isAdmin();
-		require_once 'views/doctor/crear.php';
+		require_once 'views/medico/crear.php';
 	}
 
 	public function save()
@@ -61,37 +61,37 @@ class DoctorController{
 			$celular = isset($_POST['celular']) ? $_POST['celular'] : false;
 
 			if ($nombre && $apellido && $dni && $especialidad && $matricula && $domicilio && $telefono && $celular) {
-				$doctor = new Doctor();
-				$doctor->setApellido($apellido);
-				$doctor->setNombre($nombre);
-				$doctor->setDni($dni);
-				$doctor->setEspecialidad($especialidad);
-				$doctor->setMatricula($matricula);
-				$doctor->setDomicilio($domicilio);
-				$doctor->setTelefono($telefono);
-				$doctor->setCelular($celular);
+				$medico = new Medico();
+				$medico->setApellido($apellido);
+				$medico->setNombre($nombre);
+				$medico->setDni($dni);
+				$medico->setEspecialidad($especialidad);
+				$medico->setMatricula($matricula);
+				$medico->setDomicilio($domicilio);
+				$medico->setTelefono($telefono);
+				$medico->setCelular($celular);
 
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
-					$doctor->setId_medico($id);
+					$medico->setId_medico($id);
 
-					$save = $doctor->edit();
+					$save = $medico->edit();
 				} else {
-					$save = $doctor->save();
+					$save = $medico->save();
 				}
 
 				if ($save) {
-					$_SESSION['doctor'] = "complete";
+					$_SESSION['medico'] = "complete";
 				} else {
-					$_SESSION['doctor'] = "failed";
+					$_SESSION['medico'] = "failed";
 				}
 			} else {
-				$_SESSION['doctor'] = "failed";
+				$_SESSION['medico'] = "failed";
 			}
 		} else {
-			$_SESSION['doctor'] = "failed";
+			$_SESSION['medico'] = "failed";
 		}
-		header('Location:' . base_url . 'doctor/index');
+		header('Location:' . base_url . 'medico/index');
 	}
 
 	
@@ -101,15 +101,15 @@ class DoctorController{
 			$id = $_GET['id'];
 			$edit = true;
 			
-			$doctor = new Doctor();
-			$doctor->setId($id);
+			$medico = new Medico();
+			$medico->setId($id);
 			
-			$doc = $doctor->getOne();
+			$med = $medico->getOne();
 			
-			require_once 'views/doctor/crear.php';
+			require_once 'views/medico/crear.php';
 			
 		}else{
-			header('Location:'.base_url.'doctor/index');
+			header('Location:'.base_url.'medico/index');
 		}
 	}
 	
@@ -133,10 +133,10 @@ class DoctorController{
 		
 		if(isset($_GET['id'])){
 			$id = $_GET['id'];
-			$doctor = new Doctor();
-			$doctor->setId($id);
+			$medico = new Medico();
+			$medico->setId($id);
 			
-			$delete = $doctor->delete();
+			$delete = $medico->delete();
 			if($delete){
 				$_SESSION['delete'] = 'complete';
 			}else{
@@ -146,7 +146,7 @@ class DoctorController{
 			$_SESSION['delete'] = 'failed';
 		}
 		
-		header('Location:'.base_url.'doctor/index');
+		header('Location:'.base_url.'medico/index');
 	}
 	
 }
