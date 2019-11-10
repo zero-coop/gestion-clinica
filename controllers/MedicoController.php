@@ -134,7 +134,7 @@ class MedicoController{
 		if(isset($_GET['id'])){
 			$id = $_GET['id'];
 			$medico = new Medico();
-			$medico->setId($id);
+			$medico->setId_medico($id);
 			
 			$delete = $medico->delete();
 			if($delete){

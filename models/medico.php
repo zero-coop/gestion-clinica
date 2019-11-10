@@ -133,7 +133,7 @@ class Medico{
 	}
 
 	public function delete(){
-		$sql = "DELETE FROM medicos WHERE id={$this->id}";
+		$sql = "DELETE FROM medicos WHERE id_medico={$this->getId_medico()}";
 		$delete = $this->db->query($sql);
 		
 		$result = false;

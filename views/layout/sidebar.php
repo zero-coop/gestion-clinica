@@ -41,14 +41,14 @@
                   </div>
                   <form action="<?=base_url?>usuario/login" method="POST" class="user">
                     <div class="form-group">
-                      <input type="text" name="usuario" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="Email" placeholder="Usuario">
+                      <input type="text" name="usuario" class="form-control form-control-user" placeholder="Usuario">
                     </div>
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
+                      <input type="password" name="password" class="form-control form-control-user" placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <input type="checkbox" class="custom-control-input">
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -97,7 +97,7 @@
         <li class="list-group-item"><a href="<?=base_url?>pedido/gestion">Gestionar atenciones</a></li>
         <?php if(Utils::showAdmin()): ?>
           <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion">Gestionar Obras Sociales</a></li>
-          <li class="list-group-item"><a href="<?=base_url?>doctor/index">Gestionar doctores</a></li>				
+          <li class="list-group-item"><a href="<?=base_url?>medico/index">Gestionar doctores</a></li>				
 				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion">Gestiona usuarios</a></li>
         <?php endif; ?>
 
