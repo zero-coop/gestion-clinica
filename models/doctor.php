@@ -96,6 +96,10 @@ class Doctor{
         return $r;
 	}
 	
+	public function getAll(){
+		$medicos = $this->db->query("SELECT * FROM medicos");
+		return $medicos;
+	}
 	public function getOne(){
 		$medico = $this->db->query("SELECT * FROM medicos WHERE id_medico={$this->getId_medico()}");
 		return $medico->fetch_object();

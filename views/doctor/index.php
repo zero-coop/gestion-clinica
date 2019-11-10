@@ -8,7 +8,7 @@
 					<div class="col-12">
 
 
-						<h1 class="text-center my-4">Gestión de Doctores</h1>
+						<h1 class="text-center display-4 my-4">Gestión de Doctores</h1>
 					</div>
 					<div class="col-6">
 
@@ -68,11 +68,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php while ($doc = $doctores->fetch_object()) : ?>
+						<?php while ($doc = $medicos->fetch_object()) : ?>
 							<tr>
 								<th>O</th>
 								<td scope="row"><?= $doc->id_medico; ?></td>
-								<td><?= $doc->apellido . ", " . $doc->nombre; ?></td>
+								<td><?= $doc->apellido . " , " . $doc->nombre; ?></td>
 								<td><?= $doc->dni; ?></td>
 								<td><?= $doc->especialidad; ?></td>
 								<td><?= $doc->matricula; ?></td>
@@ -93,3 +93,4 @@
 
 
 		<?php endif; ?>
+			</div>

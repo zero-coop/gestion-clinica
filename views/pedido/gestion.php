@@ -2,6 +2,10 @@
 <div class="col-10">
     <div class="row">
 
+
+
+
+
         <div class="col-12">
 
             <div class="row">
@@ -14,15 +18,15 @@
                     </a>
                 </div>
 
-                <div class="offset-2 col-4">
+        <div class="offset-2 col-4">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="Buscar Pedido" aria-label="Search">
-                        <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                        <button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
             </div>
-            <hr/>
         </div>
+
 
         <?php if (isset($_SESSION['pedido']) && $_SESSION['pedido'] == 'complete') : ?>
 					<div class="alert alert-success my-4" role="alert">
@@ -55,9 +59,8 @@
 
         <table class="table mt-4 table-bordered">
             <thead class="thead-light">
-                <thead>
                     <tr>
-                        <th>Nº Atencion</th>
+                        <th>NºAtencion</th>
                         <th>Medico</th>
                         <th>Paciente</th>
                         <th>Medicamento</th>
@@ -93,7 +96,6 @@
 </div>
 <?php else: ?>
 <div class="col-10">
-
     <div class="alert alert-warning m-5" role="alert">
         <strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?=base_url?>"></a>
     </div>

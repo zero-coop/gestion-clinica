@@ -6,8 +6,8 @@ class DoctorController{
 	
 	public function index()
 	{
-		$doctor = new Doctor();
-		$doctores = $doctor->getAll();
+		$medico = new Doctor();
+		$medicos = $medico->getAll();
 		
 		//carga la vista
 		require_once 'views/doctor/index.php';

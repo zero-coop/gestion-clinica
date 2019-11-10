@@ -1,8 +1,16 @@
 <?php if (isset($_SESSION['identity'])) : ?>
+
+
+
+
 	<div class="col-10 mt-3">
 		<div class="row">
+
+
+
+
 			<div class="col-12">
-				<h1 class="text-center my-5">Nuestros pacientes</h1>
+				<h2 class="text-center my-5">Nuestros pacientes</h2>
 			</div>
 			
 
@@ -17,18 +25,21 @@
 
 
 
-				<div class="offset-1 col-7 my-3">
+			<div class="offset-3 col-5 my-3">
 
 					<a href="<?= base_url ?>paciente/ver&id=<?= $pacient->id ?>">
-						<h4><?= $pacient->nombre ?></h4>
+						<p><?= $pacient->nombre ?></p>
 					</a>
-				</div>
-				<div class="col-4">
+			</div>
+			
+			
+			
+			<div class="col-3">
 
 
 					<a href="<?= base_url ?>carrito/add&id=<?= $pacient->id ?>" class="button">
-						<button type="button" class="btn btn-primary">Terminado</button></a>
-				</div>
+					<button type="button" class="btn btn-primary">Terminado</button></a>
+			</div>
 
 
 			<?php endwhile; ?>

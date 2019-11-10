@@ -8,7 +8,7 @@
 					<div class="col-12">
 
 
-						<h1 class="text-center my-4">Gestión de Obras Sociales</h1>
+						<h1 class="text-center display-4 my-4">Gestión de Obras Sociales</h1>
 					</div>
 					<div class="col-6">
 
