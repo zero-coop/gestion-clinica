@@ -31,19 +31,19 @@
 	  <h1 style="text-align:right">Pedidos</h1>
 	  <p></p>
     </div>
-    <div class="col-sm">
+    <div class="col-12">
       <!-- One of two columns -->
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-12">
 	<!-- columna de datos del paciente -->
-	<table class="table table-striped table-hover text-right">
+	<table class="table table-striped table-hover">
 					<tbody>
 					<?php
 							require_once 'models/obrasociales.php';
 							$obrasocial = new ObraSocial();
 							?>
 						<tr>
-						<h3 class="text-right"><?= $pac->nombre . " ".$pac->apellido  ?></h2>
+						<h3 class=""><?= $pac->nombre . " ".$pac->apellido  ?></h2>
 						</tr>
 						<tr>
 								<td scope="row"><?php echo "Paciente Nº " . "" . $pac->id_paciente; ?></td>
