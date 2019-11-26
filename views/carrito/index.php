@@ -19,7 +19,7 @@
 <tbody>	
 	<tr>
 		<td scope="row">
-			<a href="<?= base_url ?>paciente/ver&id=<?=$paciente->id?>"><?=$paciente->nombreyApellido?></a>
+			<a href="<?= base_url ?>paciente/ver&id=<?=$paciente->id?>"><?=$paciente->nombre . " " . $paciente->apellido?></a>
 		</td>
 		<td>
 			<a href="<?=base_url?>carrito/delete&index=<?=$indice?>" class="button button-carrito button-red">Quitar paciente</a>
