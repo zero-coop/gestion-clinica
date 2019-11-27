@@ -90,10 +90,9 @@ class Medico{
 
 	public static function getAllNombre(){
 		$db = Database::connect();
-		$sql = "SELECT nombre FROM medicos ORDER BY id_medico DESC;";
-		$result = $db->query($sql);
-		$r = $result->fetch_object();
-        return $r;
+		$medicos = $db->query("SELECT * FROM medicos ORDER BY id_medico DESC;");
+		//$result = $medicos->fetch_object();
+        return $medicos;
 	}
 	
 	public function getAll(){

@@ -21,11 +21,11 @@
 					
 					<div class="form-group">
 						<label for="medico">Medico :</label>
-						<?php $doc = doctor::getAllNombre(); ?>			
+						<?php $medicos = medico::getAllNombre(); ?>			
 						<select class="form-control" name="medico">
-							<?php while ($doc) : ?>
-								<option value="<?= $doc->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $doc->id_medico ? 'selected' : ''; ?>>
-									<?= $doc->nombre ?>
+							<?php while ($medico = $medicos->fetch_object()) : ?>
+								<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
+									<?= $medico->nombre .' '. $medico->apellido . ' | '. $medico->especialidad ?>
 								</option>
 							<?php endwhile; ?>
 						</select>
