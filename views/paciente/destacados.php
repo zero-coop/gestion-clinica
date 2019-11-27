@@ -4,13 +4,15 @@
 
 
 	<div class="col-10 mt-3">
+	<div class="card">
+   <div class="card-body">
 		<div class="row">
 
 
 
 
 			<div class="col-12">
-				<h2 class="text-center my-5">Nuestros pacientes</h2>
+				<h2 class="text-center my-5 display-4">Nuestros pacientes</h2>
 			</div>
 			
 
@@ -27,8 +29,8 @@
 
 			<div class="offset-3 col-5 my-3">
 
-					<a href="<?= base_url ?>paciente/ver&id=<?= $pacient->id ?>">
-						<p><?= $pacient->nombre ?></p>
+			<a href="<?= base_url ?>paciente/ver&id=<?= $pacient->id ?>">
+						<h4> <?= $pacient->nombre ?></h4>
 					</a>
 			</div>
 			
@@ -44,6 +46,9 @@
 
 			<?php endwhile; ?>
 		</div>
+	</div>
+
+	</div>
 	</div>
 
 	</div>
