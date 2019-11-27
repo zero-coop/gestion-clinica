@@ -65,7 +65,7 @@
 
 					<div class="form-group">
 						<label for="direccion">Direccion :</label>
-						<input type="text" class="form-control" name="direccion" value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
+						<input type="text" class="form-control" name="direccion" required value="<?= isset($pac) && is_object($pac) ? $pac->direccion : ''; ?>" />
 
 					</div>
 
@@ -103,7 +103,7 @@
 							}
 						?>
 						<label for="numero_socio">Numero de Afiliado :</label>
-						<input type="text" class="form-control" name="numero_afiliado" required value="<?= isset($pac) && is_object($pac) ? $n->numero_socio : 'S/N'; ?>" />
+						<input type="number" class="form-control" name="numero_afiliado" required value="<?= isset($pac) && is_object($pac) ? $n->numero_socio : 'S/N'; ?>" />
 					</div>
 
 					<div class="form-group">
