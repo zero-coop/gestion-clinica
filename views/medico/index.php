@@ -55,7 +55,6 @@
 				<table class="table mt-4 table-bordered">
 					<thead class="thead-light">
 						<tr>
-							<th>Ver</th> <!-- ver -->
 							<th>ID</th>
 							<th>Apellido y Nombre</th>
 							<th>DNI</th>
@@ -70,7 +69,6 @@
 					<tbody>
 						<?php while ($med = $medicos->fetch_object()) : ?>
 							<tr>
-								<th>O</th>
 								<td scope="row"><?= $med->id_medico; ?></td>
 								<td><?= $med->apellido . " , " . $med->nombre; ?></td>
 								<td><?= $med->dni; ?></td>
@@ -80,6 +78,7 @@
 								<td><?= $med->telefono; ?></td>
 								<td><?= $med->celular; ?></td>
 								<td>
+									<button class="btn btn-primary">Detalles</button>
 									<a href="<?= base_url ?>medico/eliminar&id=<?= $med->id_medico ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
 								</td>
 							</tr>

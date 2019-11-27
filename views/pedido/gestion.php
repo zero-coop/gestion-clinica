@@ -63,7 +63,6 @@
                         <th>NºAtencion</th>
                         <th>Medico</th>
                         <th>Paciente</th>
-                        <th>Medicamento</th>
                         <th>Servicio</th>
                         <th>Recibo</th>
                         <th>Descripcion</th>
@@ -75,8 +74,7 @@
                 <tr>
                     <td><?= $ped->id_orden_atencion; ?></td>
                     <td><?= Pedido::getMedico($ped->id_medico); ?></td>					
-                    <td><?= Pedido::getPaciente($ped->id_pacientexobrasocial); ?></td>					
-                    <td><?= Pedido::getMedicamento($ped->id_medicamento); ?></td>
+                    <td><?= Pedido::getPaciente($ped->id_pacientexobrasocial); ?></td>
                     <td><?= Pedido::getServicio($ped->id_servicio); ?></td>
                     <td><?= $ped->id_recibo; ?></td>
                     <td><?= $ped->descripcion; ?></td>

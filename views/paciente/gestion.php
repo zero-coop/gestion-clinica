@@ -70,7 +70,6 @@
 				<table class="table table-striped table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th>Ver</th>
 							<th>ID</th>
 							<th>APELLIDO Y NOMBRE</th>
 							<th>DNI</th>
@@ -88,7 +87,6 @@
 						<?php while ($pac = $pacientes->fetch_object()) : ?>
 							<?php if ($pac->habilitado || Utils::showAdmin()) : ?>
 								<tr>
-									<th><a href="<?= base_url ?>paciente/dashboard&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-primary">Detalle</button></a></th>
 									<td scope="row"><?= $pac->id_paciente; ?></td>
 									<td><?= $pac->apellido . ", " . $pac->nombre; ?></td>
 									<td><?= $pac->dni; ?></td>
@@ -116,6 +114,7 @@
 									</td>
 									<td>
 										<?php if ($pac->habilitado) : ?>
+											<a href="<?= base_url ?>paciente/dashboard&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-primary">Detalle</button></a>
 											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-info">Historia</button></a>
 											<a href="<?= base_url ?>carrito/add&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-success">Pago</button></a>
