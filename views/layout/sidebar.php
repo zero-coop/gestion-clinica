@@ -93,21 +93,20 @@
 		<ul class="list-group mt-4">
 		
 				
-        <li class="list-group-item"><a href="<?=base_url?>paciente/gestion">Gestionar pacientes</a></li>
-        <li class="list-group-item"><a href="<?=base_url?>pedido/gestion">Gestionar atenciones</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>paciente/gestion"><i class="fas fa-user-friends"></i> Gestionar pacientes</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>pedido/gestion"><i class="fas fa-list-alt"></i> Gestionar atenciones</a></li>
         <?php if(Utils::showAdmin()): ?>
-          <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion">Gestionar Obras Sociales</a></li>
-          <li class="list-group-item"><a href="<?=base_url?>medico/index">Gestionar doctores</a></li>				
-				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion">Gestiona usuarios</a></li>
+          <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion"><i class="fas fa-id-card"></i> Gestionar Obras Sociales</a></li>
+          <li class="list-group-item"><a href="<?=base_url?>medico/index"><i class="fas fa-user-md"></i> Gestionar doctores</a></li>				
+				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion"><i class="fas fa-user-edit"></i> Gestiona usuarios</a></li>
         <?php endif; ?>
 
 			
-				<li class="list-group-item"><a href="<?=base_url?>pedido/mis_pedidos">Mis atenciones</a></li>
+				<li class="list-group-item"><a href="<?=base_url?>pedido/mis_pedidos"><i class="fas fa-notes-medical"></i> Mis atenciones</a></li>
 				
 				<?php $stats = Utils::statsCarrito(); ?>
-				<li class="list-group-item"><a href="<?=base_url?>carrito/index">Pacientes (<?=$stats['count']?>)</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>carrito/index">Ver todo</a></li>
-				<li class="list-group-item"><a href="<?=base_url?>usuario/logout">Cerrar sesión</a></li>
+				<li class="list-group-item"><a href="<?=base_url?>carrito/index"><i class="fas fa-donate"></i> Pacientes (<?=$stats['count']?>)</a></li>
+				<li class="list-group-item"><a href="<?=base_url?>usuario/logout"><i class="fas fa-times-circle"></i> Cerrar sesión</a></li>
 		</aside>
 </div>
 
