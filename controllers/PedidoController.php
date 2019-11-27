@@ -3,7 +3,7 @@ require_once 'models/pedido.php';
 
 class pedidoController
 {
-/*     public function index()
+     public function index()
     {
         $pedido = new Pedido();
         $pedidos = $pedido->getAll();
@@ -85,7 +85,7 @@ class pedidoController
 	}
     
     
-  /*   public function confirmado()
+     public function confirmado()
     {
         if (isset($_SESSION['identity'])) {
             $identity = $_SESSION['identity'];
@@ -98,9 +98,9 @@ class pedidoController
             $pacientes = $pedido_pacientes->getPacientesByPedido($pedido->id);
         }
         require_once 'views/pedido/confirmado.php';
-    } */
+	}
     
-   /*  public function mis_pedidos()
+     public function mis_pedidos()
     {
         Utils::isIdentity();
         $usuario_id = $_SESSION['identity']->id;
@@ -111,9 +111,9 @@ class pedidoController
         $pedidos = $pedido->getAllByUser();
         
         require_once 'views/pedido/mis_pedidos.php';
-    } */
+    } 
     
-    /* public function detalle()
+     public function detalle()
     {
         Utils::isIdentity();
         
@@ -134,7 +134,7 @@ class pedidoController
             header('Location:'.base_url.'pedido/mis_pedidos');
         }
     }
-     */
+     
 
     public function gestion()
     {
@@ -168,7 +168,7 @@ class pedidoController
 		}
 	}
     
-    /* public function estado()
+     public function estado()
     {
         Utils::isAdmin();
         if (isset($_POST['pedido_id']) && isset($_POST['estado'])) {
@@ -186,5 +186,5 @@ class pedidoController
         } else {
             header("Location:".base_url);
         }
-    } */
+    } 
 }

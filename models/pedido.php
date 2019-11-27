@@ -150,7 +150,7 @@ class Pedido
     }
 
     
-    /* public function getOneByUser()
+     public function getOneByUser()
     {
         $sql = "SELECT p.id, p.precio FROM ordenes_atencion p "
                 //. "INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id "
@@ -226,5 +226,5 @@ class Pedido
             $result = true;
         }
         return $result;
-    }*/
+    }
 } 

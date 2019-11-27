@@ -37,7 +37,7 @@
 			<div class="col-3">
 
 
-					<a href="<?= base_url ?>carrito/add&id=<?= $pacient->id ?>" class="button">
+					<a href="<?= base_url ?>carrito/add&id=<?= $pacient->id_paciente ?>" class="button">
 					<button type="button" class="btn btn-primary">Terminado</button></a>
 			</div>
 
