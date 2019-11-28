@@ -55,7 +55,7 @@
 
 							</tbody>
 						</table>
-						<form action="<?= $url_action ?>" method="POST">
+						<form action="http://localhost/gestion-clinica/pedido/save" method="POST">
 
 							<div class="form-group">
 								<label for="medico">Medico :</label>
@@ -69,12 +69,12 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="medico">Servicio :</label>
-								<?php $medicos = medico::getAllNombre(); ?>
+								<label for="servicio">Servicio :</label>
+								<?php $medicos = pedido::getAllServicios(); ?>
 								<select class="form-control" name="medico">
-									<?php while ($medico = $medicos->fetch_object()) : ?>
-										<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
-											<?= $medico->nombre . ' ' . $medico->apellido . ' | ' . $medico->especialidad ?>
+									<?php while ($servi = $servicios->fetch_object()) : ?>
+										<option value="<?= $servi->id_servicio ?>" <?= isset($ser) && is_objet($ser) && $ped->id_servicio == $medico->id_servicio ? 'selected' : ''; ?>>
+											<?= $servi->descripcion ?>
 										</option>
 									<?php endwhile; ?>
 								</select>

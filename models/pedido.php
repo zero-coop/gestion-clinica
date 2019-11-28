@@ -94,6 +94,11 @@ class Pedido
         $pedidos = $this->db->query("SELECT * FROM ordenes_atencion ORDER BY id_orden_atencion DESC;");
         return $pedidos;
     }
+    public function getAllServicios()
+    {
+        $servicios = $this->db->query("SELECT * FROM servicios");
+        return $servicios;
+    }
     
     public function getOne()
     {

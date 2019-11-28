@@ -39,15 +39,15 @@ class pedidoController
 				// 	$save = $pedido->edit();
 				// } else {
 					$save = $pedido->save();
-				}
-
-				if ($save) {
-					$_SESSION['pedido'] = "complete";
-					header('Location:'.base_url .'pedido/dashboard&id='.$paciente->id_paciente);
-				} else {
-					$_SESSION['pedido'] = "failed";
-					header('Location:'.base_url .'pedido/gestion');
-				}
+                    
+                    if ($save) {
+                        $_SESSION['pedido'] = "complete";
+                        header('Location:'.base_url .'pedido/dashboard&id='.$paciente->id_paciente);
+                    } else {
+                        $_SESSION['pedido'] = "failed";
+                        header('Location:'.base_url .'paciente/gestion');
+                    }
+                }
 			} else {
 				$_SESSION['paciente'] = "failed";
 			}
