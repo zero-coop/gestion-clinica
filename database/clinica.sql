@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2019 a las 15:02:22
--- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- Tiempo de generación: 28-11-2019 a las 05:23:41
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -117,18 +117,6 @@ INSERT INTO `historias_clinicas` (`id_historia_clinica`, `id_pacientexobrasocial
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `medicamentos`
---
-
-CREATE TABLE `medicamentos` (
-  `id_medicamento` int(11) UNSIGNED NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `valor` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `medicos`
 --
 
@@ -195,10 +183,10 @@ CREATE TABLE `obras_sociales` (
 --
 
 INSERT INTO `obras_sociales` (`id_obrasociales`, `nombre`, `cuit`, `correo`, `telefono`, `habilitado`, `direccion`, `provincia`, `descuento`, `fecha`) VALUES
-(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-10-15 02:22:33'),
-(1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-10-15 02:22:36'),
-(3, 'ospe', '308776547', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-10-15 02:22:38'),
-(4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 220', 1, 40, '2019-10-15 02:19:41');
+(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-11-28 03:14:28'),
+(1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-11-28 03:14:06'),
+(3, 'ospe', '308776547', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-11-28 03:14:29'),
+(4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 220', 1, 40, '2019-11-28 03:14:31');
 
 -- --------------------------------------------------------
 
@@ -210,10 +198,10 @@ CREATE TABLE `ordenes_atencion` (
   `id_orden_atencion` int(255) NOT NULL,
   `id_medico` int(11) UNSIGNED NOT NULL,
   `id_pacientexobrasocial` int(11) NOT NULL,
-  `id_medicamento` int(11) UNSIGNED DEFAULT NULL,
+  `medicamento` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `id_servicio` tinyint(10) NOT NULL,
   `id_recibo` int(255) DEFAULT NULL,
-  `descripcion` varchar(535) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion` varchar(535) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -221,8 +209,8 @@ CREATE TABLE `ordenes_atencion` (
 -- Volcado de datos para la tabla `ordenes_atencion`
 --
 
-INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `id_medicamento`, `id_servicio`, `id_recibo`, `descripcion`, `fecha`) VALUES
-(9, 2, 1, NULL, 2, 1, 'consulta para ver si esta mal o no', '2019-09-27'),
+INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `id_recibo`, `descripcion`, `fecha`) VALUES
+(9, 2, 1, NULL, 1, 1, 'consulta para ver si esta mal o no', '2019-09-27'),
 (10, 1, 2, NULL, 2, 2, 'viene a verse la cola', '2019-09-27');
 
 -- --------------------------------------------------------
@@ -258,7 +246,8 @@ INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `grupo_sang
 (7, 'juan', 'cabrera', '666123123', 1, 'Masculino', '466677788', 'alvarado 888', 19, NULL, 0, '1990-01-01', 1),
 (8, 'sdaf', '334', '12345678', 7, 'Masculino', '344', 'sdf', 1, NULL, 0, '1989-04-01', 1),
 (9, 'sdfasdf', 'sasdf', '334', 0, 'Masculino', '33', 'dfadf', 1, NULL, 0, '2019-10-01', 1),
-(10, '123', '5345345', '345345', 0, 'Masculino', '3453', 'fgfg', 19, NULL, 0, '2007-07-11', 1);
+(10, '123', '5345345', '345345', 0, 'Masculino', '3453', 'fgfg', 19, NULL, 0, '2007-07-11', 1),
+(11, 'Paciente paciente', 'P1', '1234578', 2, 'Masculino', '388', 'Coronel Arenas 124', 20, NULL, 0, '1989-11-23', 1);
 
 -- --------------------------------------------------------
 
@@ -284,7 +273,8 @@ INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `
 (32, 7, 4, NULL),
 (34, 8, 4, NULL),
 (35, 9, 3, NULL),
-(36, 10, 0, NULL);
+(36, 10, 0, NULL),
+(37, 11, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -434,12 +424,6 @@ ALTER TABLE `historias_clinicas`
   ADD KEY `historias_clinicas_ibfk_2` (`id_orden_atencion`);
 
 --
--- Indices de la tabla `medicamentos`
---
-ALTER TABLE `medicamentos`
-  ADD PRIMARY KEY (`id_medicamento`);
-
---
 -- Indices de la tabla `medicos`
 --
 ALTER TABLE `medicos`
@@ -464,7 +448,6 @@ ALTER TABLE `obras_sociales`
 ALTER TABLE `ordenes_atencion`
   ADD PRIMARY KEY (`id_orden_atencion`) USING BTREE,
   ADD KEY `ordenes_atencion_ibfk_1` (`id_medico`),
-  ADD KEY `ordenes_atencion_ibfk_2` (`id_medicamento`),
   ADD KEY `ordenes_atencion_ibfk_3` (`id_pacientexobrasocial`),
   ADD KEY `ordenes_atencion_ibfk_4` (`id_servicio`),
   ADD KEY `id_recibo` (`id_recibo`);
@@ -540,12 +523,6 @@ ALTER TABLE `historias_clinicas`
   MODIFY `id_historia_clinica` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `medicamentos`
---
-ALTER TABLE `medicamentos`
-  MODIFY `id_medicamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
@@ -573,13 +550,13 @@ ALTER TABLE `ordenes_atencion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
@@ -640,7 +617,6 @@ ALTER TABLE `obras_sociales`
 --
 ALTER TABLE `ordenes_atencion`
   ADD CONSTRAINT `ordenes_atencion_ibfk_1` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id_medico`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `ordenes_atencion_ibfk_2` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamentos` (`id_medicamento`) ON DELETE NO ACTION,
   ADD CONSTRAINT `ordenes_atencion_ibfk_3` FOREIGN KEY (`id_pacientexobrasocial`) REFERENCES `pacientesxobrasociales` (`id_pacientexobrasocial`) ON DELETE NO ACTION,
   ADD CONSTRAINT `ordenes_atencion_ibfk_4` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`) ON DELETE NO ACTION,
   ADD CONSTRAINT `ordenes_atencion_ibfk_5` FOREIGN KEY (`id_recibo`) REFERENCES `recibos` (`id_recibo`);
