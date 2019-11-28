@@ -142,11 +142,11 @@ class Pedido
     public static function getServicio($id)
     {
 		$db = Database::connect();
-        $sql = "SELECT servicios.descripcion FROM servicios INNER JOIN ordenes_atencion ON servicios.id_servicio = {$id};";
+        $sql = "SELECT descripcion FROM servicios WHERE id_servicio = (SELECT id_servicio FROM ordenes_atencion WHERE id_orden_atencion = {$id});";
         $result = $db->query($sql);
-        $r = $result->fetch_assoc();
-		//$r = $result->fetch_object();
-        print_r ("nombre");
+        //$r = $result->fetch_assoc();
+        $r = $result->fetch_object();
+        return $r->descripcion;
     }
 
     

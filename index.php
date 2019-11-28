@@ -4,7 +4,7 @@ require_once 'autoload.php';
 require_once 'config/db.php';
 require_once 'config/parameters.php';
 require_once 'helpers/utils.php';
-require_once 'models/medico.php'; // se debe requerir para depues llamar de manera "corta"
+//require_once 'models/medico.php'; //se lo requiere en el controlador correcto (pedidocontroller)
 require_once 'views/layout/header.php';
 require_once 'views/layout/sidebar.php';
 

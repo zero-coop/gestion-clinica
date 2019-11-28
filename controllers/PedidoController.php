@@ -1,5 +1,7 @@
 <?php
 require_once 'models/pedido.php';
+require_once 'models/medico.php';
+require_once 'models/paciente.php';
 
 class pedidoController
 {
@@ -148,9 +150,19 @@ class pedidoController
 
     public function crear()
 	{
-		//Utils::isAdmin();
-		require_once 'views/pedido/crear.php';
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			//$edit = true;
+
+			$paciente = new Paciente();
+			$paciente->setId($id);
+			$pac = $paciente->getOne();
+			require_once 'views/pedido/crear.php';
+		} else {
+			header('Location:' . base_url . 'paciente/gestion');
+		}
 	}
+
     
     public function editar()
 	{

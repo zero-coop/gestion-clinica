@@ -115,7 +115,8 @@
 									<td>
 										<?php if ($pac->habilitado) : ?>
 											<a href="<?= base_url ?>paciente/dashboard&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-primary">Detalle</button></a>
-											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
+											<a href="<?= base_url ?>pedido/crear&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-outline-dark">Nueva Consulta</button></a>
+											
 											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-info">Historia</button></a>
 											<a href="<?= base_url ?>carrito/add&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-success">Pago</button></a>
 											<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>

@@ -75,7 +75,7 @@
                     <td><?= $ped->id_orden_atencion; ?></td>
                     <td><?= Pedido::getMedico($ped->id_medico); ?></td>					
                     <td><?= Pedido::getPaciente($ped->id_pacientexobrasocial); ?></td>
-                    <td><?= Pedido::getServicio($ped->id_servicio); ?></td>
+                    <td><?= Pedido::getServicio($ped->id_orden_atencion); ?></td>
                     <td><?= $ped->id_recibo; ?></td>
                     <td><?= $ped->descripcion; ?></td>
                     <td><?= $ped->fecha; ?></td>

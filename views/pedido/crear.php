@@ -1,53 +1,104 @@
+<?php
+//dashboard paciente
+// - traemos la info basica del paciente
+// - traemos los pedidos del paciente
+// - habilitamos el crud del pedido
+// - traemos la historia clinica del paciente
+?>
+
 <?php if (isset($_SESSION['identity'])) : ?>
+	<div class="col-10 mt-3">
+		<div class="card">
+			<div class="card-body">
 
-	<div class="col-10">
+				<div class="row">
+					<div class="col-12">
 
-		<div class="row">
-			<div class="col-12">
+						<?php if (isset($pac) && is_object($pac)) : ?>
+							<h1 class="text-center my-4">Nuevo Pedido
+								
+							</h1>
 
-				<?php if (isset($edit) && isset($ped) && is_object($ped)) : ?>
-					<h1 class="text-center my-4">Editar Pedido <?= $ped->id_orden_atencion; ?></h1>
-					<?php $url_action = base_url . "pedido/save&id=" . $ped->id_orden_atencion; ?>
-
-				<?php else : ?>
-					<h1 class="text-center my-4">Nuevo Pedido</h1>
-					<?php $url_action = base_url . "pedido/save"; ?>
-				<?php endif; ?>
-			</div>
-
-			<div class="offset-1 col-8">
-
-				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
-					
-					<div class="form-group">
-						<label for="medico">Medico :</label>
-						<?php $medicos = medico::getAllNombre(); ?>			
-						<select class="form-control" name="medico">
-							<?php while ($medico = $medicos->fetch_object()) : ?>
-								<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
-									<?= $medico->nombre .' '. $medico->apellido . ' | '. $medico->especialidad ?>
-								</option>
-							<?php endwhile; ?>
-						</select>
+						<?php
+							else :
+								header('Location:' . base_url . 'paciente/gestion');
+							endif;
+							?>
 					</div>
 
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>
+
+					<div class="offset-1 col-10">
+						<!-- columna de datos del paciente -->
+						<table class="table table-striped table-hover">
+							<tbody>
+								<?php
+									require_once 'models/obrasociales.php';
+									$obrasocial = new ObraSocial();
+									?>
+								<tr>
+									<h3 class="text-center"><?= $pac->nombre . " " . $pac->apellido  ?></h2>
+								</tr>
+
+								<tr>
+									<td>
+										<?php
+											$obra = $obrasocial->getObraSocial($pac->id_paciente);
+											$numero_socio = $obrasocial->getNumeroObraSocial($pac->id_paciente);
+											if ($obra->id_obrasociales != 0) {
+												echo "Obra Social : " . $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+											} else {
+												echo $obra->nombre;
+											}
+											?>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
+
+							<div class="form-group">
+								<label for="medico">Medico :</label>
+								<?php $medicos = medico::getAllNombre(); ?>
+								<select class="form-control" name="medico">
+									<?php while ($medico = $medicos->fetch_object()) : ?>
+										<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
+											<?= $medico->nombre . ' ' . $medico->apellido . ' | ' . $medico->especialidad ?>
+										</option>
+									<?php endwhile; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="medico">Servicio :</label>
+								<?php $medicos = medico::getAllNombre(); ?>
+								<select class="form-control" name="medico">
+									<?php while ($medico = $medicos->fetch_object()) : ?>
+										<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
+											<?= $medico->nombre . ' ' . $medico->apellido . ' | ' . $medico->especialidad ?>
+										</option>
+									<?php endwhile; ?>
+								</select>
+							</div>
+							<div class="form-group">
+  								<label for="">Medicamentos:</label>
+  									<textarea class="form-control" rows="5" id="" name="medicamentos"></textarea>
+							</div>
+							<div class="form-group">
+  								<label for="">Observaciones:</label>
+  									<textarea class="form-control" rows="5" id="" name="observaciones"></textarea>
+							</div>
+							
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>
+							</div>
+
+						</form>
+
 					</div>
-
-				</form>
-
+				</div>
 			</div>
-		</div>
-	</div>
-	</div>
-	</div>
 
-<?php else : ?>
-	<div class="col-10">
-
-		<div class="alert alert-warning m-5" role="alert">
-			<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?= base_url ?>"></a>
 		</div>
 	</div>
 
