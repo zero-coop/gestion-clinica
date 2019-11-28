@@ -5,9 +5,8 @@ class Pedido
     private $id_orden_atencion;
     private $id_medico;
     private $id_pacientexobrasocial;
-    private $id_medicamento;
+    private $medicamento;
     private $id_servicio;
-    private $id_recibo;
     private $descripcion;
     private $fecha;
     private $db;
@@ -17,9 +16,9 @@ class Pedido
         $this->db = Database::connect();
     }
     
-    public function getId()
+    public function getId_orden_atencion()
     {
-        return $this->id;
+        return $this->id_orden_atencion;
     }
 
     public function getIdMedico()
@@ -32,19 +31,14 @@ class Pedido
         return $this->id_pacientexobrasocial;
     }
 
-    public function getIdMedicamento()
+    public function getMedicamento()
     {
-        return $this->id_medicamento;
+        return $this->medicamento;
     }
 
     public function getIdServicio()
     {
         return $this->id_servicio;
-    }
-
-    public function getIdRecibo()
-    {
-        return $this->id_recibo;
     }
 
     public function getDescripcion()
@@ -74,9 +68,9 @@ class Pedido
     }
 
 
-    public function setIdMedicamento($id_medicamento)
+    public function setMedicamento($medicamento)
     {
-        $this->id_medicamento = $id_medicamento;
+        $this->medicamento = $medicamento;
     }
 
     public function setIdServicio($id_servicio)
@@ -84,10 +78,6 @@ class Pedido
         $this->id_servicio = $id_servicio;
     }
 
-    public function setIdRecibo($id_recibo)
-    {
-        $this->id_recibo = $id_recibo;
-    }
 
     public function setDescripcion($descripcion)
     {
@@ -129,14 +119,6 @@ class Pedido
         return $r->nombre;
     }
 
-    public static function getMedicamento($id)
-    {
-		$db = Database::connect();
-        $sql = "SELECT nombre FROM medicamentos INNER JOIN ordenes_atencion ON medicamentos.id_medicamento = {$id};";
-		$result = $db->query($sql);
-		$r = $result->fetch_object();
-        return $r->nombre;
-    }
 
 
     public static function getServicio($id)
@@ -174,7 +156,7 @@ class Pedido
     
     public function getPacientesByPedido($id)
     {
-        $sql = "SELECT * FROM pacientes WHERE id IN (SELECT paciente_id FROM lineas_pedidos WHERE pedido_id={$id})";
+        $sql = "SELECT * FROM pedidos WHERE id IN (SELECT paciente_id FROM lineas_pedidos WHERE pedido_id={$id})";
     
         // 	$sql = "SELECT pacientes.*,lineas_pedidos.* FROM pacientes INNER JOIN lineas_pedidos ON pacientes.id=lineas_pedidos.paciente_id WHERE lineas_pedidos.pedido_id={$id}";
                 
@@ -185,7 +167,7 @@ class Pedido
     
     public function save()
     {
-        $sql = "INSERT INTO pedidos VALUES(NULL, {$this->getUsuario_id()}, '{$this->getObraSocial()}', {$this->getPrecio()}, 'confirm', CURDATE(), CURTIME());";
+        $sql = "INSERT INTO ordenes_atencion VALUES(NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},null,'{$this->getDescripcion()}',CURDATE();";
         $save = $this->db->query($sql);
         
         $result = false;
@@ -195,28 +177,10 @@ class Pedido
         return $result;
     }
     
-    public function save_linea()
-    {
-        $sql = "SELECT LAST_INSERT_ID() as 'pedido';";
-        $query = $this->db->query($sql);
-        $pedido_id = $query->fetch_object()->pedido;
-        
-        foreach ($_SESSION['carrito'] as $elemento) {
-            $paciente = $elemento['paciente'];
-            
-            $insert = "INSERT INTO lineas_pedidos VALUES(NULL, {$pedido_id}, {$paciente->id})";
-            $save = $this->db->query($insert);
-            
-            // //			var_dump($producto);
-// //			var_dump($insert);
-// //			echo $this->db->error;
-// // //
-        }
-    }
     
     public function edit()
     {
-        $sql = "UPDATE pedidos SET estado='{$this->getEstado()}' ";
+        $sql = "UPDATE ordenes_atencion SET id_medico={$this->getIdMedico()},id_servicio={$this->getId_servicio}, id_medicamento='{$this->getMedicamento()}';";
         $sql .= " WHERE id={$this->getId()};";
         
         $save = $this->db->query($sql);

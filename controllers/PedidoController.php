@@ -13,75 +13,44 @@ class pedidoController
         require_once 'views/pedido/gestion.php';
     }
     
-    public function save()
+	public function save()
     {
-        if (isset($_POST)) {
-			$apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
-			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
-			$dni = isset($_POST['dni']) ? $_POST['dni'] : false;
-			$sexo = isset($_POST['sexo']) ? $_POST['sexo'] : false;
-			$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
-			$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
-			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
-			$obrasocial = isset($_POST['obrasocial']) ? $_POST['obrasocial'] : false;
-			$fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : false;
-			$grupo_sanguineo = isset($_POST['grupo_sanguineo']) ? $_POST['grupo_sanguineo'] : false;
-			$numero_afiliado = isset($_POST['numero_afiliado']) ? $_POST['numero_afiliado'] : false;
-			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
+		
+        if (isset($_POST) && isset($_GET)) {
+			$paciente= isset($_GET['id']) ? $_POST['id'] : false;
+			$medico = isset($_POST['medico']) ? $_POST['medico'] : false;
+			$servicio = isset($_POST['servicio']) ? $_POST['servicio'] : false;
+			$medicamento = isset($_POST['medicamento']) ? $_POST['medicamento'] : false;
+			$observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
 
-			if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
-				$paciente = new Paciente();
-				$paciente->setApellido($apellido);
-				$paciente->setNombre($nombre);
-				$paciente->setDni($dni);
-				$paciente->setSexo($sexo);
-				$paciente->setTelefono($telefono);
-				$paciente->setDireccion($direccion);
-				$paciente->setProvincia($provincia);
-				$paciente->setIdObra($obrasocial);
-				$paciente->setFechaNacimiento($fecha_nacimiento);
-				$paciente->setGrupoSanguineo($grupo_sanguineo);
-				$paciente->setNumeroAfiliado($numero_afiliado);
-				// Guardar la imagen
-				if (isset($_FILES['imagen'])) {
-					$file = $_FILES['imagen'];
-					$filename = $file['name'];
-					$mimetype = $file['type'];
+			if ($paciente && $medico && $servicio && $medicamento && $observaciones) {
+				$pedido = new Pedido();
+				$pedido->setIdPacientexObraSocial($paciente);
+				$pedido->setIdMedico($medico);
+				$pedido->setIdServicio($servicio);
+				$pedido->setMedicamento($medicamento);
+				$pedido->setDescripcion($observaciones);
+		
 
-					if ($mimetype == "image/jpg" || $mimetype == 'image/jpeg' || $mimetype == 'image/png' || $mimetype == 'image/gif') {
+				// if (isset($_GET['id'])) {
+				// 	$id = $_GET['id'];
+				// 	$pedido->setId($id);
 
-						if (!is_dir('uploads/images')) {
-							mkdir('uploads/images', 0777, true);
-						}
-
-						$paciente->setImagen($filename);
-						move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
-					}
-				}
-
-				if (isset($_GET['id'])) {
-					$id = $_GET['id'];
-					$paciente->setId($id);
-
-					$save = $paciente->edit();
-				} else {
-					$save = $paciente->save();
+				// 	$save = $pedido->edit();
+				// } else {
+					$save = $pedido->save();
 				}
 
 				if ($save) {
-					$_SESSION['paciente'] = "complete";
-					header('Location:'.base_url .'paciente/dashboard&id='.$paciente->id_paciente);
+					$_SESSION['pedido'] = "complete";
+					header('Location:'.base_url .'pedido/dashboard&id='.$paciente->id_paciente);
 				} else {
-					$_SESSION['paciente'] = "failed";
-					header('Location:'.base_url .'paciente/gestion');
+					$_SESSION['pedido'] = "failed";
+					header('Location:'.base_url .'pedido/gestion');
 				}
 			} else {
 				$_SESSION['paciente'] = "failed";
 			}
-		} else {
-			$_SESSION['paciente'] = "failed";
-		}
-		$paciente = Paciente::getUltimoPaciente();
 
 		
 	}

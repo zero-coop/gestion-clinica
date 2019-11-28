@@ -55,7 +55,7 @@
 
 							</tbody>
 						</table>
-						<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
+						<form action="<?= $url_action ?>" method="POST">
 
 							<div class="form-group">
 								<label for="medico">Medico :</label>
