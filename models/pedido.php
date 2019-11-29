@@ -4,7 +4,7 @@ class Pedido
 {
     private $id_orden_atencion;
     private $id_medico;
-    private $id_pacientexobrasocial;
+    private $id_paciente;
     private $medicamento;
     private $id_servicio;
     private $descripcion;
@@ -26,9 +26,9 @@ class Pedido
         return $this->id_medico;
     }
 
-    public function getIdPacientexObraSocial()
+    public function getIdPaciente()
     {
-        return $this->id_pacientexobrasocial;
+        return $this->id_paciente;
     }
 
     public function getMedicamento()
@@ -62,9 +62,9 @@ class Pedido
         $this->id_medico = $id_medico;
     }
 
-    public function setIdPacientexObraSocial($id_pacientexobrasocial)
+    public function setIdPaciente($id_paciente)
     {
-        $this->id_pacientexobrasocial = $id_pacientexobrasocial;
+        $this->id_paciente = $id_paciente;
     }
 
 
@@ -96,7 +96,8 @@ class Pedido
     }
     public function getAllServicios()
     {
-        $servicios = $this->db->query("SELECT * FROM servicios");
+        $db = Database::connect();
+        $servicios = $db->query("SELECT * FROM servicios");
         return $servicios;
     }
     
@@ -124,16 +125,14 @@ class Pedido
         return $r->nombre;
     }
 
-
-
     public static function getServicio($id)
     {
 		$db = Database::connect();
-        $sql = "SELECT descripcion FROM servicios WHERE id_servicio = (SELECT id_servicio FROM ordenes_atencion WHERE id_orden_atencion = {$id});";
+        $sql = "SELECT * FROM servicios WHERE id_servicio = (SELECT id_servicio FROM ordenes_atencion WHERE id_orden_atencion = {$id});";
         $result = $db->query($sql);
         //$r = $result->fetch_assoc();
         $r = $result->fetch_object();
-        return $r->descripcion;
+        return $r;
     }
 
     
@@ -172,9 +171,8 @@ class Pedido
     
     public function save()
     {
-        $sql = "INSERT INTO ordenes_atencion VALUES(NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},null,'{$this->getDescripcion()}',CURDATE();";
+        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, (SELECT id_pacientexobrasocial FROM pacientesxobrasociales WHERE id_paciente = $this->id_paciente), '{$this->getMedicamento()}', {$this->getIdServicio()},null,'{$this->getDescripcion()}',CURDATE();";
         $save = $this->db->query($sql);
-        
         $result = false;
         if ($save) {
             $result = true;
@@ -186,7 +184,7 @@ class Pedido
     public function edit()
     {
         $sql = "UPDATE ordenes_atencion SET id_medico={$this->getIdMedico()},id_servicio={$this->getId_servicio}, id_medicamento='{$this->getMedicamento()}';";
-        $sql .= " WHERE id={$this->getId()};";
+        $sql = " WHERE id={$this->getId()};";
         
         $save = $this->db->query($sql);
         

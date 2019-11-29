@@ -16,7 +16,7 @@
 
 						<?php if (isset($pac) && is_object($pac)) : ?>
 							<h1 class="text-center my-4">Nuevo Pedido
-								
+
 							</h1>
 
 						<?php
@@ -25,7 +25,6 @@
 							endif;
 							?>
 					</div>
-
 
 					<div class="offset-1 col-10">
 						<!-- columna de datos del paciente -->
@@ -38,7 +37,11 @@
 								<tr>
 									<h3 class="text-center"><?= $pac->nombre . " " . $pac->apellido  ?></h2>
 								</tr>
-
+								<?php
+									if (isset($_GET['id'])) {
+										$id_paciente = $_GET['id'];
+									}
+									?>
 								<tr>
 									<td>
 										<?php
@@ -55,23 +58,26 @@
 
 							</tbody>
 						</table>
+
 						<form action="http://localhost/gestion-clinica/pedido/save" method="POST">
+							
+							<input type="number" style="visibility:hidden" id="" class="form-control" value="<?php echo $id_paciente; ?>" name="id_paciente" placeholder="">
 
 							<div class="form-group">
 								<label for="medico">Medico :</label>
 								<?php $medicos = medico::getAllNombre(); ?>
 								<select class="form-control" name="medico">
 									<?php while ($medico = $medicos->fetch_object()) : ?>
-										<option value="<?= $medico->id_medico ?>" <?= isset($ped) && is_objet($ped) && $ped->id_medico == $medico->id_medico ? 'selected' : ''; ?>>
-											<?= $medico->nombre . ' ' . $medico->apellido . ' | ' . $medico->especialidad ?>
+										<option value="<?= $medico->id_medico ?>">
+											<?= $medico->apellido .', '. $medico->nombre .' | ' . $medico->especialidad ?>
 										</option>
 									<?php endwhile; ?>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="servicio">Servicio :</label>
-								<?php $medicos = pedido::getAllServicios(); ?>
-								<select class="form-control" name="medico">
+								<?php $servicios = Pedido::getAllServicios(); ?>
+								<select class="form-control" name="servicio">
 									<?php while ($servi = $servicios->fetch_object()) : ?>
 										<option value="<?= $servi->id_servicio ?>" <?= isset($ser) && is_objet($ser) && $ped->id_servicio == $medico->id_servicio ? 'selected' : ''; ?>>
 											<?= $servi->descripcion ?>
@@ -80,27 +86,24 @@
 								</select>
 							</div>
 							<div class="form-group">
-  								<label for="">Medicamentos:</label>
-  									<textarea class="form-control" rows="5" id="" name="medicamentos"></textarea>
+								<label for="">Medicamentos:</label>
+								<textarea class="form-control" rows="5" id="" name="medicamento"></textarea>
 							</div>
 							<div class="form-group">
-  								<label for="">Observaciones:</label>
-  									<textarea class="form-control" rows="5" id="" name="observaciones"></textarea>
+								<label for="">Observaciones:</label>
+								<textarea class="form-control" rows="5" id="" name="observaciones"></textarea>
 							</div>
-							
+
 
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary mt-2" value="Guardar">Guardar</button>
 							</div>
 
 						</form>
-
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
 
 <?php endif; ?>
