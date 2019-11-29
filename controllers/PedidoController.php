@@ -21,11 +21,12 @@ class pedidoController
             $servicio = isset($_POST['servicio']) ? $_POST['servicio'] : false;
             $medicamento = isset($_POST['medicamento']) ? $_POST['medicamento'] : false;
             $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
-
+            
             
             if ($id_paciente && $medico && $servicio) {
                 $pedido = new Pedido();
-                $pedido->setIdPaciente($id_paciente);
+                $paciente=$pedido->getPacientexObra($id_paciente);
+                $pedido->setIdPacientexObraSocial($paciente);
                 $pedido->setIdMedico($medico);
                 $pedido->setIdServicio($servicio);
                 $pedido->setMedicamento($medicamento);
@@ -41,12 +42,13 @@ class pedidoController
                     $save = $pedido->save();
                 }
 
+
                 if ($save) {
                     $_SESSION['pedido'] = "complete";
                     header('Location:' . base_url . 'pedido/gestion');
                 } else {
                     $_SESSION['pedido'] = "failed";
-                    header('Location:' . base_url . 'paciente/gestion');
+                    header('Location:' . base_url . 'pedido/gestion');
                 }
             }
         } else {

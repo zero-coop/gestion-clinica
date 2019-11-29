@@ -4,7 +4,7 @@ class Pedido
 {
     private $id_orden_atencion;
     private $id_medico;
-    private $id_paciente;
+    private $id_pacientexobrasocial;
     private $medicamento;
     private $id_servicio;
     private $descripcion;
@@ -26,9 +26,9 @@ class Pedido
         return $this->id_medico;
     }
 
-    public function getIdPaciente()
+    public function getIdPacientexObraSocial()
     {
-        return $this->id_paciente;
+        return $this->id_pacientexobrasocial;
     }
 
     public function getMedicamento()
@@ -62,8 +62,12 @@ class Pedido
         $this->id_medico = $id_medico;
     }
 
-    public function setIdPaciente($id_paciente)
+    public function setIdPacientexObraSocial($id_pacientexobrasocial)
     {
+        $this->id_pacientexobrasocial = $id_pacientexobrasocial;
+    }
+
+    public function setIdPaciente($id_paciente){
         $this->id_paciente = $id_paciente;
     }
 
@@ -91,7 +95,7 @@ class Pedido
 
     public function getAll()
     {
-        $pedidos = $this->db->query("SELECT * FROM ordenes_atencion ORDER BY id_orden_atencion DESC;");
+        $pedidos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.nombre AS medico,pacientes.nombre,servicios.descripcion,recibos.id_recibo,ordenes_atencion.fecha FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico INNER JOIN recibos ON ordenes_atencion.id_recibo=recibos.id_recibo ORDER BY ordenes_atencion.id_orden_atencion DESC;");
         return $pedidos;
     }
     public function getAllServicios()
@@ -110,7 +114,7 @@ class Pedido
     public static function getPaciente($id)
     {
 		$db = Database::connect();
-        $sql = "SELECT nombre FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id};";
+        $sql = "SELECT * FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id};";
 		$result = $db->query($sql);
 		$r = $result->fetch_object();
         return $r->nombre;
@@ -134,6 +138,17 @@ class Pedido
         $r = $result->fetch_object();
         return $r;
     }
+    public static function getPacientexObra($id_paciente)
+    {
+		$db = Database::connect();
+        $sql = "SELECT id_pacientexobrasocial FROM pacientesxobrasociales INNER JOIN pacientes ON pacientes.id_paciente = pacientesxobrasociales.id_paciente and pacientes.id_paciente={$id_paciente};";
+        $resultado = $db->query($sql);
+        $result= $resultado->fetch_object();
+        $r=$result->id_pacientexobrasocial;
+        return $r;
+    }
+
+    
 
     
      public function getOneByUser()
@@ -171,7 +186,7 @@ class Pedido
     
     public function save()
     {
-        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, (SELECT id_pacientexobrasocial FROM pacientesxobrasociales WHERE id_paciente = $this->id_paciente), '{$this->getMedicamento()}', {$this->getIdServicio()},null,'{$this->getDescripcion()}',CURDATE();";
+        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},NULL,'{$this->getDescripcion()}',CURDATE())";
         $save = $this->db->query($sql);
         $result = false;
         if ($save) {

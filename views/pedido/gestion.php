@@ -67,18 +67,20 @@
                         <th>Recibo</th>
                         <th>Descripcion</th>
                         <th>Fecha</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($ped = $pedidos->fetch_object()) :    ?>
                         <tr>
                             <td><?= $ped->id_orden_atencion; ?></td>
-                            <td><?= Pedido::getMedico($ped->id_medico); ?></td>
-                            <td><?= Pedido::getPaciente($ped->id_pacientexobrasocial); ?></td>
-                            <td><?= Pedido::getServicio($ped->id_orden_atencion)->descripcion; ?></td>
+                            <td><?= $ped->medico; ?></td>
+                            <td><?= $ped->nombre; ?></td>
+                            <td><?= $ped->id_orden_atencion; ?></td>
                             <td><?= $ped->id_recibo; ?></td>
                             <td><?= $ped->descripcion; ?></td>
                             <td><?= $ped->fecha; ?></td>
+                            <td><button class="btn btn-danger">Eliminar</button></td>
                             <!-- <td scope="row">
 				<a href="<//?= base_url ?>pedido/detalle&id=<//?= $ped->id ?>"><//?= $ped->id ?></a>
 			</td> -->
