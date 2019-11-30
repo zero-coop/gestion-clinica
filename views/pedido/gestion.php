@@ -64,8 +64,8 @@
                         <th>Medico</th>
                         <th>Paciente</th>
                         <th>Servicio</th>
-                        <th>Recibo</th>
                         <th>Descripcion</th>
+                        <th>Precio</th>
                         <th>Fecha</th>
                         <th>Acciones</th>
                     </tr>
@@ -77,10 +77,13 @@
                             <td><?= $ped->medico; ?></td>
                             <td><?= $ped->nombre; ?></td>
                             <td><?= $ped->id_orden_atencion; ?></td>
-                            <td><?= $ped->id_recibo; ?></td>
                             <td><?= $ped->descripcion; ?></td>
+                            <td><?= $ped->precio; ?></td>
                             <td><?= $ped->fecha; ?></td>
-                            <td><button class="btn btn-danger">Eliminar</button></td>
+                            <td>
+                            <button class="btn btn-success">Pago</button>
+                            <button class="btn btn-danger">Eliminar</button>
+                            </td>
                             <!-- <td scope="row">
 				<a href="<//?= base_url ?>pedido/detalle&id=<//?= $ped->id ?>"><//?= $ped->id ?></a>
 			</td> -->

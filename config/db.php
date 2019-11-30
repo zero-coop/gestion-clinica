@@ -8,12 +8,6 @@ class Database{
 		return $db;
 	}
 
-	/* public static function query($sql){
-		//$db = new mysqli('localhost', 'root', '', 'clinica');
-		$this->connect->db->query;
-		//return $r;
 
-		
-	} */
 }
 

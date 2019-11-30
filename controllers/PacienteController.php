@@ -8,6 +8,12 @@ class pacienteController
 	{
 		$paciente = new Paciente();
 		$pacientes = $paciente->getAll();
+		$npaciente=new Paciente();
+		$npacientes=$npaciente->getNpacientes();
+		$medico= new Paciente();
+		$medicos=$medico->getAllMedic();
+		$pedido= new Paciente();
+		$pedidos=$pedido->getAllPed();
 
 		// renderizar vista
 		require_once 'views/paciente/destacados.php';

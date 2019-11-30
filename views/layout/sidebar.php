@@ -71,19 +71,7 @@
   </div>
 			<?php else: ?>
 
-		 <div class="col-2">
-		<!-- <h3 class="text-center my-3">Iniciar Sesion</h3>
-			<form action="<?=base_url?>usuario/login" method="post">
-				<label for="email">Email :</label>
-				<input class="form-control" type="email" name="email" />
-				<label for="password">Contraseña :</label>
-				<input class="form-control" type="password" name="password" />
-				<button class="btn btn-primary my-3 form-control" type="submit" value="Enviar">Iniciar</button>
-			</form> -->
-
-			 
-		
-    </div>
+		 
 
 <div class="container-fluid">
 	<div class="row">
@@ -102,10 +90,9 @@
         <?php endif; ?>
 
 			
-				<li class="list-group-item"><a href="<?=base_url?>pedido/mis_pedidos"><i class="fas fa-notes-medical"></i> Mis atenciones</a></li>
+				<!-- <li class="list-group-item"><a href="<?=base_url?>pedido/mis_pedidos"><i class="fas fa-notes-medical"></i> Mis atenciones</a></li> -->
 				
-				<?php $stats = Utils::statsCarrito(); ?>
-				<li class="list-group-item"><a href="<?=base_url?>carrito/index"><i class="fas fa-donate"></i> Pacientes (<?=$stats['count']?>)</a></li>
+			
 				<li class="list-group-item"><a href="<?=base_url?>usuario/logout"><i class="fas fa-times-circle"></i> Cerrar sesión</a></li>
 		</aside>
 </div>

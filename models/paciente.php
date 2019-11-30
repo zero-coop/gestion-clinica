@@ -179,6 +179,23 @@ class Paciente
 		$pacientes = $this->db->query("SELECT * FROM pacientes ORDER BY id_paciente DESC");
 		return $pacientes;
 	}
+	public function getNpacientes()
+	{
+		$npacientes = $this->db->query("SELECT COUNT(nombre) AS numero FROM pacientes");
+		return $npacientes;
+	}
+	public function getAllMedic()
+	{
+		$pacientes = $this->db->query("SELECT COUNT(nombre) as numero FROM medicos");
+		return $pacientes;
+	}
+	public function getAllPed()
+	{
+		$pedidos = $this->db->query("SELECT COUNT(id_orden_atencion) as numero FROM ordenes_atencion ");
+		return $pedidos;
+	}
+
+
 
 	public function getAllDoctor()
 	{

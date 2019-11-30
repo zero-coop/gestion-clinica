@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2019 a las 05:23:41
+-- Tiempo de generación: 30-11-2019 a las 23:53:53
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `clinica`
+CREATE DATABASE clinica;
+USE clinica;
 --
 
 -- --------------------------------------------------------
@@ -31,7 +33,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `debehaber` (
   `id_debehaber` int(11) NOT NULL,
   `id_orden_atencion` int(255) NOT NULL,
-  `id_recibo` int(255) NOT NULL,
   `saldo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -39,9 +40,23 @@ CREATE TABLE `debehaber` (
 -- Volcado de datos para la tabla `debehaber`
 --
 
-INSERT INTO `debehaber` (`id_debehaber`, `id_orden_atencion`, `id_recibo`, `saldo`) VALUES
-(1, 9, 1, 0),
-(2, 10, 2, 0);
+INSERT INTO `debehaber` (`id_debehaber`, `id_orden_atencion`, `saldo`) VALUES
+(1, 9, 0),
+(2, 10, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas`
+--
+
+CREATE TABLE `facturas` (
+  `id` int(11) NOT NULL,
+  `id_metodos_pago` int(11) NOT NULL,
+  `id_orden_atencion` int(11) NOT NULL,
+  `monto` float NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -183,7 +198,7 @@ CREATE TABLE `obras_sociales` (
 --
 
 INSERT INTO `obras_sociales` (`id_obrasociales`, `nombre`, `cuit`, `correo`, `telefono`, `habilitado`, `direccion`, `provincia`, `descuento`, `fecha`) VALUES
-(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-11-28 03:14:28'),
+(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-11-30 17:33:58'),
 (1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-11-28 03:14:06'),
 (3, 'ospe', '308776547', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-11-28 03:14:29'),
 (4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 220', 1, 40, '2019-11-28 03:14:31');
@@ -200,8 +215,8 @@ CREATE TABLE `ordenes_atencion` (
   `id_pacientexobrasocial` int(11) NOT NULL,
   `medicamento` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `id_servicio` tinyint(10) NOT NULL,
-  `id_recibo` int(255) DEFAULT NULL,
   `descripcion` varchar(535) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `precio` float DEFAULT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -209,9 +224,18 @@ CREATE TABLE `ordenes_atencion` (
 -- Volcado de datos para la tabla `ordenes_atencion`
 --
 
-INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `id_recibo`, `descripcion`, `fecha`) VALUES
-(9, 2, 1, NULL, 1, 1, 'consulta para ver si esta mal o no', '2019-09-27'),
-(10, 1, 2, NULL, 2, 2, 'viene a verse la cola', '2019-09-27');
+INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `descripcion`, `precio`, `fecha`) VALUES
+(9, 2, 1, NULL, 1, 'consulta para ver si esta mal o no', NULL, '2019-09-27'),
+(10, 1, 2, NULL, 2, 'viene a verse la cola', 1000, '2019-09-27'),
+(11, 2, 1, 'hola', 1, 'hola', NULL, '2019-11-29'),
+(12, 2, 37, 'asd', 1, 'asdasd', NULL, '2019-11-29'),
+(14, 2, 35, 'lala', 1, 'lala', NULL, '2019-11-29'),
+(15, 2, 2, 'y ella ', 1, 'y ella', NULL, '2019-11-30'),
+(16, 1, 37, 'hola', 2, 'hola', 2500, '2019-11-30'),
+(17, 2, 2, '200', 1, '123', 500, '2019-11-30'),
+(18, 2, 36, 'hola', 1, 'hola', 2500, '2019-11-30'),
+(19, 1, 2, 'hola', 1, 'Hola', 1000, '2019-11-30'),
+(20, 1, 1, 'NMOSE', 2, 'NOSE', 500, '2019-11-30');
 
 -- --------------------------------------------------------
 
@@ -321,28 +345,6 @@ INSERT INTO `provincias` (`id_provincia`, `nombre`, `codigo_postal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recibos`
---
-
-CREATE TABLE `recibos` (
-  `id_recibo` int(255) NOT NULL,
-  `id_orden_atencion` int(255) NOT NULL,
-  `monto` int(11) NOT NULL,
-  `metodo_pago` int(10) NOT NULL,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `recibos`
---
-
-INSERT INTO `recibos` (`id_recibo`, `id_orden_atencion`, `monto`, `metodo_pago`, `fecha`) VALUES
-(1, 9, 400, 1, '2019-09-27'),
-(2, 10, 500, 1, '2019-09-27');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `servicios`
 --
 
@@ -399,8 +401,15 @@ INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `
 --
 ALTER TABLE `debehaber`
   ADD PRIMARY KEY (`id_debehaber`),
-  ADD KEY `id_orden_atencion` (`id_orden_atencion`),
-  ADD KEY `id_recibo` (`id_recibo`);
+  ADD KEY `id_orden_atencion` (`id_orden_atencion`);
+
+--
+-- Indices de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_metodos_pago` (`id_metodos_pago`),
+  ADD KEY `id_orden_atencion` (`id_orden_atencion`);
 
 --
 -- Indices de la tabla `grupo_sanguineo`
@@ -446,11 +455,10 @@ ALTER TABLE `obras_sociales`
 -- Indices de la tabla `ordenes_atencion`
 --
 ALTER TABLE `ordenes_atencion`
-  ADD PRIMARY KEY (`id_orden_atencion`) USING BTREE,
+  ADD PRIMARY KEY (`id_orden_atencion`),
   ADD KEY `ordenes_atencion_ibfk_1` (`id_medico`),
   ADD KEY `ordenes_atencion_ibfk_3` (`id_pacientexobrasocial`),
-  ADD KEY `ordenes_atencion_ibfk_4` (`id_servicio`),
-  ADD KEY `id_recibo` (`id_recibo`);
+  ADD KEY `ordenes_atencion_ibfk_4` (`id_servicio`);
 
 --
 -- Indices de la tabla `pacientes`
@@ -474,14 +482,6 @@ ALTER TABLE `provincias`
   ADD PRIMARY KEY (`id_provincia`);
 
 --
--- Indices de la tabla `recibos`
---
-ALTER TABLE `recibos`
-  ADD PRIMARY KEY (`id_recibo`),
-  ADD KEY `metodo_pago` (`metodo_pago`),
-  ADD KEY `id_orden_atencion` (`id_orden_atencion`);
-
---
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
@@ -503,6 +503,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `debehaber`
   MODIFY `id_debehaber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo_sanguineo`
@@ -544,7 +550,7 @@ ALTER TABLE `obras_sociales`
 -- AUTO_INCREMENT de la tabla `ordenes_atencion`
 --
 ALTER TABLE `ordenes_atencion`
-  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
@@ -563,12 +569,6 @@ ALTER TABLE `pacientesxobrasociales`
 --
 ALTER TABLE `provincias`
   MODIFY `id_provincia` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `recibos`
---
-ALTER TABLE `recibos`
-  MODIFY `id_recibo` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -590,8 +590,14 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `debehaber`
 --
 ALTER TABLE `debehaber`
-  ADD CONSTRAINT `debehaber_ibfk_1` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`),
-  ADD CONSTRAINT `debehaber_ibfk_2` FOREIGN KEY (`id_recibo`) REFERENCES `recibos` (`id_recibo`);
+  ADD CONSTRAINT `debehaber_ibfk_1` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`);
+
+--
+-- Filtros para la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`id_metodos_pago`) REFERENCES `metodos_pago` (`id_metodo_pago`),
+  ADD CONSTRAINT `facturas_ibfk_2` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`);
 
 --
 -- Filtros para la tabla `hijos`
@@ -613,15 +619,6 @@ ALTER TABLE `obras_sociales`
   ADD CONSTRAINT `obras_sociales_ibfk_1` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`id_provincia`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `ordenes_atencion`
---
-ALTER TABLE `ordenes_atencion`
-  ADD CONSTRAINT `ordenes_atencion_ibfk_1` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id_medico`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `ordenes_atencion_ibfk_3` FOREIGN KEY (`id_pacientexobrasocial`) REFERENCES `pacientesxobrasociales` (`id_pacientexobrasocial`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `ordenes_atencion_ibfk_4` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `ordenes_atencion_ibfk_5` FOREIGN KEY (`id_recibo`) REFERENCES `recibos` (`id_recibo`);
-
---
 -- Filtros para la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
@@ -633,13 +630,6 @@ ALTER TABLE `pacientes`
 ALTER TABLE `pacientesxobrasociales`
   ADD CONSTRAINT `pacientesxobrasociales_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE,
   ADD CONSTRAINT `pacientesxobrasociales_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obras_sociales` (`id_obrasociales`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `recibos`
---
-ALTER TABLE `recibos`
-  ADD CONSTRAINT `recibos_ibfk_1` FOREIGN KEY (`metodo_pago`) REFERENCES `metodos_pago` (`id_metodo_pago`),
-  ADD CONSTRAINT `recibos_ibfk_2` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,6 +8,7 @@ class Pedido
     private $medicamento;
     private $id_servicio;
     private $descripcion;
+    private $precio;
     private $fecha;
     private $db;
     
@@ -44,6 +45,10 @@ class Pedido
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+    public function getPrecio()
+    {
+        return $this->precio;
     }
 
     public function getFecha()
@@ -87,6 +92,10 @@ class Pedido
     {
         $this->descripcion = $this->db->real_escape_string($descripcion);
     }
+    public function setPrecio($precio)
+    {
+        $this->precio = $this->db->real_escape_string($precio);
+    }
 
     public function setFecha($fecha)
     {
@@ -95,7 +104,7 @@ class Pedido
 
     public function getAll()
     {
-        $pedidos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.nombre AS medico,pacientes.nombre,servicios.descripcion,recibos.id_recibo,ordenes_atencion.fecha FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico INNER JOIN recibos ON ordenes_atencion.id_recibo=recibos.id_recibo ORDER BY ordenes_atencion.id_orden_atencion DESC;");
+        $pedidos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.nombre AS medico,pacientes.nombre,servicios.descripcion,ordenes_atencion.fecha,ordenes_atencion.precio FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico ORDER BY ordenes_atencion.id_orden_atencion DESC;");
         return $pedidos;
     }
     public function getAllServicios()
@@ -118,6 +127,15 @@ class Pedido
 		$result = $db->query($sql);
 		$r = $result->fetch_object();
         return $r->nombre;
+    }
+    
+    public static function delete(){
+        $db = Database::connect();
+        $sql = "DELETE FROM ";
+		$result = $db->query($sql);
+		$r = $result->fetch_object();
+        return $r->nombre;
+
     }
    
     public static function getMedico($id)
@@ -186,7 +204,7 @@ class Pedido
     
     public function save()
     {
-        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},NULL,'{$this->getDescripcion()}',CURDATE())";
+        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},'{$this->getDescripcion()}',{$this->getPrecio()},CURDATE());";
         $save = $this->db->query($sql);
         $result = false;
         if ($save) {

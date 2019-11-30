@@ -12,10 +12,10 @@
 			<div class="card-body">
 
 				<div class="row">
-					<div class="col-12">
+					<div class="offset-1 col-11">
 
 						<?php if (isset($pac) && is_object($pac)) : ?>
-							<h1 class="text-center my-4">Nuevo Pedido
+							<h1 class=" my-4">Nuevo Pedido
 
 							</h1>
 
@@ -84,6 +84,10 @@
 										</option>
 									<?php endwhile; ?>
 								</select>
+							</div>
+							<div class="form-group">
+								<label for="">Precio:</label>
+								<input type="text" class="form-control" name="precio">
 							</div>
 							<div class="form-group">
 								<label for="">Medicamentos:</label>

@@ -42,7 +42,6 @@ class carritoController
 			if (is_object($paciente)) {
 				$_SESSION['carrito'][] = array(
 					"id_paciente" => $paciente->id,
-					"precio" => $paciente->precio,
 					"unidades" => 1,
 					"paciente" => $paciente
 				);

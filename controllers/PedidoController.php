@@ -21,14 +21,16 @@ class pedidoController
             $servicio = isset($_POST['servicio']) ? $_POST['servicio'] : false;
             $medicamento = isset($_POST['medicamento']) ? $_POST['medicamento'] : false;
             $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
+            $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
             
             
-            if ($id_paciente && $medico && $servicio) {
+            if ($id_paciente && $medico && $servicio && $precio) {
                 $pedido = new Pedido();
                 $paciente=$pedido->getPacientexObra($id_paciente);
                 $pedido->setIdPacientexObraSocial($paciente);
                 $pedido->setIdMedico($medico);
                 $pedido->setIdServicio($servicio);
+                $pedido->setPrecio($precio);
                 $pedido->setMedicamento($medicamento);
                 $pedido->setDescripcion($observaciones);
                 
@@ -119,6 +121,27 @@ class pedidoController
         require_once 'views/pedido/gestion.php';
     }
 
+    public function eliminar()
+	{
+		//Utils::isAdmin();
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$pedido = new Pedido();
+			$pedido->setId_orden_atencion($id);
+			$delete = $pedido->delete();
+
+			if ($delete) {
+				$_SESSION['delete'] = 'complete';
+			} else {
+				$_SESSION['delete'] = 'failed';
+			}
+		} else {
+			$_SESSION['delete'] = 'failed';
+		}
+
+		header('Location:' . base_url . 'pedido/gestion');
+	}
+
     public function crear()
     {
         if (isset($_GET['id'])) {
@@ -151,23 +174,5 @@ class pedidoController
         }
     }
 
-    public function estado()
-    {
-        Utils::isAdmin();
-        if (isset($_POST['pedido_id']) && isset($_POST['estado'])) {
-            // Recoger datos form
-            $id = $_POST['pedido_id'];
-            $estado = $_POST['estado'];
 
-            // Upadate del pedido
-            $pedido = new Pedido();
-            $pedido->setId($id);
-            $pedido->setEstado($estado);
-            $pedido->edit();
-
-            header("Location:" . base_url . 'pedido/detalle&id=' . $id);
-        } else {
-            header("Location:" . base_url);
-        }
-    }
 }

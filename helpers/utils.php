@@ -79,9 +79,6 @@ class Utils{
 		if(isset($_SESSION['carrito'])){
 			$stats['count'] = count($_SESSION['carrito']);
 			
-			foreach($_SESSION['carrito'] as $paciente){
-				$stats['total'] += $paciente['precio']*$paciente['unidades'];
-			}
 		}
 		
 		return $stats;
