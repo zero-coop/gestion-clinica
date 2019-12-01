@@ -1,17 +1,37 @@
 <?php
 require_once 'models/paciente.php';
+require_once 'models/recibo.php';
 
 class carritoController
 {
 
 	public function index()
 	{
-		if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) >= 1) {
-			$carrito = $_SESSION['carrito'];
-		} else {
-			$carrito = array();
+		if(isset($_GET['id'])){
+			$id_pedido=$_GET[id];
+			
+			require_once 'views/carrito/index.php';
 		}
-		require_once 'views/carrito/index.php';
+	}
+
+	public function terminar(){
+
+		if(isset($_POST)){
+			
+			$id_orden= isset($_POST['id']) ? $_POST['id'] : false;
+			$metodo_pago= isset($_POST['apellido']) ? $_POST['apellido'] : false;
+			$monto= isset($_POST['precio']) ? $_POST['precio'] : false;
+
+			if($id_orden && $metodo_pago && $monto){
+				$recibo=new Recibo();
+				$recibo->setIdOrdenAtencion($id_orden);
+				$recibo->setMetodosPago($metodo_pago);
+				$recibo->setMonto($monto);
+			}
+		}
+
+		header('Location:' . base_url . "recibo/index" );
+
 	}
 
 	public function add()

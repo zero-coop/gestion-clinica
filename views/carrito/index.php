@@ -9,11 +9,11 @@
 
 <form action="" method="POST">
   <div class="form-group">
-    <label for="formGroupExampleInput">Example label</label>
+    <label for="formGroupExampleInput">Metodos de pago</label>
     <input type="text" class="form-control" id="" placeholder="Example input">
   </div>
   <div class="form-group">
-    <label for="">Another label</label>
+    <label for="">Precio Total</label>
     <input type="text" class="form-control" id="" placeholder="Another input">
   </div>
 </form>
