@@ -78,6 +78,11 @@ class Recibo{
 		return $result;
 	}
 
+	public function getSetearId($id_pedido){
+		$recibos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion FROM ordenes_atencion WHERE id_orden_atencion=$id_pedido");
+		return $recibos;
+	}
+
 
 
 

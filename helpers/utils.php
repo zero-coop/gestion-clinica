@@ -63,6 +63,13 @@ class Utils{
 		return $provincias;
 	}
 
+	public static function showMetodosPagos(){
+		require_once 'models/metodospagos.php';
+		$metodos = new MetodosPagos();
+		$metodospagos = $metodos->getAll();
+		return $metodospagos;
+	}
+
 	public static function showGrupos(){
 		require_once 'models/gruposanguineo.php';
 		$grupo = new GrupoSanguineo();
