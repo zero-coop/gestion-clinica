@@ -16,6 +16,17 @@ class reciboController
 		}
 	}
 
+	public function continuar(){
+
+		if(isset($_POST)){
+			$precio=$_POST['precio'];
+			$metodo=$_POST['id_metodo'];
+			require_once 'views/recibo/finalizar.php';
+			return $precio && $metodo;
+
+		}
+	}
+
 	public function terminar(){
 
 		if(isset($_POST)){
@@ -30,9 +41,9 @@ class reciboController
 				$recibo->setMetodosPago($metodo_pago);
 				$recibo->setMonto($monto);
 			}
+			header('Location:' . base_url . "recibo/gestion" );
 		}
 
-		header('Location:' . base_url . "recibo/gestion" );
 
 	}
 

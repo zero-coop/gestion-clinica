@@ -51,8 +51,8 @@ class MetodosPagos{
 
 	public function getAll()
 	{
-		$metodos = $this->db->query("SELECT * FROM metodos_pagos ORDER BY id_metodos_pago DESC");
-		return $metodos;
+		$metodospagos = $this->db->query("SELECT * FROM metodos_pago ORDER BY id_metodo_pago DESC");
+		return $metodospagos;
 	}
 	
 	public function save(){
