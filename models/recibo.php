@@ -66,6 +66,11 @@ class Recibo{
 		$recibos = $this->db->query("SELECT * FROM recibos ORDER BY id DESC");
 		return $recibos;
 	}
+	public function getRecargo($metodo)
+	{
+		$recargo = $this->db->query("SELECT * FROM metodos_pago WHERE id_metodo_pago=$metodo");
+		return $recargo;
+	}
 	
 	public function save(){
 		$sql = "INSERT INTO recibos VALUES(NULL, {$this->getIdMetodosPago()}, {$this->IdOrdenAtencion()}, {$this->getMonto()},CURDATE());";

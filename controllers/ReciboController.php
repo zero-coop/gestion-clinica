@@ -19,11 +19,15 @@ class reciboController
 	public function continuar(){
 
 		if(isset($_POST)){
+			$id_orden=$_POST['id_orden'];
 			$precio=$_POST['precio'];
 			$metodo=$_POST['id_metodo'];
+			$recargo= new Recibo();
+			$recargos=$recargo->getRecargo($metodo);
+			$mostrar=new Recibo();
+			$mostar->mostrarOrdenCompleta($id_orden);
 			require_once 'views/recibo/finalizar.php';
-			return $precio && $metodo;
-
+		    return $precio && $metodo && $recargos;
 		}
 	}
 

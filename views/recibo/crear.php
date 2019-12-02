@@ -10,7 +10,8 @@
 <form action="http://localhost/gestion-clinica/recibo/continuar" method="POST">
   <?php while ($rec =$devolver->fetch_object()) : ?>
   <div class="form-group">
-    <input type="text" class="form-control" id="" value="<?=$rec->id_orden_atencion ?>" placeholder="Example input" style="visibility:hidden">
+    <label for="">Numero de pedido</label>
+    <input type="text" class="form-control" name="id_orden" value="<?=$rec->id_orden_atencion ?>" >
   </div>
   <?php endwhile; ?>
 
