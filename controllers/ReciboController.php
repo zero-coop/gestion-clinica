@@ -15,40 +15,45 @@ class reciboController
 			require_once 'views/recibo/crear.php';
 		}
 	}
-
+	
 	public function continuar(){
-
+		
 		if(isset($_POST)){
 			$id_orden=$_POST['id_orden'];
 			$precio=$_POST['precio'];
 			$metodo=$_POST['id_metodo'];
 			$recargo= new Recibo();
 			$recargos=$recargo->getRecargo($metodo);
-			$mostrar=new Recibo();
-			$mostar->mostrarOrdenCompleta($id_orden);
+			$todo=new Recibo();
+			$terminado=$todo->mostrarOrdenCompleta($id_orden);
 			require_once 'views/recibo/finalizar.php';
-		    return $precio && $metodo && $recargos;
+		    return $id_orden && $precio && $metodo && $recargos && $terminado;
 		}
 	}
-
+	
 	public function terminar(){
-
+		
 		if(isset($_POST)){
 			
 			$id_orden= isset($_POST['id']) ? $_POST['id'] : false;
-			$metodo_pago= isset($_POST['id_metodo']) ? $_POST['id_metodo'] : false;
+			$metodo_pago= isset($_POST['metodo']) ? $_POST['metodo'] : false;
 			$monto= isset($_POST['precio']) ? $_POST['precio'] : false;
-
+			
 			if($id_orden && $metodo_pago && $monto){
 				$recibo=new Recibo();
 				$recibo->setIdOrdenAtencion($id_orden);
-				$recibo->setMetodosPago($metodo_pago);
+				$recibo->setIdMetodosPago($metodo_pago);
 				$recibo->setMonto($monto);
+				$recibo->save();
 			}
-			header('Location:' . base_url . "recibo/gestion" );
+			header('Location:' . base_url . 'recibo/terminado');
 		}
-
-
+		
+		
+	}
+	public function terminado(){
+		
+		require_once 'views/recibo/terminado.php';
 	}
 
 

@@ -1,8 +1,3 @@
-
-function mostrarTotal(){
-  var precio=document.getElementById('precio_pedido').value;
-  
-}
 (function () {
   'use strict';
 

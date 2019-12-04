@@ -73,7 +73,7 @@ class Recibo{
 	}
 	
 	public function save(){
-		$sql = "INSERT INTO recibos VALUES(NULL, {$this->getIdMetodosPago()}, {$this->IdOrdenAtencion()}, {$this->getMonto()},CURDATE());";
+		$sql = "INSERT INTO recibos VALUES(NULL, {$this->getIdMetodosPago()}, {$this->getIdOrdenAtencion()}, {$this->getMonto()},CURDATE());";
 		$save = $this->db->query($sql);
 		
 		$result = false;
@@ -86,6 +86,12 @@ class Recibo{
 	public function getSetearId($id_pedido){
 		$recibos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion FROM ordenes_atencion WHERE id_orden_atencion=$id_pedido");
 		return $recibos;
+	}
+
+	public function mostrarOrdenCompleta($id_orden){
+		$todo = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,obras_sociales.nombre AS obra,medicos.nombre AS mediconombre,medicos.apellido AS medicoapellido,medicos.especialidad,pacientes.nombre AS pacientenombre,pacientes.apellido AS pacienteapellido,pacientes.dni,servicios.descripcion,ordenes_atencion.fecha,ordenes_atencion.precio FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN obras_sociales ON obras_sociales.id_obrasociales=pacientesxobrasociales.id_obra_social INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico AND ordenes_atencion.id_orden_atencion=$id_orden");
+		return $todo;
+
 	}
 
 

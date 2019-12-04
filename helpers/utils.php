@@ -91,18 +91,4 @@ class Utils{
 		return $stats;
 	}
 	
-	public static function showStatus($status){
-		$value = 'Pendiente';
-		
-		if($status == 'confirm'){
-			$value = 'Pendiente';
-		}elseif($status == 'preparation'){
-			$value = 'Atendiendo';
-		}elseif($status == 'ready'){
-			$value = 'Terminado';
-		};
-		
-		return $value;
-	}
-	
 }
