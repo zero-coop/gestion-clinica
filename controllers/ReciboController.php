@@ -56,6 +56,10 @@ class reciboController
 		require_once 'views/recibo/terminado.php';
 	}
 
+	public function registro(){
+		
+	}
+
 
 	
 
