@@ -14,6 +14,8 @@ class pacienteController
 		$medicos=$medico->getAllMedic();
 		$pedido= new Paciente();
 		$pedidos=$pedido->getAllPed();
+		$ingreso=new Paciente();
+		$ingresos=$ingreso->getIngresos();
 
 		// renderizar vista
 		require_once 'views/paciente/destacados.php';

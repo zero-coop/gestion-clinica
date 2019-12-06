@@ -68,7 +68,7 @@ class Recibo{
 	}
 	public function getInicio()
 	{
-		$recibos = $this->db->query("SELECT recibos.id AS recibo,metodos_pago.metodo,ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre ,servicios.descripcion,recibos.fecha,recibos.monto FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico INNER JOIN recibos ON recibos.id_orden_atencion=ordenes_atencion.id_orden_atencion INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago");
+		$recibos = $this->db->query("SELECT recibos.id AS recibo,metodos_pago.metodo,ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre ,servicios.descripcion,recibos.fecha,recibos.monto FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico INNER JOIN recibos ON recibos.id_orden_atencion=ordenes_atencion.id_orden_atencion INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago ORDER BY recibos.id DESC");
 		return $recibos;
 	}
 	public function getRecargo($metodo)
@@ -78,7 +78,7 @@ class Recibo{
 	}
 	
 	public function save(){
-		$sql = "INSERT INTO recibos VALUES(NULL, {$this->getIdMetodosPago()}, {$this->getIdOrdenAtencion()}, {$this->getMonto()},CURDATE());";
+		$sql = "INSERT INTO recibos VALUES(NULL, {$this->getIdMetodosPago()}, {$this->getIdOrdenAtencion()}, {$this->getMonto()},CURTIME());";
 		$save = $this->db->query($sql);
 		
 		$result = false;

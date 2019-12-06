@@ -194,6 +194,11 @@ class Paciente
 		$pedidos = $this->db->query("SELECT COUNT(id_orden_atencion) as numero FROM ordenes_atencion ");
 		return $pedidos;
 	}
+	public function getIngresos()
+	{
+		$ingresos = $this->db->query("SELECT SUM(monto) as total FROM recibos");
+		return $ingresos;
+	}
 
 
 
