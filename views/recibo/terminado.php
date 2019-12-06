@@ -9,7 +9,7 @@
     </div>
     <div class="col-12 text-center">
     <a href=""><button class="btn btn-danger">Imprimir factura PDF</button></a>
-    <a href=""><button class="btn btn-info">Ver registro de pagos</button></a>
+    <a href="http://localhost/gestion-clinica/recibo/registro"><button class="btn btn-info">Ver registro de pagos</button></a>
     <a href=""><button class="btn btn-primary">Inicio</button></a>
     </div>
 

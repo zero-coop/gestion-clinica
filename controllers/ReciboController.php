@@ -57,7 +57,7 @@ class reciboController
 	}
 
 	public function registro(){
-		
+		require_once 'views/recibo/registro.php';
 	}
 
 

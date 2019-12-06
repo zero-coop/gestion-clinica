@@ -1,7 +1,7 @@
 <div class="col-10">
 <div class="row">
 
-<div class="col-12"> <h4 class="text-center display-4">Registro de pagos</h4></div>
+<div class="col-12 my-5"> <h4 class="text-center display-4">Registro de pagos</h4></div>
     
 <table class="table">
   <thead>
