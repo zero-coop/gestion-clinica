@@ -3,28 +3,35 @@
 
 <div class="col-12 my-5"> <h4 class="text-center display-4">Registro de pagos</h4></div>
     
-<table class="table">
+<table class="table my-3">
   <thead>
     <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>N° Recibo</th>
+      <th>N° Orden</th>
+      <th>Paciente</th>
+      <th>Medico</th>
+      <th>Descripcion</th>
+      <th>Pago</th>
+      <th>Total</th>
+      <th>Fecha</th>
     </tr>
+<?php while ($mos = $mostrar->fetch_object()) : ?>
+<tr>
+<th scope="row"><?=$mos->recibo?></th>
+    <td><?=$mos->id_orden_atencion?></td>
+    <td><?=$mos->pacienteapellido . " " . $mos->pacientenombre?></td>
+    <td><?=$mos->medicoapellido . " " . $mos->mediconombre?></td>
+    <td><?=$mos->descripcion?></td>
+    <td><?=$mos->metodo?></td>
+    <td><?=$mos->monto?></td>
+    <td><?=$mos->fecha?></td>
+</tr>
+<?php endwhile;?>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    </tr>
+
   </tbody>
 </table>
-
 
 
 </div>

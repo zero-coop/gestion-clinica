@@ -63,7 +63,6 @@
                         <th>NºAtencion</th>
                         <th>Medico</th>
                         <th>Paciente</th>
-                        <th>Servicio</th>
                         <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Fecha</th>
@@ -74,9 +73,8 @@
                     <?php while ($ped = $pedidos->fetch_object()) :    ?>
                         <tr>
                             <td><?= $ped->id_orden_atencion; ?></td>
-                            <td><?= $ped->medico; ?></td>
-                            <td><?= $ped->nombre; ?></td>
-                            <td><?= $ped->id_orden_atencion; ?></td>
+                            <td><?= $ped->medicoapellido . " " . $ped->mediconombre; ?></td>
+                            <td><?= $ped->pacienteapellido . " ". $ped->pacientenombre; ?></td>
                             <td><?= $ped->descripcion; ?></td>
                             <td><?= $ped->precio; ?></td>
                             <td><?= $ped->fecha; ?></td>

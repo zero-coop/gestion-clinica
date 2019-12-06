@@ -57,7 +57,10 @@ class reciboController
 	}
 
 	public function registro(){
+		$todo=new Recibo();
+		$mostrar=$todo->getInicio();
 		require_once 'views/recibo/registro.php';
+		return $mostrar;
 	}
 
 
