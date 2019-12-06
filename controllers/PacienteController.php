@@ -203,4 +203,18 @@ class pacienteController
 
 		header('Location:' . base_url . 'paciente/gestion');
 	}
+
+	public function historia(){
+		if(isset($_GET)){
+
+			$id=$_GET['id'];			
+			
+			require_once 'views/paciente/historia.php';
+			
+			$paciente= new Paciente();
+			$mostrar=$paciente->getHistoria($id);
+			return $mostrar;
+		}
+
+	}
 }
