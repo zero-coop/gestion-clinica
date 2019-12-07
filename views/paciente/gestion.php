@@ -18,18 +18,12 @@
 						</a>
 					</div>
 
-					<div class="offset-2 col-4">
-						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="text" placeholder="Buscar paciente" aria-label="Search">
-							<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-						</form>
-					</div>
+					
 				</div>
-				<hr />
 			</div>
 
 
-			<div class="col-12">
+			<div class="col-12 my-3">
 
 				<?php if (isset($_SESSION['paciente']) && $_SESSION['paciente'] == 'complete') : ?>
 					<div class="alert alert-success my-4" role="alert">
@@ -67,7 +61,7 @@
 					</div>
 				<?php endif; ?>
 				<?php Utils::deleteSession('update'); ?>
-				<table class="table table-striped table-hover">
+				<table class="table table-striped table-hover" id="example">
 					<thead class="thead-light">
 						<tr>
 							<th>ID</th>

@@ -14,15 +14,8 @@
                     </div>
                     <div class="col-6">
                         <a href="<?= base_url ?>pedido/crear">
-                            <button type="button" class="btn btn-success">Nuevo Pedido</button>
+                            <button type="button" class="btn btn-success my-3">Nuevo Pedido</button>
                         </a>
-                    </div>
-
-                    <div class="offset-2 col-4">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Buscar Pedido" aria-label="Search">
-                            <button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -56,8 +49,9 @@
                 </div>
             <?php endif; ?>
             <?php Utils::deleteSession('update'); ?>
+            </div>
 
-            <table class="table mt-4 table-bordered">
+            <table id="example" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
                         <th>NºAtencion</th>

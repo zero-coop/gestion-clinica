@@ -1,2 +1,0 @@
-# gestion-clinica
-Gestion Clinica
