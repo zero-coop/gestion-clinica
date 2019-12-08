@@ -74,6 +74,7 @@
                             <td><?= $ped->fecha; ?></td>
                             <td>
                             <a href="<?= base_url ?>recibo/crear&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-success">Pago</button></a>
+                            <a href="<?= base_url ?>pedido/observaciones&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-info">Observaciones</button></a>
                             <a href=""><button class="btn btn-danger">Eliminar</button></a>
                             </td>
                             <!-- <td scope="row">

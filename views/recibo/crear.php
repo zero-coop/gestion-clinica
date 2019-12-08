@@ -20,7 +20,7 @@
     <input type="text" name="precio" class="form-control" id="precio_pedido" placeholder="">
   </div>
   <div class="form-group">
-		<label for="metodos">Metodo de Pago :</label>
+		<label for="metodos">Metodos de pago :</label>
 		<?php $metodospagos = Utils::showMetodosPagos(); ?>
 		<select class="form-control" name="id_metodo">
 		<?php while ($metodo = $metodospagos->fetch_object()) : ?>

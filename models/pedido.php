@@ -131,11 +131,16 @@ class Pedido
     
     public static function getPaciente($id)
     {
-		$db = Database::connect();
+        $db = Database::connect();
         $sql = "SELECT * FROM pacientes INNER JOIN pacientesxobrasociales ON pacientes.id_paciente = {$id};";
 		$result = $db->query($sql);
 		$r = $result->fetch_object();
         return $r->nombre;
+    }
+    
+    public function getObservaciones($id){
+        $todo = $this->db->query("SELECT ordenes_atencion.descripcion,ordenes_atencion.medicamento FROM ordenes_atencion WHERE id_orden_atencion=$id");
+        return $todo;
     }
     
     public static function delete(){
@@ -231,11 +236,20 @@ class Pedido
 		$pacientes = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre,ordenes_atencion.fecha FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico AND servicios.descripcion='internacion' AND ordenes_atencion.alta=1 ORDER BY ordenes_atencion.id_orden_atencion DESC ");
 		return $pacientes;
     }
+    public function getAtenciones(){
+		$pacientes = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre,ordenes_atencion.fecha FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico AND servicios.descripcion='internacion' AND ordenes_atencion.alta=0 ORDER BY ordenes_atencion.id_orden_atencion DESC ");
+		return $pacientes;
+    }
     
     public function alta($id){
         $alta = $this->db->query("UPDATE ordenes_atencion SET fecha_fin=CURTIME(),alta=0 WHERE id_orden_atencion=$id");
         return $alta;
-
+        
+    }
+    public function enviar($id){
+        $numero = $this->db->query("SELECT ordenes_atencion.alta FROM ordenes_atencion WHERE ordenes_atencion.id_orden_atencion=$id");
+        return $numero;
+        
     }
     
     public function edit()
@@ -250,5 +264,11 @@ class Pedido
             $result = true;
         }
         return $result;
+    }
+    
+    public function getUpdate($id){
+        $update = $this->db->query("UPDATE ordenes_atencion SET descripcion='{$this->getDescripcion()}',medicamento='{$this->getMedicamento()}' WHERE id_orden_atencion=$id");
+        return $update;
+        
     }
 } 

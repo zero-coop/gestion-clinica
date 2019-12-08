@@ -26,8 +26,10 @@ class reciboController
 			$recargos=$recargo->getRecargo($metodo);
 			$todo=new Recibo();
 			$terminado=$todo->mostrarOrdenCompleta($id_orden);
+			$obra=new Recibo();
+			$desObra=$obra->getDescObra($id_orden);
 			require_once 'views/recibo/finalizar.php';
-		    return $id_orden && $precio && $metodo && $recargos && $terminado;
+		    return $id_orden && $precio && $metodo && $desObra && $recargos && $terminado;
 		}
 	}
 	

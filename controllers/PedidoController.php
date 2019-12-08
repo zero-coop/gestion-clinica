@@ -166,10 +166,9 @@ class pedidoController
         //Utils::isAdmin();
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $edit = true;
 
             $pedido = new Pedido();
-            $pedido->setId($id_orden_atencion);
+            $pedido->setId($id);
             $ped = $pedido->getOne();
             require_once 'views/pedido/crear.php';
         } else {
@@ -216,6 +215,44 @@ class pedidoController
         $todos=$pacientes->getInternaciones();
         require_once 'views/pedido/internaciones.php';
         
+    }
+    
+    public function observaciones(){
+        if(isset($_GET)){
+            $id=$_GET['id'];
+            $mostrar= new Pedido();
+            $todo=$mostrar->getObservaciones($id);
+            require_once 'views/pedido/observaciones.php';
+            return $id && $todo;
+            
+            
+        }
+        
+    }
+
+    public function cargar(){
+        if(isset($_POST)){
+            $id=$_POST['id'] ? $_POST['id'] : false; 
+            $observacion=$_POST['observacion'] ? $_POST['observacion'] : false; 
+            $medicamento=$_POST['medicamento'] ? $_POST['medicamento'] : false; 
+            
+            if($id && $observacion && $medicamento){
+                $update=new Pedido();
+                $update->setDescripcion($observacion);
+                $update->setMedicamento($medicamento);
+                $update->getUpdate($id);
+                $numero=$update->enviar($id);
+                $num=$numero->fetch_object();
+                if($num->alta!=0){
+
+                    header('Location:'. base_url . 'pedido/verInternaciones');                    
+                }else{
+                    header('Location:'. base_url . 'pedido/index');
+                
+
+                }
+            }
+        }
     }
 
 

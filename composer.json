@@ -1,0 +1,6 @@
+{
+    "require": {
+        "mpdf/mpdf": "^8.0",
+        "spipu/html2pdf": "^5.2"
+    }
+}

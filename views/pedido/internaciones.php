@@ -39,8 +39,8 @@
                             <td><?= $to->fecha; ?></td>
                             <td>
                             <a href="<?= base_url ?>pedido/darAlta&id=<?= $to->id_orden_atencion ?>"><button class="btn btn-success">Alta</button></a>
-                            <a href=""><button class="btn btn-info">Observaciones</button></a>
-                            <a href=""><button class="btn btn-warning">Pago</button></a>
+                            <a href="<?= base_url ?>pedido/observaciones&id=<?= $to->id_orden_atencion ?>"><button class="btn btn-info">Observaciones</button></a>
+                            <a href="<?= base_url ?>recibo/crear&id=<?= $to->id_orden_atencion ?>"><button class="btn btn-warning">Pago</button></a>
                             </td>
                             <!-- <td scope="row">
 				<a href="<//?= base_url ?>pedido/detalle&id=<//?= $ped->id ?>"><//?= $ped->id ?></a>
