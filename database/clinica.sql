@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2019 a las 01:31:54
+-- Tiempo de generación: 09-12-2019 a las 00:13:30
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `clinica`
-CREATE TABLE clinica;
-USE clinica;
 --
 
 -- --------------------------------------------------------
@@ -178,7 +176,7 @@ CREATE TABLE `obras_sociales` (
   `habilitado` tinyint(1) UNSIGNED DEFAULT 1,
   `direccion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` tinyint(2) UNSIGNED NOT NULL,
-  `descuento` tinyint(2) NOT NULL,
+  `descuento` int(11) NOT NULL DEFAULT 0,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -217,7 +215,7 @@ CREATE TABLE `ordenes_atencion` (
 
 INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `descripcion`, `precio`, `fecha`, `fecha_fin`, `alta`) VALUES
 (9, 2, 1, NULL, 1, 'consulta para ver si esta mal o no', NULL, '2019-09-27 03:00:00', '2019-12-07 23:16:27', 1),
-(10, 1, 2, NULL, 2, 'viene a verse la cola', 1000, '2019-09-27 03:00:00', '2019-12-07 23:16:27', 1),
+(10, 1, 2, '1000', 2, '10\'', 1000, '2019-09-27 03:00:00', '2019-12-07 23:16:27', 1),
 (11, 2, 1, 'hola', 1, 'hola', NULL, '2019-11-29 03:00:00', '2019-12-08 00:17:12', 0),
 (12, 2, 37, 'asd', 1, 'asdasd', NULL, '2019-11-29 03:00:00', '2019-12-07 23:16:27', 1),
 (14, 2, 35, 'lala', 1, 'lala', NULL, '2019-11-29 03:00:00', '2019-12-07 23:16:27', 1),
@@ -226,13 +224,14 @@ INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexo
 (17, 2, 2, '200', 1, '123', 500, '2019-11-30 03:00:00', '2019-12-07 23:54:58', 0),
 (18, 2, 36, 'hola', 1, 'hola', 2500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
 (19, 1, 2, 'hola', 1, 'Hola', 1000, '2019-11-30 03:00:00', '2019-12-07 23:53:23', 0),
-(20, 1, 1, 'NMOSE', 2, 'NOSE', 500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
+(20, 1, 1, 'hola', 2, 'hola', 500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
 (21, 4, 1, '', 1, '', 500, '2019-12-07 03:00:00', '2019-12-07 23:53:12', 0),
 (22, 4, 1, 'lol', 1, 'Dolor de cabeza', 1000, '2019-12-07 03:00:00', '2019-12-08 00:03:53', 0),
 (23, 4, 1, 'asd', 1, 'asd', 500, '2019-12-08 00:14:36', '2019-12-08 00:17:10', 0),
 (24, 4, 3, 'nose', 1, 'nose', 5000, '2019-12-08 00:15:05', '2019-12-08 00:16:31', 0),
 (25, 4, 1, 'hola', 2, 'hola', 1000, '2019-12-08 00:23:50', '2019-12-08 00:23:50', 0),
-(26, 4, 1, 'hola', 1, 'hola', 5000, '2019-12-08 00:24:15', '2019-12-08 00:24:15', 1);
+(26, 4, 1, 'chau', 1, 'chau', 5000, '2019-12-08 00:24:15', '2019-12-08 00:24:15', 1),
+(27, 4, 1, 'hola', 1, 'hola', 800, '2019-12-08 14:48:21', '2019-12-08 14:48:21', 1);
 
 -- --------------------------------------------------------
 
@@ -373,7 +372,10 @@ INSERT INTO `recibos` (`id`, `id_metodos_pago`, `id_orden_atencion`, `monto`, `f
 (11, 2, 20, '6500', '2019-12-06 03:00:00'),
 (12, 2, 20, '6500', '2019-12-06 03:00:00'),
 (13, 2, 20, '6500', '2019-12-06 03:00:00'),
-(14, 1, 20, '5000', '2019-12-06 17:36:37');
+(14, 1, 20, '5000', '2019-12-06 17:36:37'),
+(15, 1, 26, '5000', '2019-12-08 14:45:49'),
+(16, 2, 27, '6500', '2019-12-08 19:10:32'),
+(17, 2, 20, '1950', '2019-12-08 23:05:00');
 
 -- --------------------------------------------------------
 
@@ -577,7 +579,7 @@ ALTER TABLE `obras_sociales`
 -- AUTO_INCREMENT de la tabla `ordenes_atencion`
 --
 ALTER TABLE `ordenes_atencion`
-  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
@@ -601,7 +603,7 @@ ALTER TABLE `provincias`
 -- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
