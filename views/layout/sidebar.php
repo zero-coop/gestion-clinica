@@ -83,6 +83,7 @@
 				
         <li class="list-group-item"><a href="<?=base_url?>paciente/gestion"><i class="fas fa-user-friends"></i> Gestionar pacientes</a></li>
         <li class="list-group-item"><a href="<?=base_url?>pedido/gestion"><i class="fas fa-list-alt"></i> Gestionar atenciones</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>pedido/internaciones"><i class="fas fa-list-alt"></i> Internaciones</a></li>
         <?php if(Utils::showAdmin()): ?>
           <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion"><i class="fas fa-id-card"></i> Gestionar Obras Sociales</a></li>
           <li class="list-group-item"><a href="<?=base_url?>medico/index"><i class="fas fa-user-md"></i></i> Gestionar doctores</a></li>				

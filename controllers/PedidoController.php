@@ -3,6 +3,7 @@ require_once 'models/pedido.php';
 require_once 'models/medico.php';
 require_once 'models/paciente.php';
 
+
 class pedidoController
 {
     public function index()
@@ -19,6 +20,7 @@ class pedidoController
             $id_paciente = isset($_POST['id_paciente']) ? $_POST['id_paciente'] : false;
             $medico = isset($_POST['medico']) ? $_POST['medico'] : false;
             $servicio = isset($_POST['servicio']) ? $_POST['servicio'] : false;
+            $alta = ($servicio==1) ? 1 : 0;
             $medicamento = isset($_POST['medicamento']) ? $_POST['medicamento'] : false;
             $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
             $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
@@ -33,6 +35,7 @@ class pedidoController
                 $pedido->setPrecio($precio);
                 $pedido->setMedicamento($medicamento);
                 $pedido->setDescripcion($observaciones);
+                $pedido->setAlta($alta);
                 
 
                 if (isset($_GET['id'])) {
@@ -172,6 +175,47 @@ class pedidoController
         } else {
             header('Location:' . base_url . 'pedido/gestion');
         }
+    }
+    
+    public function historia(){
+        if(isset($_GET['id'])){
+            
+            
+            $id=$_GET['id'];			
+			$pedido= new Pedido();
+			$historia=$pedido->getHistoria($id);
+			require_once 'views/pedido/historia.php';
+			return $id;
+		}
+        
+    }
+    
+    public function internaciones(){
+        $pacientes=new Pedido();
+        $todos=$pacientes->getInternaciones();
+        require_once 'views/pedido/internaciones.php';
+        return $todos;
+        
+    }
+    
+    public function darAlta(){
+        if(isset($_GET['id'])){
+            
+            
+            $id=$_GET['id'];			
+            $alta=new Pedido();
+            $alta->alta($id);
+            
+		}
+        header('Location:' . base_url . 'pedido/verInternaciones');
+        
+    }
+    
+    public function verInternaciones(){
+        $pacientes=new Pedido();
+        $todos=$pacientes->getInternaciones();
+        require_once 'views/pedido/internaciones.php';
+        
     }
 
 

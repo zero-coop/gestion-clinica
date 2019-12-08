@@ -291,8 +291,5 @@ class Paciente
 		return $result;
 	}
 
-	public function historia($id){
-		$historias = $this->db->query("SELECT dni FROM pacientes WHERE dni = $dni");
-		return $historias;
-	}
+
 }

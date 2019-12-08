@@ -10,6 +10,7 @@ class Pedido
     private $descripcion;
     private $precio;
     private $fecha;
+    private $alta;
     private $db;
     
     public function __construct()
@@ -54,6 +55,10 @@ class Pedido
     public function getFecha()
     {
         return $this->fecha;
+    }
+    public function getAlta()
+    {
+        return $this->alta;
     }
 
 
@@ -101,10 +106,14 @@ class Pedido
     {
         $this->fecha = $fecha;
     }
+    public function setAlta($alta)
+    {
+        $this->alta = $alta;
+    }
 
     public function getAll()
     {
-        $pedidos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre ,servicios.descripcion,ordenes_atencion.fecha,ordenes_atencion.precio FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico ORDER BY ordenes_atencion.id_orden_atencion DESC;");
+        $pedidos = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre ,servicios.descripcion,ordenes_atencion.fecha,ordenes_atencion.precio FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico and servicios.id_servicio=2 ORDER BY ordenes_atencion.id_orden_atencion DESC;");
         return $pedidos;
     }
     public function getAllServicios()
@@ -204,7 +213,7 @@ class Pedido
     
     public function save()
     {
-        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},'{$this->getDescripcion()}',{$this->getPrecio()},CURDATE());";
+        $sql = "INSERT INTO ordenes_atencion VALUES (NULL, {$this->getIdMedico()}, {$this->getIdPacientexObraSocial()}, '{$this->getMedicamento()}', {$this->getIdServicio()},'{$this->getDescripcion()}',{$this->getPrecio()},CURTIME(),null,{$this->getAlta()});";
         $save = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -213,6 +222,21 @@ class Pedido
         return $result;
     }
     
+    public function getHistoria($id){
+		$historias = $this->db->query("SELECT servicios.descripcion,ordenes_atencion.fecha,medicos.nombre AS mediconombre,medicos.apellido AS medicoapellido FROM servicios INNER JOIN ordenes_atencion ON servicios.id_servicio=ordenes_atencion.id_servicio INNER JOIN medicos ON medicos.id_medico=ordenes_atencion.id_medico INNER JOIN pacientesxobrasociales ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN pacientes ON pacientesxobrasociales.id_paciente=pacientes.id_paciente AND pacientes.id_paciente=$id");
+		return $historias;
+    }
+    
+    public function getInternaciones(){
+		$pacientes = $this->db->query("SELECT ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre,ordenes_atencion.fecha FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico AND servicios.descripcion='internacion' AND ordenes_atencion.alta=1 ORDER BY ordenes_atencion.id_orden_atencion DESC ");
+		return $pacientes;
+    }
+    
+    public function alta($id){
+        $alta = $this->db->query("UPDATE ordenes_atencion SET fecha_fin=CURTIME(),alta=0 WHERE id_orden_atencion=$id");
+        return $alta;
+
+    }
     
     public function edit()
     {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2019 a las 20:30:29
+-- Tiempo de generación: 08-12-2019 a las 01:31:54
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `clinica`
+CREATE TABLE clinica;
+USE clinica;
 --
 
 -- --------------------------------------------------------
@@ -27,8 +29,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `debehaber`
 --
-CREATE DATABASE clinica;
-USE clinica;
 
 CREATE TABLE `debehaber` (
   `id_debehaber` int(11) NOT NULL,
@@ -206,25 +206,33 @@ CREATE TABLE `ordenes_atencion` (
   `id_servicio` tinyint(10) NOT NULL,
   `descripcion` varchar(535) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `precio` float DEFAULT NULL,
-  `fecha` date NOT NULL
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_fin` timestamp NOT NULL DEFAULT current_timestamp(),
+  `alta` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `ordenes_atencion`
 --
 
-INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `descripcion`, `precio`, `fecha`) VALUES
-(9, 2, 1, NULL, 1, 'consulta para ver si esta mal o no', NULL, '2019-09-27'),
-(10, 1, 2, NULL, 2, 'viene a verse la cola', 1000, '2019-09-27'),
-(11, 2, 1, 'hola', 1, 'hola', NULL, '2019-11-29'),
-(12, 2, 37, 'asd', 1, 'asdasd', NULL, '2019-11-29'),
-(14, 2, 35, 'lala', 1, 'lala', NULL, '2019-11-29'),
-(15, 2, 2, 'y ella ', 1, 'y ella', NULL, '2019-11-30'),
-(16, 1, 37, 'hola', 2, 'hola', 2500, '2019-11-30'),
-(17, 2, 2, '200', 1, '123', 500, '2019-11-30'),
-(18, 2, 36, 'hola', 1, 'hola', 2500, '2019-11-30'),
-(19, 1, 2, 'hola', 1, 'Hola', 1000, '2019-11-30'),
-(20, 1, 1, 'NMOSE', 2, 'NOSE', 500, '2019-11-30');
+INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexobrasocial`, `medicamento`, `id_servicio`, `descripcion`, `precio`, `fecha`, `fecha_fin`, `alta`) VALUES
+(9, 2, 1, NULL, 1, 'consulta para ver si esta mal o no', NULL, '2019-09-27 03:00:00', '2019-12-07 23:16:27', 1),
+(10, 1, 2, NULL, 2, 'viene a verse la cola', 1000, '2019-09-27 03:00:00', '2019-12-07 23:16:27', 1),
+(11, 2, 1, 'hola', 1, 'hola', NULL, '2019-11-29 03:00:00', '2019-12-08 00:17:12', 0),
+(12, 2, 37, 'asd', 1, 'asdasd', NULL, '2019-11-29 03:00:00', '2019-12-07 23:16:27', 1),
+(14, 2, 35, 'lala', 1, 'lala', NULL, '2019-11-29 03:00:00', '2019-12-07 23:16:27', 1),
+(15, 2, 2, 'y ella ', 1, 'y ella', NULL, '2019-11-30 03:00:00', '2019-12-07 23:55:22', 0),
+(16, 1, 37, 'hola', 2, 'hola', 2500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
+(17, 2, 2, '200', 1, '123', 500, '2019-11-30 03:00:00', '2019-12-07 23:54:58', 0),
+(18, 2, 36, 'hola', 1, 'hola', 2500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
+(19, 1, 2, 'hola', 1, 'Hola', 1000, '2019-11-30 03:00:00', '2019-12-07 23:53:23', 0),
+(20, 1, 1, 'NMOSE', 2, 'NOSE', 500, '2019-11-30 03:00:00', '2019-12-07 23:16:27', 1),
+(21, 4, 1, '', 1, '', 500, '2019-12-07 03:00:00', '2019-12-07 23:53:12', 0),
+(22, 4, 1, 'lol', 1, 'Dolor de cabeza', 1000, '2019-12-07 03:00:00', '2019-12-08 00:03:53', 0),
+(23, 4, 1, 'asd', 1, 'asd', 500, '2019-12-08 00:14:36', '2019-12-08 00:17:10', 0),
+(24, 4, 3, 'nose', 1, 'nose', 5000, '2019-12-08 00:15:05', '2019-12-08 00:16:31', 0),
+(25, 4, 1, 'hola', 2, 'hola', 1000, '2019-12-08 00:23:50', '2019-12-08 00:23:50', 0),
+(26, 4, 1, 'hola', 1, 'hola', 5000, '2019-12-08 00:24:15', '2019-12-08 00:24:15', 1);
 
 -- --------------------------------------------------------
 
@@ -569,7 +577,7 @@ ALTER TABLE `obras_sociales`
 -- AUTO_INCREMENT de la tabla `ordenes_atencion`
 --
 ALTER TABLE `ordenes_atencion`
-  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
