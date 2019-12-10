@@ -13,11 +13,11 @@
 					<div class="col-6">
 
 
-						<a href="<?= base_url ?>reporte/pdf">
-							<button type="button" class="btn btn-danger">PDF</button>
-						</a>
 						<a href="<?= base_url ?>paciente/crear">
 							<button type="button" class="btn btn-success">Agregar paciente</button>
+						</a>
+						<a href="<?= base_url ?>reporte/pdf">
+							<button type="button" class="btn btn-danger">Reporte PDF</button>
 						</a>
 					</div>
 

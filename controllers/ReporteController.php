@@ -5,7 +5,7 @@
 class ReporteController{
 
     public function pdf(){
-        header('Location:' . base_url . 'reportes/test.php');
+        header('Location:' . base_url . 'reportes/pacientes_pdf.php');
     }
 }
 
