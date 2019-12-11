@@ -7,19 +7,20 @@ require __DIR__ . '/../config/db.php';
 $obrasocial = new ObraSocial();
 
 $obj = new Paciente();
-$mostrar = $obj->getPacientes();
+$mostrar = $obj->getAll();
 
 $html = "
 <body>
-
-<table>
+<h1 style='text-align:center; font-family:Helvetica; color:green;'>Clinica</h1>
+<h2 style='text-align:center; font-family:Helvetica; color:grey;'>Pacientes</h2>
+<table style='' width='100%'>
 <tr>
-<th>ID</th>
-<th>APELLIDO Y NOMBRE</th>
-<th>DNI</th>
-<th>EDAD</th>
-<th>SEXO</th>
-<th>OBRA SOCIAL</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>ID</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>APELLIDO Y NOMBRE</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>DNI</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>EDAD</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>SEXO</th>
+<th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>OBRA SOCIAL</th>
 </tr>";
 
 while($mos = $mostrar->fetch_assoc()){
@@ -37,13 +38,13 @@ while($mos = $mostrar->fetch_assoc()){
 	}
 
 
-    $html .= "<tr>
-                <td>".$mos['id_paciente']."</td>
-                <td>".$mos['apellido']."</td>
-                <td>".$mos['dni']."</td>
-                <td>".$edad."</td>
-                <td>".$mos['sexo']."</td>
-                <td>".$obrita."</td>
+    $html .= "<tr style='hover {background-color: #f5f5f5;};nth-child(even) {background-color: #f2f2f2;}'>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['id_paciente']."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['apellido']. ' ' . $mos['nombre']."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['dni']."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$edad."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['sexo']."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$obrita."</td>
             </tr>";
 
 }
