@@ -1,18 +1,18 @@
 <?php 
-require_once 'conexion.php';
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pacientes</title>
-</head>
+require __DIR__ . '/../models/paciente.php';
+require __DIR__ . '/../models/obrasociales.php';
+require __DIR__ . '/../config/db.php';
+
+$obrasocial = new ObraSocial();
+
+$obj = new Paciente();
+$mostrar = $obj->getPacientes();
+
+$html = "
 <body>
 
-<table border="1px" width="80%" text-aling="center">
+<table>
 <tr>
 <th>ID</th>
 <th>APELLIDO Y NOMBRE</th>
@@ -20,19 +20,47 @@ require_once 'conexion.php';
 <th>EDAD</th>
 <th>SEXO</th>
 <th>OBRA SOCIAL</th>
-</tr>
-<?php while($mos=$mostrar->fetch_object()) :?>
-<tr>
-<td value="<?php echo $mos->id_paciente?>"></td>
-<td><?=$mos->apellido . " " . $mos->nombre?></td>
-<td><?=$mos->dni?></td>
-<td><?=$mos->sexo?></td>
-<td><?=$mos->telefono?></td>
-<td><?=$mos->direccion?></td>
-</tr>
-<?php endwhile; ?>
+</tr>";
 
-</table>
-    
-</body>
-</html>
+while($mos = $mostrar->fetch_assoc()){
+    $cumpleanos = new DateTime($mos['fecha_nacimiento']);
+	$hoy = new DateTime();
+	$annos = $hoy->diff($cumpleanos);
+    $edad = $annos->y;;
+
+    $obra = $obrasocial->getObraSocial($mos['id_paciente']);
+	if ($obra->id_obrasociales != 0) {
+        $numero_socio = ObraSocial::getNumeroObraSocial($mos['id_paciente']);
+        $obrita =  $obra->nombre . " | Numero: " . $numero_socio->numero_socio;
+	} else {
+	    $obrita = $obra->nombre;
+	}
+
+
+    $html .= "<tr>
+                <td>".$mos['id_paciente']."</td>
+                <td>".$mos['apellido']."</td>
+                <td>".$mos['dni']."</td>
+                <td>".$edad."</td>
+                <td>".$mos['sexo']."</td>
+                <td>".$obrita."</td>
+            </tr>";
+
+}
+$html .= "</table>";
+
+
+
+// Require composer autoload
+require_once __DIR__ . '/../vendor/autoload.php';
+// Create an instance of the class:
+$mpdf = new \Mpdf\Mpdf();
+
+// Write some HTML code:
+$mpdf->WriteHTML($html);
+
+// Output a PDF file directly to the browser
+$mpdf->Output();
+
+
+?>

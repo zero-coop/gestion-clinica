@@ -55,7 +55,8 @@ class Paciente
 		return $this->dni;
 	}
 
-	function getFechaNacimiento(){
+	function getFechaNacimiento()
+	{
 		return $this->fecha_nacimiento;
 	}
 
@@ -100,7 +101,7 @@ class Paciente
 	}
 
 
-	function setId($id) 
+	function setId($id)
 	{
 		$this->id = $id;
 	}
@@ -140,7 +141,8 @@ class Paciente
 		$this->sexo = $this->db->real_escape_string($sexo);
 	}
 
-	function setGrupoSanguineo($grupo_sanguineo){
+	function setGrupoSanguineo($grupo_sanguineo)
+	{
 		$this->grupo_sanguineo = $this->db->real_escape_string($grupo_sanguineo);
 	}
 
@@ -224,12 +226,14 @@ class Paciente
 		return $paciente->fetch_object();
 	}
 
-	public function pacienteExiste($dni){
+	public function pacienteExiste($dni)
+	{
 		$result = $this->db->query("SELECT dni FROM pacientes WHERE dni = $dni");
 		return $result;
 	}
 
-	public function getUltimoPaciente(){
+	public function getUltimoPaciente()
+	{
 		$db = Database::connect();
 		$sql = "SELECT * FROM pacientes WHERE id_paciente=(SELECT MAX(id_paciente) FROM pacientes)";
 		$result = $db->query($sql);
@@ -267,29 +271,36 @@ class Paciente
 		return $result;
 	}
 
-	public function delete(){
+	public function delete()
+	{
 
 		$sql = "UPDATE pacientes SET habilitado='0' WHERE id_paciente={$this->id}";
 		$delete = $this->db->query($sql);
-		
+
 		$result = false;
-		if ($delete){
+		if ($delete) {
 			$result = true;
 		}
 		return $result;
 	}
 
-	public function habiliar(){
+	public function habiliar()
+	{
 
 		$sql = "UPDATE pacientes SET habilitado='1' WHERE id_paciente={$this->id}";
 		$update = $this->db->query($sql);
-		
+
 		$result = false;
-		if ($update){
+		if ($update) {
 			$result = true;
 		}
 		return $result;
 	}
 
-
+	public function getPacientes()
+	{
+		$sql = "SELECT * FROM pacientes ORDER BY id_paciente ASC";
+		$mostrar = $this->db->query($sql);
+		return $mostrar;
+	}
 }

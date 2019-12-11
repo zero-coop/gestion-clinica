@@ -4,9 +4,18 @@
 
 class ReporteController{
 
-    public function pdf(){
-        header('Location:' . base_url . 'reportes/pacientes_pdf.php');
+    public function paciente(){
+        header('Location:' . base_url . 'reportes/paciente.php');
     }
+
+    public function medicos(){
+        header('Location:' . base_url . 'reportes/paciente.php');
+    }
+
+    public function ordensociales(){
+        header('Location:' . base_url . 'reportes/paciente.php');
+    }
+
 }
 
 

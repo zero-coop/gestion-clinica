@@ -16,12 +16,12 @@
 						<a href="<?= base_url ?>paciente/crear">
 							<button type="button" class="btn btn-success">Agregar paciente</button>
 						</a>
-						<a href="<?= base_url ?>reporte/pdf">
+						<a href="<?= base_url ?>reporte/paciente" target=_blank>
 							<button type="button" class="btn btn-danger">Reporte PDF</button>
 						</a>
 					</div>
 
-					
+
 				</div>
 			</div>
 
@@ -89,11 +89,11 @@
 									<td><?= $pac->dni; ?></td>
 									<td>
 										<?php
-													$cumpleanos = new DateTime($pac->fecha_nacimiento);
-													$hoy = new DateTime();
-													$annos = $hoy->diff($cumpleanos);
-													echo $annos->y;;
-													?>
+											$cumpleanos = new DateTime($pac->fecha_nacimiento);
+											$hoy = new DateTime();
+											$annos = $hoy->diff($cumpleanos);
+											echo $annos->y;;
+										?>
 									</td>
 
 									<td><?= $pac->sexo; ?></td>
@@ -113,7 +113,7 @@
 										<?php if ($pac->habilitado) : ?>
 											<a href="<?= base_url ?>paciente/dashboard&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-primary">Detalle</button></a>
 											<a href="<?= base_url ?>pedido/crear&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-outline-dark">Nueva Consulta</button></a>
-											
+
 											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 											<a href="<?= base_url ?>pedido/historia&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-info">Historia</button></a>
 											<a href="<?= base_url ?>carrito/add&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-success">Pagos</button></a>
