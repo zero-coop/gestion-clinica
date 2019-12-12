@@ -23,7 +23,7 @@
 							else :
 								header('Location:' . base_url . 'paciente/gestion');
 							endif;
-						?>
+							?>
 					</div>
 
 
@@ -34,7 +34,7 @@
 								<?php
 									require_once 'models/obrasociales.php';
 									$obrasocial = new ObraSocial();
-								?>
+									?>
 								<tr>
 									<h3 class="text-center"><?= $pac->nombre . " " . $pac->apellido  ?></h2>
 								</tr>
@@ -73,7 +73,14 @@
 								</tr>
 								<tr>
 									<td>
-										<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
+										<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>">
+											<button type="button" class="btn btn-warning">Editar</button>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url ?>reporte/pacientebyid" target=_blank>
+											<button type="button" class="btn btn-danger">Reporte PDF</button>
+										</a>
 									</td>
 								</tr>
 

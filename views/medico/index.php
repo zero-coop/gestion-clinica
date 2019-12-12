@@ -16,6 +16,9 @@
 						<a href="<?= base_url ?>medico/crear">
 							<button type="button" class="btn btn-success my-3">Agregar Doctor</button>
 						</a>
+						<a href="<?= base_url ?>reporte/medicos" target=_blank>
+							<button type="button" class="btn btn-danger">Reporte PDF</button>
+						</a>
 					</div>
 
 					

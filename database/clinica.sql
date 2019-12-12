@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2019 a las 00:13:30
+-- Tiempo de generación: 12-12-2019 a las 04:41:53
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -67,31 +67,6 @@ INSERT INTO `grupo_sanguineo` (`id_grupo`, `nombre`) VALUES
 (6, 'AB-'),
 (7, '0+'),
 (8, '0-');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `hijos`
---
-
-CREATE TABLE `hijos` (
-  `id_hijo` int(10) NOT NULL,
-  `id_paciente` int(10) NOT NULL,
-  `apellido_paterno` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `dni` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `sexo` varchar(1) COLLATE utf8_spanish2_ci NOT NULL,
-  `nonato` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `hijos`
---
-
-INSERT INTO `hijos` (`id_hijo`, `id_paciente`, `apellido_paterno`, `dni`, `nombre`, `apellido`, `sexo`, `nonato`) VALUES
-(1, 2, 'cacho', '34222111', 'juan de los palotes', 'gimenez cacho', 'M', 1),
-(2, 2, 'cacho', '36878999', 'juana', 'gimenez cacho', 'F', 1);
 
 -- --------------------------------------------------------
 
@@ -268,7 +243,8 @@ INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `grupo_sang
 (9, 'sdfasdf', 'sasdf', '334', 0, 'Masculino', '33', 'dfadf', 1, NULL, 0, '2019-10-01', 1),
 (10, '123', '5345345', '345345', 0, 'Masculino', '3453', 'fgfg', 19, NULL, 0, '2007-07-11', 1),
 (11, 'Paciente paciente', 'P1', '1234578', 2, 'Masculino', '388', 'Coronel Arenas 124', 20, NULL, 0, '1989-11-23', 1),
-(12, 'Andrés', 'Haitit', '41530626', 3, 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 17, NULL, 0, '1999-10-03', 1);
+(12, 'Andrés', 'Haitit', '41530626', 3, 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 17, NULL, 0, '1999-10-03', 1),
+(13, 'Yo', 'Y ella', '123456789', 7, 'Masculino', '387', 'EL Carmen', 10, NULL, 0, '1989-12-29', 1);
 
 -- --------------------------------------------------------
 
@@ -296,7 +272,8 @@ INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `
 (35, 9, 3, NULL),
 (36, 10, 0, NULL),
 (37, 11, 1, 0),
-(38, 12, 3, 112);
+(38, 12, 3, 112),
+(39, 13, 3, 233332233);
 
 -- --------------------------------------------------------
 
@@ -445,13 +422,6 @@ ALTER TABLE `grupo_sanguineo`
   ADD PRIMARY KEY (`id_grupo`);
 
 --
--- Indices de la tabla `hijos`
---
-ALTER TABLE `hijos`
-  ADD PRIMARY KEY (`id_hijo`),
-  ADD KEY `id_paciente` (`id_paciente`);
-
---
 -- Indices de la tabla `historias_clinicas`
 --
 ALTER TABLE `historias_clinicas`
@@ -546,12 +516,6 @@ ALTER TABLE `grupo_sanguineo`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `hijos`
---
-ALTER TABLE `hijos`
-  MODIFY `id_hijo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT de la tabla `historias_clinicas`
 --
 ALTER TABLE `historias_clinicas`
@@ -585,13 +549,13 @@ ALTER TABLE `ordenes_atencion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
@@ -626,12 +590,6 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `debehaber`
   ADD CONSTRAINT `debehaber_ibfk_1` FOREIGN KEY (`id_orden_atencion`) REFERENCES `ordenes_atencion` (`id_orden_atencion`);
-
---
--- Filtros para la tabla `hijos`
---
-ALTER TABLE `hijos`
-  ADD CONSTRAINT `hijos_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`);
 
 --
 -- Filtros para la tabla `historias_clinicas`

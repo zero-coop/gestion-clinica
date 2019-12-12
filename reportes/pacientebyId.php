@@ -61,4 +61,4 @@ $mpdf->SetTitle('Reporte de Pacientes');
 $mpdf->WriteHTML($html);
 
 // Output a PDF file directly to the browser
-$mpdf->Output('reporte_pacientes.pdf', 'I');
+//$mpdf->Output('reporte_pacientes.pdf', 'I');

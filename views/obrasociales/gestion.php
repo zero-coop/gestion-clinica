@@ -15,6 +15,9 @@
 						<a href="<?= base_url ?>obrasociales/crear">
 							<button type="button" class="btn btn-success">Agregar obra social</button>
 						</a>
+						<a href="<?= base_url ?>reporte/obrasociales" target=_blank>
+							<button type="button" class="btn btn-danger">Reporte PDF</button>
+						</a>
 					</div>
 
 				</div>

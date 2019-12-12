@@ -96,7 +96,7 @@ class Medico{
 	}
 	
 	public function getAll(){
-		$medicos = $this->db->query("SELECT * FROM medicos");
+		$medicos = $this->db->query("SELECT * FROM medicos ORDER BY apellido ASC");
 		return $medicos;
 	}
 	public function getOne(){
