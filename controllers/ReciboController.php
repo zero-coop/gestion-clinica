@@ -47,8 +47,11 @@ class reciboController
 				$recibo->setIdMetodosPago($metodo_pago);
 				$recibo->setMonto($monto);
 				$recibo->save();
+				$recibo_terminado=$recibo->getReciboTerminado($id_orden);
+				require_once 'views/recibo/terminado.php';
+				return $recibo_terminado;
+
 			}
-			header('Location:' . base_url . 'recibo/terminado');
 		}
 		
 		

@@ -186,6 +186,11 @@ class Paciente
 		$npacientes = $this->db->query("SELECT COUNT(nombre) AS numero FROM pacientes");
 		return $npacientes;
 	}
+	public function getPagos($id)
+	{
+		$pagos = $this->db->query("SELECT recibos.fecha,metodos_pago.metodo, recibos.monto, recibos.id,servicios.descripcion,medicos.apellido,medicos.nombre FROM metodos_pago INNER JOIN recibos ON recibos.id_metodos_pago=metodos_pago.id_metodo_pago INNER JOIN ordenes_atencion ON ordenes_atencion.id_orden_atencion=recibos.id INNER JOIN servicios ON servicios.id_servicio=ordenes_atencion.id_servicio INNER JOIN medicos ON medicos.id_medico=ordenes_atencion.id_medico INNER JOIN pacientesxobrasociales ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN pacientes ON pacientes.id_paciente=pacientesxobrasociales.id_paciente AND pacientes.id_paciente=$id");
+		return $pagos;
+	}
 	public function getAllMedic()
 	{
 		$pacientes = $this->db->query("SELECT COUNT(nombre) as numero FROM medicos");

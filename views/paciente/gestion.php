@@ -116,7 +116,7 @@
 
 											<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-warning">Editar</button></a>
 											<a href="<?= base_url ?>pedido/historia&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-info">Historia</button></a>
-											<a href="<?= base_url ?>carrito/add&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-success">Pagos</button></a>
+											<a href="<?= base_url ?>paciente/pagos&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-success">Pagos</button></a>
 											<a href="<?= base_url ?>paciente/eliminar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
 										<?php elseif (!$pac->habilitado || Utils::showAdmin()) : ?>
 											<a href="<?= base_url ?>paciente/habilitar&id=<?= $pac->id_paciente ?>"><button type="button" class="btn btn-secondary">Habilitar</button></a>

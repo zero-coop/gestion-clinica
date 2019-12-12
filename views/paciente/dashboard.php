@@ -76,8 +76,6 @@
 										<a href="<?= base_url ?>paciente/editar&id=<?= $pac->id_paciente ?>">
 											<button type="button" class="btn btn-warning">Editar</button>
 										</a>
-									</td>
-									<td>
 										<a href="<?= base_url ?>reporte/pacientebyid" target=_blank>
 											<button type="button" class="btn btn-danger">Reporte PDF</button>
 										</a>

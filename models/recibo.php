@@ -104,6 +104,11 @@ class Recibo{
 		return $descobra;
 		
 	}
+	public function getReciboTerminado($id_orden){
+		$recibo = $this->db->query("SELECT recibos.id,recibos.fecha,ordenes_atencion.id_orden_atencion,servicios.descripcion, pacientes.apellido,pacientes.nombre,pacientes.dni,recibos.monto,metodos_pago.metodo FROM recibos INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago INNER JOIN ordenes_atencion ON ordenes_atencion.id_orden_atencion=recibos.id_orden_atencion INNER JOIN servicios ON servicios.id_servicio=ordenes_atencion.id_servicio INNER JOIN pacientesxobrasociales ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN pacientes ON pacientes.id_paciente=pacientesxobrasociales.id_paciente AND recibos.id_orden_atencion=$id_orden ORDER BY recibos.id_orden_atencion LIMIT 1;");
+		return $recibo;
+		
+	}
 
 
 

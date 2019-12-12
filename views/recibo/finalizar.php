@@ -71,7 +71,7 @@
   <?php endwhile; ?>
 
     <label class="text-info" for="">Precio Total</label>
-    <input type="text" class="form-control" id="total" name="precio" value="" name="precio">
+    <input type="text" class="form-control" id="total" name="precio" value="" required name="precio">
     
   <div class="form-group">
  

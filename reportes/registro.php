@@ -8,6 +8,7 @@ $tabla = $obj->getInicio();
 
 $html = "
 <body>
+<img style='text-align:left' src='http://localhost/gestion-clinica/assets/img/png.jpg' width='10%'>
 <h1 style='text-align:center; font-family:Helvetica; color:green;'>Clinica</h1>
 <h2 style='text-align:center; font-family:Helvetica; color:grey;'>Registro de Pagos</h2>
 <table style='' width='100%'>

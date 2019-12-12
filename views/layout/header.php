@@ -20,15 +20,16 @@
 				<div class="row">
 					<div class="col-12 bg-primary">
 						<div class="row">
-							<div class="col-3">
+							<div class="col-1 my-2">
+								<img class="" style="" src="http://localhost/gestion-clinica/assets/img/logo.png" width="80%" alt="">
 							</div>
 
 							<!-- NAV -->
-							<div class="col-12">
+							<div class="col-11">
 
 								<nav class="navbar navbar-expand-lg navbar-primary bg-primary">
-									<a class="navbar-brand text-white" href="<?= base_url ?>">Inicio</a>
-									<a class="navbar-brand text-white"><?= $_SESSION['identity']->nombre ?> <?= $_SESSION['identity']->apellido ?></a>
+									<a class="navbar-brand mt-4 text-white" href="<?= base_url ?>">Inicio</a>
+									<a class="navbar-brand mt-4 text-white"><?= $_SESSION['identity']->nombre ?> <?= $_SESSION['identity']->apellido ?></a>
 									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<span class="navbar-toggler-icon"></span>
 									</button>
