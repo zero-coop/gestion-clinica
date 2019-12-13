@@ -68,13 +68,18 @@ class Recibo{
 	}
 	public function getInicio()
 	{
-		$recibos = $this->db->query("SELECT recibos.id AS recibo,metodos_pago.metodo,ordenes_atencion.id_orden_atencion,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre ,servicios.descripcion,recibos.fecha,recibos.monto FROM pacientes INNER JOIN pacientesxobrasociales on pacientes.id_paciente=pacientesxobrasociales.id_pacientexobrasocial INNER JOIN ordenes_atencion ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN servicios ON ordenes_atencion.id_servicio=servicios.id_servicio INNER JOIN medicos ON ordenes_atencion.id_medico=medicos.id_medico INNER JOIN recibos ON recibos.id_orden_atencion=ordenes_atencion.id_orden_atencion INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago ORDER BY recibos.id DESC");
+		$recibos = $this->db->query("SELECT recibos.id as id,ordenes_atencion.id_orden_atencion as id_orden,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre,recibos.monto,recibos.fecha,servicios.descripcion,metodos_pago.metodo FROM recibos INNER JOIN ordenes_atencion ON recibos.id_orden_atencion=ordenes_atencion.id_orden_atencion INNER JOIN medicos ON medicos.id_medico=ordenes_atencion.id_medico INNER JOIN servicios ON servicios.id_servicio=ordenes_atencion.id_servicio INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago inner join pacientesxobrasociales ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN pacientes ON pacientes.id_paciente=pacientesxobrasociales.id_paciente");
 		return $recibos;
 	}
 	public function getRecargo($metodo)
 	{
 		$recargo = $this->db->query("SELECT * FROM metodos_pago WHERE id_metodo_pago=$metodo");
 		return $recargo;
+	}
+	public function detalleRegistro($id)
+	{
+		$detalle = $this->db->query("SELECT recibos.id as id,ordenes_atencion.id_orden_atencion as id_orden,medicos.apellido AS medicoapellido,medicos.nombre AS mediconombre,pacientes.apellido AS pacienteapellido,pacientes.nombre AS pacientenombre,recibos.monto,recibos.fecha,ordenes_atencion.fecha AS fechaorden,ordenes_atencion.descripcion AS observacion,servicios.descripcion,metodos_pago.metodo FROM recibos INNER JOIN ordenes_atencion ON recibos.id_orden_atencion=ordenes_atencion.id_orden_atencion INNER JOIN medicos ON medicos.id_medico=ordenes_atencion.id_medico INNER JOIN servicios ON servicios.id_servicio=ordenes_atencion.id_servicio INNER JOIN metodos_pago ON metodos_pago.id_metodo_pago=recibos.id_metodos_pago inner join pacientesxobrasociales ON pacientesxobrasociales.id_pacientexobrasocial=ordenes_atencion.id_pacientexobrasocial INNER JOIN pacientes ON pacientes.id_paciente=pacientesxobrasociales.id_paciente AND recibos.id=$id");
+		return $detalle;
 	}
 	
 	public function save(){

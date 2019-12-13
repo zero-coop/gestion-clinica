@@ -84,16 +84,29 @@ class reciboController
 		require_once 'views/recibo/registro.php';
 		return $mostrar;
 	}
-
+	
 	public function eliminar()
 	{
 		if (isset($_GET)) {
-
+			
 			$id = $_GET['id'];
 			$eliminar = new Recibo();
 			$eliminar->eliminar($id);
-
+			
 			header('Location:' . base_url . 'pedido/gestion');
 		}
 	}
+	
+	public function ver(){
+		if (isset($_GET)) {
+			$id=$_GET['id'];
+			$detalle=new Recibo();
+			$detalles=$detalle->detalleRegistro($id);
+			require_once 'views/recibo/ver.php';
+			return $detalles;
+
+
+	}
+}
+
 }

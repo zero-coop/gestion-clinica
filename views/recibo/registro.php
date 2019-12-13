@@ -20,17 +20,19 @@
             <th>Pago</th>
             <th>Total</th>
             <th>Fecha</th>
+            <th>Acciones</th>
           </tr>
           <?php while ($mos = $mostrar->fetch_object()) : ?>
             <tr>
-              <th scope="row"><?= $mos->recibo ?></th>
-              <td><?= $mos->id_orden_atencion ?></td>
+              <th scope="row"><?= $mos->id ?></th>
+              <td><?= $mos->id_orden ?></td>
               <td><?= $mos->pacienteapellido . " " . $mos->pacientenombre ?></td>
               <td><?= $mos->medicoapellido . " " . $mos->mediconombre ?></td>
               <td><?= $mos->descripcion ?></td>
               <td><?= $mos->metodo ?></td>
               <td><?= $mos->monto ?></td>
               <td><?= $mos->fecha ?></td>
+              <td><a href="<?= base_url ?>recibo/ver&id=<?= $mos->id ?>"><button class="btn btn-primary">Detalles</button></a></td>
             </tr>
           <?php endwhile; ?>
         </thead>
