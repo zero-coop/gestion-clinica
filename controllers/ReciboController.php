@@ -68,6 +68,18 @@ class reciboController
 		return $mostrar;
 	}
 
+	public function eliminar(){
+		if(isset($_GET['id'])){
+
+			$id=$_GET['id'];
+			$eliminar= new Recibo();
+			$terminado= $eliminar->eliminarRecibo($id);
+
+			header('Location: views/recibo/gestion.php');
+
+		}
+	}
+
 
 	
 

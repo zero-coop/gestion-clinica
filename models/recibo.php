@@ -109,6 +109,11 @@ class Recibo{
 		return $recibo;
 		
 	}
+	public function eliminarRecibo($id){
+		$eliminar = $this->db->query("DELETE FROM ordenes_atencion WHERE ordenes_atencion.id_orden_atencion=$id");
+		return $eliminar;
+		
+	}
 
 
 

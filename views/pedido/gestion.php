@@ -75,7 +75,7 @@
                             <td>
                             <a href="<?= base_url ?>recibo/crear&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-success">Pago</button></a>
                             <a href="<?= base_url ?>pedido/observaciones&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-info">Observaciones</button></a>
-                            <a href=""><button class="btn btn-danger">Eliminar</button></a>
+                            <a href="<?= base_url ?>recibo/eliminar&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-danger">Eliminar</button></a>
                             </td>
                             <!-- <td scope="row">
 				<a href="<//?= base_url ?>pedido/detalle&id=<//?= $ped->id ?>"><//?= $ped->id ?></a>

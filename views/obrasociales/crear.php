@@ -16,7 +16,7 @@
 
 			<div class="offset-1 col-8">
 
-				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
+				<form action="http://localhost/gestion-clinica/obraSociales/save" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="nombre">Nombre :</label>
 						<input type="text" class="form-control" name="nombre" value="<?= isset($obra) && is_object($obra) ? $obra->nombre : ''; ?>" />
