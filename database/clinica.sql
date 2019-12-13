@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2019 a las 04:41:53
+-- Tiempo de generación: 13-12-2019 a las 17:24:13
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -111,7 +111,6 @@ CREATE TABLE `medicos` (
 --
 
 INSERT INTO `medicos` (`id_medico`, `nombre`, `apellido`, `dni`, `especialidad`, `matricula`, `domicilio`, `telefono`, `celular`) VALUES
-(1, 'pedro', 'robatodo', '23444555', 'ginecoloco', '564322', 'caseros 1767', '4889933', '3875777666'),
 (2, 'andres', 'lopez', '21999888', 'cirujano', '876543', 'zuviria 43', '4887755', '3875212333'),
 (4, 'Andrés', 'Haitit', '41530626', 'Cirujano', 'A4430', '25 De Mayo, Vicente Lopez 96', '3875002942', '3875002942');
 
@@ -160,10 +159,23 @@ CREATE TABLE `obras_sociales` (
 --
 
 INSERT INTO `obras_sociales` (`id_obrasociales`, `nombre`, `cuit`, `correo`, `telefono`, `habilitado`, `direccion`, `provincia`, `descuento`, `fecha`) VALUES
-(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-11-30 17:33:58'),
-(1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-11-28 03:14:06'),
+(0, 'Sin Obra Social', '', '', NULL, 1, NULL, 6, 0, '2019-12-13 03:28:22'),
+(1, 'IPS', '20333333333', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-12-13 03:12:07'),
 (3, 'ospe', '308776547', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-11-28 03:14:29'),
-(4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 220', 1, 40, '2019-11-28 03:14:31');
+(4, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 220', 1, 40, '2019-11-28 03:14:31'),
+(10, 'javi', '2334', 'algo@algo', '34', 1, 'cor', 10, 34, '2019-12-13 02:14:13'),
+(11, 'javi', '2334', 'algo@algo', '34', 0, 'corij', 1, 34, '2019-12-13 02:21:08'),
+(12, 'javi', '2334', 'algo@algo', '34', 0, 'corij', 1, 3443, '2019-12-13 02:21:05'),
+(13, 'boreal', '308789998', 'contacto@boreal.com', '4332222', 1, 'españa 222', 1, 40, '2019-12-13 02:14:55'),
+(14, 'javi', '2334', 'algo@algo', '34', 0, 'corij', 1, 343, '2019-12-13 05:22:49'),
+(15, 'ospe', '308776547', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-12-13 02:18:27'),
+(16, 'ospe', '3087765474', 'admin@ospe.com', '4567788', 1, 'alvarado 7777', 1, 70, '2019-12-13 03:11:27'),
+(17, 'IPS', '20333333777', 'ips@ips.com', '4223344', 1, 'belgrano 990', 1, 40, '2019-12-13 03:11:34'),
+(18, 'osunsa', '2744444777743', 'unsa@unsa.comasdfasdf', '38744444', 1, 'av bolivia 1111', 1, 30, '2019-12-13 04:36:48'),
+(19, 'hola', '3e3', 'algo@algo', '34', 1, 'co', 10, 34, '2019-12-13 04:37:45'),
+(20, '3434sdf', '2334', 'algo@algo', '34', 1, 'asdf', 10, 43, '2019-12-13 05:22:00'),
+(21, 'Maxi se la come doblada', '123123', 'yella@ella.com', '32154', 1, 'asdasd', 1, 50, '2019-12-13 12:30:22'),
+(22, 'OSDN', '2744447777111', 'OSDN@OSDN', '321654987', 1, 'Alberto Fernandez 32', 15, 10, '2019-12-13 05:26:29');
 
 -- --------------------------------------------------------
 
@@ -204,9 +216,36 @@ INSERT INTO `ordenes_atencion` (`id_orden_atencion`, `id_medico`, `id_pacientexo
 (22, 4, 1, 'lol', 1, 'Dolor de cabeza', 1000, '2019-12-07 03:00:00', '2019-12-08 00:03:53', 0),
 (23, 4, 1, 'asd', 1, 'asd', 500, '2019-12-08 00:14:36', '2019-12-08 00:17:10', 0),
 (24, 4, 3, 'nose', 1, 'nose', 5000, '2019-12-08 00:15:05', '2019-12-08 00:16:31', 0),
-(25, 4, 1, 'hola', 2, 'hola', 1000, '2019-12-08 00:23:50', '2019-12-08 00:23:50', 0),
 (26, 4, 1, 'chau', 1, 'chau', 5000, '2019-12-08 00:24:15', '2019-12-08 00:24:15', 1),
-(27, 4, 1, 'hola', 1, 'hola', 800, '2019-12-08 14:48:21', '2019-12-08 14:48:21', 1);
+(27, 4, 1, 'hola', 1, 'hola', 800, '2019-12-08 14:48:21', '2019-12-08 14:48:21', 1),
+(28, 4, 1, 'asda', 1, 'asd', 5000, '2019-12-13 02:43:42', '2019-12-13 02:43:42', 1),
+(32, 4, 1, '', 1, '', 1111, '2019-12-13 05:54:43', '2019-12-13 05:54:43', 1),
+(34, 4, 39, '', 2, '', 500, '2019-12-13 06:40:42', '2019-12-13 06:40:42', 0),
+(35, 4, 38, '', 2, '', 3333, '2019-12-13 06:41:03', '2019-12-13 06:41:03', 0),
+(36, 2, 3, 'sdgf', 2, 'asdf', 1000, '2019-12-13 06:41:42', '2019-12-13 06:41:42', 0),
+(37, 2, 39, '', 2, '', 1000, '2019-12-13 06:43:32', '2019-12-13 06:43:32', 0),
+(38, 4, 39, 'asdfsadf', 2, 'sadfasdfsdaf', 500, '2019-12-13 06:43:58', '2019-12-13 06:43:58', 0),
+(39, 4, 39, 'asdasd', 1, 'asdasd', 500, '2019-12-13 06:44:20', '2019-12-13 06:44:20', 1),
+(40, 4, 35, 'asdasd', 1, 'asdasd', 1000, '2019-12-13 06:44:42', '2019-12-13 06:44:42', 1),
+(42, 4, 1, '12311', 1, '123123', 111111000, '2019-12-13 06:45:21', '2019-12-13 06:45:21', 1),
+(43, 2, 34, '', 2, '', 500, '2019-12-13 06:45:45', '2019-12-13 06:45:45', 0),
+(44, 4, 39, '', 1, '', 2000, '2019-12-13 14:24:09', '2019-12-13 14:24:09', 1),
+(45, 4, 38, '12', 1, '13', 999, '2019-12-13 14:25:04', '2019-12-13 14:25:04', 1),
+(46, 4, 1, 'hola', 1, 'hola', 1000, '2019-12-13 14:41:59', '2019-12-13 14:41:59', 1),
+(47, 4, 1, 'qw', 1, 'qw', 5000, '2019-12-13 14:58:36', '2019-12-13 14:58:36', 1),
+(48, 4, 3, '1231', 2, '123', 5000, '2019-12-13 14:59:10', '2019-12-13 14:59:10', 0),
+(49, 4, 34, 'sadas', 2, 'asdasd', 5000, '2019-12-13 14:59:52', '2019-12-13 14:59:52', 0),
+(50, 4, 1, '', 2, '', 1234, '2019-12-13 15:00:13', '2019-12-13 15:00:13', 0),
+(51, 4, 38, 'dasd', 1, 'asdas', 5000, '2019-12-13 15:00:49', '2019-12-13 15:00:49', 1),
+(52, 2, 32, 'asda', 1, 'asda', 1000, '2019-12-13 15:01:22', '2019-12-13 15:01:22', 1),
+(53, 4, 32, '', 2, '', 12312, '2019-12-13 15:01:56', '2019-12-13 15:01:56', 0),
+(54, 4, 41, 'asdasd', 2, 'asdasd', 5000, '2019-12-13 15:02:44', '2019-12-13 15:02:44', 0),
+(55, 4, 37, '', 2, '', 5555, '2019-12-13 15:02:59', '2019-12-13 15:02:59', 0),
+(56, 4, 39, 'qweq', 1, 'asda', 1000, '2019-12-13 15:03:07', '2019-12-13 15:03:07', 1),
+(57, 4, 32, '', 1, '', 2500, '2019-12-13 15:16:04', '2019-12-13 15:16:04', 1),
+(58, 4, 1, '', 1, '', 12345, '2019-12-13 16:22:03', '2019-12-13 16:22:03', 1),
+(59, 4, 39, '', 1, '', 11111, '2019-12-13 16:22:51', '2019-12-13 16:22:51', 1),
+(60, 4, 3, '', 1, '', 12345, '2019-12-13 16:23:18', '2019-12-13 16:23:18', 1);
 
 -- --------------------------------------------------------
 
@@ -235,16 +274,18 @@ CREATE TABLE `pacientes` (
 --
 
 INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `grupo_sanguineo`, `sexo`, `telefono`, `direccion`, `provincia`, `hijos`, `historia_clinica`, `fecha_nacimiento`, `habilitado`) VALUES
-(1, 'damian', 'canonica', '1234', 2, 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08', 1),
+(1, 'damian el que se la come', 'canonica', '1234545645', 4, 'Masculino', '4556677', '25 de mayo', 1, NULL, 0, '1989-10-08', 1),
 (2, 'susana', 'gimenez', '2084533457', 0, 'Femenino', '4557788', 'buenos aires 20', 2, NULL, 0, '1989-09-08', 1),
-(3, 'juan carlos', 'lopez', '20304545457', 4, 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09', 1),
+(3, 'juan carlos se la come', 'maga se la da', '20304545457', 4, 'Masculino', '4556677', 'la concha de la lora 666', 1, NULL, 0, '1989-10-09', 1),
 (7, 'juan', 'cabrera', '666123123', 1, 'Masculino', '466677788', 'alvarado 888', 19, NULL, 0, '1990-01-01', 1),
 (8, 'sdaf', '334', '12345678', 7, 'Masculino', '344', 'sdf', 1, NULL, 0, '1989-04-01', 1),
 (9, 'sdfasdf', 'sasdf', '334', 0, 'Masculino', '33', 'dfadf', 1, NULL, 0, '2019-10-01', 1),
 (10, '123', '5345345', '345345', 0, 'Masculino', '3453', 'fgfg', 19, NULL, 0, '2007-07-11', 1),
 (11, 'Paciente paciente', 'P1', '1234578', 2, 'Masculino', '388', 'Coronel Arenas 124', 20, NULL, 0, '1989-11-23', 1),
 (12, 'Andrés', 'Haitit', '41530626', 3, 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 17, NULL, 0, '1999-10-03', 1),
-(13, 'Yo', 'Y ella', '123456789', 7, 'Masculino', '387', 'EL Carmen', 10, NULL, 0, '1989-12-29', 1);
+(13, 'Yo', 'Y ella', '123456789', 7, 'Masculino', '387', 'EL Carmen', 10, NULL, 0, '1989-12-29', 1),
+(14, 'fda', 'jkalk', '123456', 3, 'Masculino', '3434', 'dsfa', 1, NULL, 0, '1989-05-23', 1),
+(15, 'Ella Nose', 'Tambien', '4122313', 2, 'Masculino', '03875002942', '25 De Mayo, Vicente Lopez 96', 1, NULL, 0, '1654-02-04', 1);
 
 -- --------------------------------------------------------
 
@@ -273,7 +314,9 @@ INSERT INTO `pacientesxobrasociales` (`id_pacientexobrasocial`, `id_paciente`, `
 (36, 10, 0, NULL),
 (37, 11, 1, 0),
 (38, 12, 3, 112),
-(39, 13, 3, 233332233);
+(39, 13, 3, 233332233),
+(40, 14, 0, 0),
+(41, 15, 22, 23465465);
 
 -- --------------------------------------------------------
 
@@ -352,7 +395,25 @@ INSERT INTO `recibos` (`id`, `id_metodos_pago`, `id_orden_atencion`, `monto`, `f
 (14, 1, 20, '5000', '2019-12-06 17:36:37'),
 (15, 1, 26, '5000', '2019-12-08 14:45:49'),
 (16, 2, 27, '6500', '2019-12-08 19:10:32'),
-(17, 2, 20, '1950', '2019-12-08 23:05:00');
+(17, 2, 20, '1950', '2019-12-08 23:05:00'),
+(18, 2, 28, '1950', '2019-12-13 04:46:12'),
+(19, 2, 28, '1950', '2019-12-13 04:50:24'),
+(20, 2, 28, '2218', '2019-12-13 04:50:44'),
+(21, 2, 28, '1950', '2019-12-13 04:53:13'),
+(22, 2, 28, '390', '2019-12-13 05:32:17'),
+(23, 2, 28, '3900', '2019-12-13 05:32:51'),
+(24, 2, 28, '1560', '2019-12-13 05:33:32'),
+(25, 1, 28, '1500', '2019-12-13 05:34:48'),
+(26, 2, 28, '1950', '2019-12-13 05:35:22'),
+(27, 2, 28, '1339', '2019-12-13 05:35:27'),
+(28, 1, 28, '1000', '2019-12-13 05:35:39'),
+(29, 2, 28, '1950', '2019-12-13 05:36:54'),
+(30, 2, 28, '1950', '2019-12-13 05:37:10'),
+(31, 1, 28, '300', '2019-12-13 05:37:33'),
+(32, 2, 28, '390', '2019-12-13 05:39:39'),
+(33, 1, 28, '1500', '2019-12-13 05:40:22'),
+(34, 1, 28, '1500', '2019-12-13 05:42:02'),
+(35, 1, 28, '570', '2019-12-13 05:42:04');
 
 -- --------------------------------------------------------
 
@@ -398,10 +459,6 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `apellido`, `email`, `password`, `rol`, `imagen`) VALUES
 (1, 'admin', 'Nombre_Admin', 'Apellido_Admin', 'admin@admin.com', '$2y$10$IaHs0BIkMwRFOw/lLfWLae9NHFGID.DKEFpN86nE1tYywUKokWJ/e', 'admin', NULL),
 (2, 'andreshaitit', 'Andrés', 'Haitit', 'andreshaitit99@gmail.com', '$2y$04$9YT6zXCS1BNl3DHYf9ByKerRXVbDShC1ouhFK1YtMOXWZBhSI3BnK', 'admin', NULL),
-(3, 'dfsdf', 'dfdf', 'dfdf', 'demian.douyou@gmail.com', '$2y$04$wgLmtlmMrQ15fDlHCk4R1OHilafSTry5m0AToHYERtAn6bUKPrVAq', 'admin', NULL),
-(4, 'juancjuan', 'juan', 'lopez', 'juancjuan@gmail.com', '$2y$04$G1NAqFp/Ys.mjw6qb8oo8.1l10RFOJ5eTz.Y3.mziuNipOBXr31eO', 'admin', NULL),
-(5, 'damian', 'damian', 'damian', 'damian@gmail.com', '$2y$04$.NdD5OOol5SwVwuWnqq0ZOkTLamUZAkecR4EI8ixrxmYTBGWJ1Ily', 'user', NULL),
-(6, 'javi', 'javi', 'lerma', 'javilerma89@gmail.com', '$2y$04$U//s6EmKy6zKbtmapSZ0ku0BoyNuYmbgyBZ98GLHIs9IlKHXzpAYu', 'user', NULL),
 (7, 'user', 'user', 'user', 'user@user.com', '$2y$04$NKODCeTU1GOFwJ.ZmwmxVuAOeRenDQNMhGBcLzy5oHNG3sUYWnzCy', 'user', NULL);
 
 --
@@ -525,7 +582,7 @@ ALTER TABLE `historias_clinicas`
 -- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `id_medico` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_medico` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `metodos_pago`
@@ -537,25 +594,25 @@ ALTER TABLE `metodos_pago`
 -- AUTO_INCREMENT de la tabla `obras_sociales`
 --
 ALTER TABLE `obras_sociales`
-  MODIFY `id_obrasociales` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_obrasociales` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `ordenes_atencion`
 --
 ALTER TABLE `ordenes_atencion`
-  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_orden_atencion` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_paciente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientesxobrasociales`
 --
 ALTER TABLE `pacientesxobrasociales`
-  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_pacientexobrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
@@ -567,7 +624,7 @@ ALTER TABLE `provincias`
 -- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -579,7 +636,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
