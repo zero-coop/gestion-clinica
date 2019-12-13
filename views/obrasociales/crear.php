@@ -4,9 +4,9 @@
 		<div class="row">
 			<div class="col-12">
 
-				<?php if (isset($edit) && isset($obra) && is_object($obra)) : ?>
-					<h1 class="text-center my-4">Editar obra social <?= $obra->nombre ?></h1>
-					<?php $url_action = base_url . "obrasociales/save&id=" . $obra->id_obrasociales; ?>
+				<?php if (isset($edit) && isset($obr) && is_object($obr)) : ?>
+					<h1 class="text-center my-4">Editar obra social <?= $obr->nombre ?></h1>
+					<?php $url_action = base_url . "obrasociales/save&id=" . $obr->id_obrasociales; ?>
 
 				<?php else : ?>
 					<h1 class="text-center my-4">Nueva Obra Social</h1>
@@ -15,32 +15,31 @@
 			</div>
 
 			<div class="offset-1 col-8">
-
-				<form action="http://localhost/gestion-clinica/obraSociales/save" method="POST" enctype="multipart/form-data">
+				
+					
+				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="nombre">Nombre :</label>
-						<input type="text" class="form-control" name="nombre" value="<?= isset($obra) && is_object($obra) ? $obra->nombre : ''; ?>" />
+						<input type="text" class="form-control" name="nombre" value="<?= isset($obr) && is_object($obr) ? $obr->nombre : ''; ?>" />
 					</div>
 					<div class="form-group">
 						<label for="dni">Cuit :</label>
-						<input type="text" class="form-control" name="cuit" value="<?= isset($obra) && is_object($obra) ? $obra->cuit : ''; ?>" />
+						<input type="text" class="form-control" name="cuit" value="<?= isset($obr) && is_object($obr) ? $obr->cuit : ''; ?>" />
 
 					</div>
 					<div class="form-group">
 						<label for="email">Correo :</label>
-						<input type="email" class="form-control" name="correo" value="<?= isset($obra) && is_object($obra) ? $obra->correo : ''; ?>">
+						<input type="email" class="form-control" name="correo" value="<?= isset($obr) && is_object($obr) ? $obr->correo : ''; ?>">
 
 					</div>
 					<div class="form-group">
 						<label for="telefono">Telefono :</label>
-						<input type="number" class="form-control" name="telefono" value="<?= isset($obra) && is_object($obra) ? $obra->telefono : ''; ?>">
-
+						<input type="number" class="form-control" name="telefono" value="<?= isset($obr) && is_object($obr) ? $obr->telefono : ''; ?>">
 					</div>
 
 					<div class="form-group">
 						<label for="direccion">Direccion :</label>
-						<input type="text" class="form-control" name="direccion" value="<?= isset($direccion) && is_object($direccion) ? $obra->direccion : ''; ?>" />
-
+						<input type="text" class="form-control" name="direccion" value="<?= isset($obr) && is_object($obr) ? $obr->direccion : ''; ?>" />
 					</div>
 
 					<div class="form-group">
@@ -56,7 +55,7 @@
 					</div>
 					<div class="form-group">
 						<label for="direccion">Descuento % :</label>
-						<input type="number" class="form-control" name="descuento" value="<?= isset($descuento) && is_object($descuento) ? $obra->descuento : ''; ?>" />
+						<input type="number" class="form-control" name="descuento" value="<?= isset($obr) && is_object($obr) ? $obr->descuento : ''; ?>" />
 
 					</div>
 

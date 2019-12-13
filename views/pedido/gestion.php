@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-6">
                         <a href="<?= base_url ?>pedido/crear">
-                            <button type="button" class="btn btn-success my-3">Nuevo Pedido</button>
+                            <button type="button" class="btn btn btn-outline-success my-3">Nueva Consulta</button>
                         </a>
                     </div>
                 </div>

@@ -20,16 +20,13 @@ class MedicoController{
 			
 			// Conseguir doctor
 			$medico = new Medico();
-			$medico->setId($id);
-			$medico = $medico->getOne();
+			$medico->setId_medico($id);
+			$medicos = $medico->getOne();
+			require_once 'views/medico/ver.php';
+			return $medicos;
 			
-			// Conseguir pacientes;
-			//$paciente = new Paciente();
-			//$paciente->setDoctor_id($id);
-			//$pacientes = $paciente->getAll();
 		}
 		
-		require_once 'views/medico/ver.php';
 	}
 
 	public function gestion()

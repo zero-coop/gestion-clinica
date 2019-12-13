@@ -46,35 +46,43 @@ class obraSocialesController
 			$provincia = isset($_POST['provincia']) ? $_POST['provincia'] : false;
 			$descuento = isset($_POST['descuento']) ? $_POST['descuento'] : false;
 
-			// $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
-
-			if ($nombre && $cuit && $correo && $telefono && $direccion && $provincia && $descuento) {
-				$obra = new ObraSocial();
-				$obra->setNombre($nombre);
-				$obra->setCuit($cuit);
-				$obra->setCorreo($correo);
-				$obra->setTelefono($telefono);
-				$obra->setDireccion($direccion);
-				$obra->setProvincia($provincia);
-				$obra->setDescuento($descuento);
+			$obra = new ObraSocial();
+			$result = $obra->ObraExiste($cuit);
+			$r = $result->fetch_assoc();
 
 
-				if (isset($_GET['id'])) {
-					$id = $_GET['id'];
-					$obra->setId($id);
+			if ((isset($_GET['id']) && $r) || !$r) {
 
-					$save = $obra->edit();
-				} else {
-					$save = $obra->save();
-				}
+				if ($nombre && $cuit && $correo && $telefono && $direccion && $provincia && $descuento) {
+					$obra = new ObraSocial();
 
-				if ($save) {
-					$_SESSION['obra'] = "complete";
+					$obra->setNombre($nombre);
+					$obra->setCuit($cuit);
+					$obra->setCorreo($correo);
+					$obra->setTelefono($telefono);
+					$obra->setDireccion($direccion);
+					$obra->setProvincia($provincia);
+					$obra->setDescuento($descuento);
+
+
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+						$obra->setId($id);
+						$save = $obra->edit();
+					} else {
+						$save = $obra->save();
+					}
+
+					if ($save) {
+						$_SESSION['obra'] = "complete";
+					} else {
+						$_SESSION['obra'] = "failed";
+					}
 				} else {
 					$_SESSION['obra'] = "failed";
 				}
 			} else {
-				$_SESSION['obra'] = "failed";
+				$_SESSION['obra'] = "existe";
 			}
 		} else {
 			$_SESSION['obra'] = "failed";
@@ -84,16 +92,13 @@ class obraSocialesController
 
 	public function editar()
 	{
-		Utils::isAdmin();
+		//Utils::isAdmin();
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$edit = true;
-
 			$obra = new ObraSocial();
 			$obra->setId($id);
-
 			$obr = $obra->getOne();
-
 			require_once 'views/obrasociales/crear.php';
 		} else {
 			header('Location:' . base_url . 'obrasociales/gestion');

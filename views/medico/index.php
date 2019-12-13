@@ -76,7 +76,7 @@
 								<td><?= $med->telefono; ?></td>
 								<td><?= $med->celular; ?></td>
 								<td>
-									<button class="btn btn-primary">Detalles</button>
+									<a href="<?= base_url ?>medico/ver&id=<?= $med->id_medico ?>"><button class="btn btn-primary">Detalles</button></a>
 									<a href="<?= base_url ?>medico/eliminar&id=<?= $med->id_medico ?>"><button type="button" class="btn btn-danger">Eliminar</button></a>
 								</td>
 							</tr>

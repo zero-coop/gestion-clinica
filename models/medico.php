@@ -101,7 +101,7 @@ class Medico{
 	}
 	public function getOne(){
 		$medico = $this->db->query("SELECT * FROM medicos WHERE id_medico={$this->getId_medico()}");
-		return $medico->fetch_object();
+		return $medico;
 	}
 	
 	public function save(){

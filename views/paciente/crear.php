@@ -5,7 +5,7 @@
 			<div class="col-12">
 
 				<?php if (isset($edit) && isset($pac) && is_object($pac)) : ?>
-					<h1 class="text-center my-4">Editar paciente <?= $pac->apellido . ", ". $pac->nombre ?></h1>
+					<h1 class="text-center my-4">Editar paciente <?= $pac->apellido . ", " . $pac->nombre ?></h1>
 					<?php $url_action = base_url . "paciente/save&id=" . $pac->id_paciente; ?>
 
 				<?php else : ?>
@@ -17,7 +17,7 @@
 			<div class="offset-1 col-8">
 
 				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
-					
+
 					<div class="form-group">
 						<label for="nombre">Nombres :</label>
 						<input type="text" class="form-control" name="nombre" required value="<?= isset($pac) && is_object($pac) ? $pac->nombre : ''; ?>" />
@@ -84,10 +84,10 @@
 						<label for="doctor">Obra Social :</label>
 						<?php $obras = Utils::showObras(); ?>
 						<?php
-							if(isset($pac) && is_object($pac)){
+							if (isset($pac) && is_object($pac)) {
 								$one_obra = Utils::getObra($pac->id_paciente);
 							}
-						?>
+							?>
 						<select class="form-control" name="obrasocial">
 							<?php while ($obra = $obras->fetch_object()) : ?>
 								<option value="<?= $obra->id_obrasociales ?>" <?= isset($pac) && is_object($pac) && $obra->id_obrasociales == $one_obra->id_obrasociales ? 'selected' : ''; ?>>
@@ -97,11 +97,11 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<?php 
-							if(isset($pac) && is_object($pac)){
+						<?php
+							if (isset($pac) && is_object($pac)) {
 								$n = ObraSocial::getNumeroObraSocial($pac->id_paciente);
 							}
-						?>
+							?>
 						<label for="numero_socio">Numero de Afiliado :</label>
 						<input type="number" class="form-control" name="numero_afiliado" required value="<?= isset($pac) && is_object($pac) ? $n->numero_socio : 'S/N'; ?>" />
 					</div>

@@ -74,45 +74,46 @@ class ObraSocial
 		$this->nombre = $this->db->real_escape_string($nombre);
     }
     
-    function setCuit()
+    function setCuit($cuit)
 	{
 		$this->cuit = $this->db->real_escape_string($cuit);
     }
 
-    function setCorreo()
+    function setCorreo($correo)
 	{
 		$this->correo = $this->db->real_escape_string($correo);
     }
 
-    function setTelefono()
+    function setTelefono($telefono)
 	{
 		$this->telefono = $this->db->real_escape_string($telefono);
     }
 
-    function setDireccion(){
+    function setDireccion($direccion){
 		  $this->direccion = $this->db->real_escape_string($direccion);
     }
     
-    function setProvincia(){
+    function setProvincia($provincia){
 		  $this->provincia = $this->db->real_escape_string($provincia);
     }
 
-    function setDescuento(){
+    function setDescuento($descuento){
 		  $this->descuento = $this->db->real_escape_string($descuento);
     }
 
-    function setFecha(){
+    function setFecha($fecha){
 		  $this->fecha = $this->db->real_escape_string($fecha);
     }
     
     public function getAll(){
-      $obrasociales = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales ASC;");
+      $obrasociales = $this->db->query("SELECT * FROM obras_sociales ORDER BY id_obrasociales DESC;");
       return $obrasociales;
     }
 
     public function getOne()
     {
-        $obrasocial = $this->db->query("SELECT * FROM obras_sociales WHERE id = {$this->getId_obrasociales()}");
+      $obrasocial = $this->db->query("SELECT * FROM obras_sociales WHERE id_obrasociales = {$this->getId_obrasociales()}");
+      return $obrasocial->fetch_object();
     }
 
     public function getObraSocial($id_paciente)
@@ -121,6 +122,11 @@ class ObraSocial
       $result = $this->db->query($sql);
       $r = $result->fetch_object();
       return $r;
+    }
+
+    public function ObraExiste($cuit){
+      $result = $this->db->query("SELECT cuit FROM obras_sociales WHERE cuit = $cuit");
+      return $result;
     }
 
     public static function getNumeroObraSocial($id_paciente)
@@ -136,9 +142,8 @@ class ObraSocial
 
     public function save()
 	{
-		$sql = "INSERT INTO obras_sociales VALUES(NULL, '{$this->getNombre()}', '{$this->getCuit()}', '{$this->getCorreo()}', {$this->getTelefono()},'{$this->getDireccion()}',{$this->getProvincia()},{$this->getDescuento()},CURTIME();";
-		$save = $this->db->query($sql);
-
+		$sql = "INSERT INTO obras_sociales VALUES (NULL, '{$this->getNombre()}', '{$this->getCuit()}', '{$this->getCorreo()}', {$this->getTelefono()}, 1,'{$this->getDireccion()}',{$this->getProvincia()},{$this->getDescuento()},CURTIME())";
+    $save = $this->db->query($sql);
 		$result = false;
 		if ($save) {
 			$result = true;
@@ -148,17 +153,9 @@ class ObraSocial
 
 	public function edit()
 	{
-		$sql = "UPDATE obras_sociales SET nombre='{$this->getNombre()}', cuit='{$this->getCuit()}', correo='{$this->getCorreo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}';";
-
-		if ($this->getImagen() != null) {
-			$sql .= ", imagen='{$this->getImagen()}'";
-		}
-
-		$sql .= " WHERE id={$this->id};";
-
+		$sql = "UPDATE obras_sociales SET nombre='{$this->getNombre()}', cuit='{$this->getCuit()}', correo='{$this->getCorreo()}', telefono='{$this->getTelefono()}', direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}' WHERE id_obrasociales={$this->getId_obrasociales()};";
 
 		$save = $this->db->query($sql);
-
 		$result = false;
 		if ($save) {
 			$result = true;

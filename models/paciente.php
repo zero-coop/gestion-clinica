@@ -263,10 +263,6 @@ class Paciente
 	{
 		$sql = "UPDATE pacientes SET nombre='{$this->getNombre()}', apellido='{$this->getApellido()}', dni='{$this->getDni()}', grupo_sanguineo='{$this->getGrupoSanguineo()}', sexo='{$this->getSexo()}', telefono={$this->getTelefono()}, direccion='{$this->getDireccion()}',provincia='{$this->getProvincia()}', hijos=NULL, historia_clinica=0, fecha_nacimiento ='{$this->getFechaNacimiento()}' WHERE id_paciente={$this->id};";
 
-		if ($this->getImagen() != null) {
-			$sql .= ", imagen='{$this->getImagen()}'";
-		}
-
 		$save = $this->db->query($sql);
 
 		$result = false;

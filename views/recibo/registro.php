@@ -5,7 +5,7 @@
       <h4 class="text-center display-4">Registro de pagos</h4>
       <div class="col-6">
         <a href="<?= base_url ?>reporte/registro" target=_blank>
-          <button type="button" class="btn btn-danger">Reporte PDF</button>
+          <button type="button" class="btn btn-danger my-4">Reporte PDF</button>
         </a>
       </div>
 

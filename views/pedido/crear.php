@@ -60,7 +60,7 @@
 						</table>
 
 						<form action="http://localhost/gestion-clinica/pedido/save" method="POST">
-							
+
 							<input type="number" style="visibility:hidden" id="" class="form-control" value="<?php echo $id_paciente; ?>" name="id_paciente" placeholder="">
 
 							<div class="form-group">
@@ -69,7 +69,7 @@
 								<select class="form-control" name="medico">
 									<?php while ($medico = $medicos->fetch_object()) : ?>
 										<option value="<?= $medico->id_medico ?>">
-											<?= $medico->apellido .', '. $medico->nombre .' | ' . $medico->especialidad ?>
+											<?= $medico->apellido . ', ' . $medico->nombre . ' | ' . $medico->especialidad ?>
 										</option>
 									<?php endwhile; ?>
 								</select>

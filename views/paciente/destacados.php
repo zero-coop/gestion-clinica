@@ -10,11 +10,9 @@
 
 
 
+			
 			<div class="col-12">
-				<h2 class="text-center my-5 display-4">Clinica</h2>
-			</div>
-			<div class="col-12">
-			<div class="row mt-3">
+			<div class="row my-5">
 				
 				
 			

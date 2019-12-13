@@ -1,50 +1,33 @@
-<?php if(isset($_SESSION['identity'])): ?>
 <div class="col-10">
 <div class="row">
-<div class="col-12">
+	<div class="offset-1 col-10 text-center ">
 
-<?php if (isset($medico)): ?>
-	<h1 class="text-center my-4"><?= $medico->nombreyApellido ?></h1>
-	<?php if ($pacientes->num_rows == 0): ?>
-		<p>No hay pacientes para mostrar</p>
-	<?php else: ?>
-</div>
 
-		<?php while ($pacient = $pacientes->fetch_object()): ?>
-<div class="col-3">
+		
+		.
+		<?php while ($med = $medicos->fetch_object()): ?>
+			<h2 class="my-4"></h2>
 			
-				<a href="<?= base_url ?>paciente/ver&id=<?= $pacient->id ?>">
-					<?php if ($pacient->imagen != null): ?>
-						<img src="<?= base_url ?>uploads/images/<?= $pacient->imagen ?>" width="40%"/>
-					<?php else: ?>
-						<img src="<?= base_url ?>assets/img/doctora.png" width="40%"/>
-					<?php endif; ?>
-</div>
-<div class="col-9">
-					<h2><?= $pacient->nombreyApellido ?></h2>
-				</a>
-				<a href="<?=base_url?>carrito/add&id=<?=$pacient->id?>" class="button">
-				<button class="btn btn-primary">Terminado</button>
-				</a>
-
-
-</div>
-		<?php endwhile; ?>
-	<?php endif; ?>
-<?php else: ?>
-<h1>El doctor no esta registrado</h1>
-<?php endif; ?>
-</div>	
-
-</div>
-</div>
-</div>
-</div>
-<?php else: ?>
-<div class="col-10">
-	
-	<div class="alert alert-warning m-5" role="alert">
-		<strong>Necesitas ser andministrador.</strong> Inicia sesion aqui <a href="<?=base_url?>"></a>
+			<div class="card text-white bg-info mb-3 d-inline-block" style="min-width: 100%;">
+				<div class="card-header text-dark"><h4>Doctor <?=$med->apellido . " " . $med->nombre?></h4></div>
+				<div class="card-body">
+					<h4>DNI :<?= " " . $med->dni?></h4>
+					<h4>ESPECIALIDAD :<?= " " . $med->especialidad?></h4>
+					<h4>MATRICULA :<?= " " . $med->matricula?></h4>
+					<h4>DIRECCION :<?= " " . $med->domicilio?></h4>
+					<h4>TELEFONO FIJO :<?= " " . $med->telefono?></h4>
+					<h4>CELULAR :<?= " " . $med->celular?></h4>
+				</div>
+				
+			
+				
+				
+				
+				
+				
+				
+				<?php endwhile; ?>
+			</div>
+		</div>
 	</div>
 </div>
-<?php endif; ?>

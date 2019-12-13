@@ -84,8 +84,9 @@ class pacienteController
 
 			$paciente = new Paciente();
 			$result = $paciente->pacienteExiste($dni);
+			$r = $result->fetch_assoc();
 
-			if ((isset($_GET['id']) && !$result->num_rows > 0) || !$result->num_rows > 0 ){
+			if ((isset($_GET['id']) && $r) || !$r ){
 
 				if ($nombre && $apellido && $dni && $sexo && $telefono && $direccion && $provincia) {
 
@@ -213,7 +214,6 @@ class pacienteController
 			$todos=$pagos->getPagos($id);
 			require_once 'views/paciente/pagos.php';
 			return $todos;
-			
 		}
 	}
 

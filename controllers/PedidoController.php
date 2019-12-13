@@ -17,18 +17,20 @@ class pedidoController
     public function save()
     {
         if (isset($_POST)) {
+
             $id_paciente = isset($_POST['id_paciente']) ? $_POST['id_paciente'] : false;
             $medico = isset($_POST['medico']) ? $_POST['medico'] : false;
             $servicio = isset($_POST['servicio']) ? $_POST['servicio'] : false;
-            $alta = ($servicio==1) ? 1 : 0;
+            $alta = ($servicio == 1) ? 1 : 0;
             $medicamento = isset($_POST['medicamento']) ? $_POST['medicamento'] : false;
             $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
             $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
-            
-            
-            if ($id_paciente && $medico && $servicio && $precio) {
+
+            echo $id_paciente .'|'. $medico .'|'. $servicio .'|'. $precio;
+        
+            if ($id_paciente && $medico && $precio) {
                 $pedido = new Pedido();
-                $paciente=$pedido->getPacientexObra($id_paciente);
+                $paciente = $pedido->getPacientexObra($id_paciente);
                 $pedido->setIdPacientexObraSocial($paciente);
                 $pedido->setIdMedico($medico);
                 $pedido->setIdServicio($servicio);
@@ -36,7 +38,6 @@ class pedidoController
                 $pedido->setMedicamento($medicamento);
                 $pedido->setDescripcion($observaciones);
                 $pedido->setAlta($alta);
-                
 
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
@@ -125,25 +126,25 @@ class pedidoController
     }
 
     public function eliminar()
-	{
-		//Utils::isAdmin();
-		if (isset($_GET['id'])) {
-			$id = $_GET['id'];
-			$pedido = new Pedido();
-			$pedido->setId_orden_atencion($id);
-			$delete = $pedido->delete();
+    {
+        //Utils::isAdmin();
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $pedido = new Pedido();
+            $pedido->setId_orden_atencion($id);
+            $delete = $pedido->delete();
 
-			if ($delete) {
-				$_SESSION['delete'] = 'complete';
-			} else {
-				$_SESSION['delete'] = 'failed';
-			}
-		} else {
-			$_SESSION['delete'] = 'failed';
-		}
+            if ($delete) {
+                $_SESSION['delete'] = 'complete';
+            } else {
+                $_SESSION['delete'] = 'failed';
+            }
+        } else {
+            $_SESSION['delete'] = 'failed';
+        }
 
-		header('Location:' . base_url . 'pedido/gestion');
-	}
+        header('Location:' . base_url . 'pedido/gestion');
+    }
 
     public function crear()
     {
@@ -175,85 +176,79 @@ class pedidoController
             header('Location:' . base_url . 'pedido/gestion');
         }
     }
-    
-    public function historia(){
-        if(isset($_GET['id'])){
-            
-            
-            $id=$_GET['id'];			
-			$pedido= new Pedido();
-			$historia=$pedido->getHistoria($id);
-			require_once 'views/pedido/historia.php';
-			return $id;
-		}
-        
-    }
-    
-    public function internaciones(){
-        $pacientes=new Pedido();
-        $todos=$pacientes->getInternaciones();
-        require_once 'views/pedido/internaciones.php';
-        return $todos;
-        
-    }
-    
-    public function darAlta(){
-        if(isset($_GET['id'])){
-            
-            
-            $id=$_GET['id'];			
-            $alta=new Pedido();
-            $alta->alta($id);
-            
-		}
-        header('Location:' . base_url . 'pedido/verInternaciones');
-        
-    }
-    
-    public function verInternaciones(){
-        $pacientes=new Pedido();
-        $todos=$pacientes->getInternaciones();
-        require_once 'views/pedido/internaciones.php';
-        
-    }
-    
-    public function observaciones(){
-        if(isset($_GET)){
-            $id=$_GET['id'];
-            $mostrar= new Pedido();
-            $todo=$mostrar->getObservaciones($id);
-            require_once 'views/pedido/observaciones.php';
-            return $id && $todo;
-            
-            
+
+    public function historia()
+    {
+        if (isset($_GET['id'])) {
+
+
+            $id = $_GET['id'];
+            $pedido = new Pedido();
+            $historia = $pedido->getHistoria($id);
+            require_once 'views/pedido/historia.php';
+            return $id;
         }
-        
     }
 
-    public function cargar(){
-        if(isset($_POST)){
-            $id=$_POST['id'] ? $_POST['id'] : false; 
-            $observacion=$_POST['observacion'] ? $_POST['observacion'] : false; 
-            $medicamento=$_POST['medicamento'] ? $_POST['medicamento'] : false; 
-            
-            if($id && $observacion && $medicamento){
-                $update=new Pedido();
+    public function internaciones()
+    {
+        $pacientes = new Pedido();
+        $todos = $pacientes->getInternaciones();
+        require_once 'views/pedido/internaciones.php';
+        return $todos;
+    }
+
+    public function darAlta()
+    {
+        if (isset($_GET['id'])) {
+
+
+            $id = $_GET['id'];
+            $alta = new Pedido();
+            $alta->alta($id);
+        }
+        header('Location:' . base_url . 'pedido/verInternaciones');
+    }
+
+    public function verInternaciones()
+    {
+        $pacientes = new Pedido();
+        $todos = $pacientes->getInternaciones();
+        require_once 'views/pedido/internaciones.php';
+    }
+
+    public function observaciones()
+    {
+        if (isset($_GET)) {
+            $id = $_GET['id'];
+            $mostrar = new Pedido();
+            $todo = $mostrar->getObservaciones($id);
+            require_once 'views/pedido/observaciones.php';
+            return $id && $todo;
+        }
+    }
+
+    public function cargar()
+    {
+        if (isset($_POST)) {
+            $id = $_POST['id'] ? $_POST['id'] : false;
+            $observacion = $_POST['observacion'] ? $_POST['observacion'] : false;
+            $medicamento = $_POST['medicamento'] ? $_POST['medicamento'] : false;
+
+            if ($id && $observacion && $medicamento) {
+                $update = new Pedido();
                 $update->setDescripcion($observacion);
                 $update->setMedicamento($medicamento);
                 $update->getUpdate($id);
-                $numero=$update->enviar($id);
-                $num=$numero->fetch_object();
-                if($num->alta!=0){
-
-                    header('Location:'. base_url . 'pedido/verInternaciones');                    
-                }else{
-                    header('Location:'. base_url . 'pedido/index');
-                
-
+                $numero = $update->enviar($id);
+                $num = $numero->fetch_object();
+                if ($num->alta == 1) {
+                    // hay internados con 0 y 1
+                    header('Location:' . base_url . 'pedido/verInternaciones');
+                } else {
+                    header('Location:' . base_url . 'pedido/index');
                 }
             }
         }
     }
-
-
 }
