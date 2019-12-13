@@ -79,7 +79,7 @@
 								<?php $servicios = Pedido::getAllServicios(); ?>
 								<select class="form-control" name="servicio">
 									<?php while ($servi = $servicios->fetch_object()) : ?>
-										<option value="<?= $servi->id_servicio ?>" <?= isset($ser) && is_objet($ser) && $ped->id_servicio == $medico->id_servicio ? 'selected' : ''; ?>>
+										<option value="<?= $servi->id_servicio ?>" <?= isset($ser) && is_object($ser) && $ped->id_servicio == $medico->id_servicio ? 'selected' : ''; ?>>
 											<?= $servi->descripcion ?>
 										</option>
 									<?php endwhile; ?>

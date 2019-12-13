@@ -34,6 +34,7 @@ class usuarioController
 			$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
 			$email = isset($_POST['email']) ? $_POST['email'] : false;
 			$password = isset($_POST['password']) ? $_POST['password'] : false;
+			$rol = isset($_POST['rol']) ? $_POST['rol'] : false;
 
 			if ($nombre_usuario && $nombre && $apellidos && $email && $password) {
 				$usuario = new Usuario();
@@ -42,6 +43,7 @@ class usuarioController
 				$usuario->setApellido($apellidos);
 				$usuario->setEmail($email);
 				$usuario->setPassword($password);
+				$usuario->setRol($rol);
 
 				$save = $usuario->save();
 				if ($save) {
@@ -55,7 +57,7 @@ class usuarioController
 		} else {
 			$_SESSION['register'] = "failed";
 		}
-		header("Location:" . base_url . 'usuario/registro');
+		header("Location:" . base_url . 'usuario/gestion');
 	}
 
 	public function login()

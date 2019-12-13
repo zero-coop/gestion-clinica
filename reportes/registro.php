@@ -5,10 +5,14 @@ require __DIR__ . '/../config/db.php';
 
 $obj = new Recibo();
 $tabla = $obj->getInicio();
+$fecha = date('d-m-Y');
 
 $html = "
 <body>
-<img style='text-align:left' src='http://localhost/gestion-clinica/assets/img/png.jpg' width='10%'>
+<div>
+    <img style='text-align:left' src='http://localhost/gestion-clinica/assets/img/png.jpg' width='15%'>
+    <h2 style='text-align:right; font-family:Helvetica; color:grey;'>$fecha</h2>
+</div>
 <h1 style='text-align:center; font-family:Helvetica; color:green;'>Clinica</h1>
 <h2 style='text-align:center; font-family:Helvetica; color:grey;'>Registro de Pagos</h2>
 <table style='' width='100%'>

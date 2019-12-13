@@ -26,9 +26,7 @@ class pedidoController
             $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : false;
             $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
 
-            echo $id_paciente .'|'. $medico .'|'. $servicio .'|'. $precio;
-        
-            if ($id_paciente && $medico && $precio) {
+            if ($id_paciente && $medico) {
                 $pedido = new Pedido();
                 $paciente = $pedido->getPacientexObra($id_paciente);
                 $pedido->setIdPacientexObraSocial($paciente);

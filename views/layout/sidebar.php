@@ -84,11 +84,11 @@
         <li class="list-group-item"><a href="<?=base_url?>paciente/gestion"><i class="fas fa-user-friends"></i> Gestionar pacientes</a></li>
         <li class="list-group-item"><a href="<?=base_url?>pedido/gestion"><i class="fas fa-list-alt"></i> Gestionar atenciones</a></li>
         <li class="list-group-item"><a href="<?=base_url?>pedido/internaciones"><i class="fas fa-clinic-medical"></i> Internaciones</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion"><i class="fas fa-id-card"></i> Gestionar Obras Sociales</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>medico/index"><i class="fas fa-user-md"></i></i> Gestionar doctores</a></li>
+        <li class="list-group-item"><a href="<?=base_url?>recibo/registro"><i class="fas fa-search-dollar"></i> Registro de pagos</a></li>
         <?php if(Utils::showAdmin()): ?>
-          <li class="list-group-item"><a href="<?=base_url?>obrasociales/gestion"><i class="fas fa-id-card"></i> Gestionar Obras Sociales</a></li>
-          <li class="list-group-item"><a href="<?=base_url?>medico/index"><i class="fas fa-user-md"></i></i> Gestionar doctores</a></li>				
-				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion"><i class="fas fa-user-edit"></i> Gestiona usuarios</a></li>
-				  <li class="list-group-item"><a href="<?=base_url?>recibo/registro"><i class="fas fa-search-dollar"></i> Registro de pagos</a></li>
+				  <li class="list-group-item"><a href="<?=base_url?>usuario/gestion"><i class="fas fa-user-edit"></i> Gestiona usuarios</a></li>  
         <?php endif; ?>
 
 			

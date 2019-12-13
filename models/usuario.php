@@ -105,7 +105,7 @@ class Usuario
 	
 	public function save()
 	{
-		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre_usuario()}','{$this->getNombre()}', '{$this->getApellido()}', '{$this->getEmail()}', '{$this->getPassword()}', 'admin', null);";
+		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre_usuario()}','{$this->getNombre()}', '{$this->getApellido()}', '{$this->getEmail()}', '{$this->getPassword()}', '{$this->getRol()}', null);";
 		$save = $this->db->query($sql);
 
 		$result = false;

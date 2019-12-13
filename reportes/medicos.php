@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require __DIR__ . '/../models/paciente.php';
 require __DIR__ . '/../models/medico.php';
@@ -6,10 +6,14 @@ require __DIR__ . '/../config/db.php';
 
 $obj = new Medico();
 $tabla = $obj->getAll();
+$fecha = date('d-m-Y');
 
 $html = "
 <body>
-<img style='text-align:left' src='http://localhost/gestion-clinica/assets/img/png.jpg' width='10%'>
+<div>
+    <img style='text-align:left' src='http://localhost/gestion-clinica/assets/img/png.jpg' width='15%'>
+    <h2 style='text-align:right; font-family:Helvetica; color:grey;'>$fecha</h2>
+</div>
 <h1 style='text-align:center; font-family:Helvetica; color:green;'>Clinica</h1>
 <h2 style='text-align:center; font-family:Helvetica; color:grey;'>Medicos</h2>
 <table style='' width='100%'>
@@ -23,19 +27,18 @@ $html = "
 <th style='border-bottom: 1px solid #ddd; padding: 10px; text-align: left; background-color: #4CAF50; color: white;'>CELULAR</th>
 </tr>";
 
-while($mos = $tabla->fetch_assoc()){
- 
+while ($mos = $tabla->fetch_assoc()) {
+
     $html .= "<tr style='hover {background-color: #f5f5f5;};nth-child(even) {background-color: #f2f2f2;}'>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['id_medico']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['apellido']. ', ' .$mos['nombre']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['dni']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['especialidad']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['matricula']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['domicilio']."</td>
-                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>".$mos['celular']."</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['id_medico'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['apellido'] . ', ' . $mos['nombre'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['dni'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['especialidad'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['matricula'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['domicilio'] . "</td>
+                <td style='border-bottom: 1px solid #ddd;  padding: 10px;text-align: left;'>" . $mos['celular'] . "</td>
     
             </tr>";
-
 }
 $html .= "</table>";
 
