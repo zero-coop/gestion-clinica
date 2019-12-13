@@ -46,7 +46,7 @@ class MedicoController{
 
 	public function save()
 	{
-		Utils::isAdmin();
+
 		if (isset($_POST)) {
 			$apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
@@ -71,7 +71,6 @@ class MedicoController{
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
 					$medico->setId_medico($id);
-
 					$save = $medico->edit();
 				} else {
 					$save = $medico->save();
@@ -93,16 +92,14 @@ class MedicoController{
 
 	
 	public function editar(){
-		Utils::isAdmin();
+		//Utils::isAdmin();
 		if(isset($_GET['id'])){
 			$id = $_GET['id'];
 			$edit = true;
-			
 			$medico = new Medico();
-			$medico->setId($id);
+			$medico->setId_medico($id);
 			
 			$med = $medico->getOne();
-			
 			require_once 'views/medico/crear.php';
 			
 		}else{

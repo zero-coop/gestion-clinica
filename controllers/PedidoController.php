@@ -46,18 +46,24 @@ class pedidoController
                     $save = $pedido->save();
                 }
 
+                if($servicio == 1){
+                    $re = 'pedido/internaciones';
+                } else {
+                    $re = 'pedido/gestion';
+                }
+
 
                 if ($save) {
                     $_SESSION['pedido'] = "complete";
-                    header('Location:' . base_url . 'pedido/gestion');
+                    header('Location:' . base_url . $re);
                 } else {
                     $_SESSION['pedido'] = "failed";
-                    header('Location:' . base_url . 'pedido/gestion');
+                    header('Location:' . base_url . $re);
                 }
             }
         } else {
             $_SESSION['paciente'] = "failed";
-            header('Location:' . base_url . 'paciente/gestion');
+            header('Location:' . base_url . $re);
         }
     }
 

@@ -3,10 +3,10 @@
 
 		<div class="row">
 			<div class="col-12">
-
+				<?php $med = $med->fetch_object(); ?>
 				<?php if (isset($edit) && isset($med) && is_object($med)) : ?>
 					<h1 class="text-center my-4">Editar Doctor <?= $med->apellido ?></h1>
-					<?php $url_action = base_url . "medico/save&id=" . $med->id; ?>
+					<?php $url_action = base_url . "medico/save&id=" . $med->id_medico; ?>
 
 				<?php else : ?>
 					<h1 class="text-center my-4">Nuevo Doctor</h1>
@@ -19,11 +19,11 @@
 				<form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="apellido">Apellido:</label>
-						<input type="text" class="form-control" name="apellido" value="<?= isset($med) && is_object($med) ? $med->nombre : ''; ?>" />
+						<input type="text" class="form-control" name="apellido" value="<?= isset($med) && is_object($med) ? $med->apellido : ''; ?>" />
 					</div>
 					<div class="form-group">
 						<label for="nombre">Nombre:</label>
-						<input type="text" class="form-control" name="nombre" value="<?= isset($med) && is_object($med) ? $med->apellido : ''; ?>" />
+						<input type="text" class="form-control" name="nombre" value="<?= isset($med) && is_object($med) ? $med->nombre : ''; ?>" />
 					</div>
 					<div class="form-group">
 						<label for="dni">DNI:</label>

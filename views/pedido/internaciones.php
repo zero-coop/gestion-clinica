@@ -35,7 +35,7 @@
                         <tr>
                             <td><?= $to->id_orden_atencion; ?></td>
                             <td><?= $to->medicoapellido . " " . $to->mediconombre; ?></td>
-                            <td><?= $to->pacienteapellido . " ". $to->pacientenombre; ?></td>
+                            <td><?= $to->apellido . " ". $to->nombre; ?></td>
                             <td><?= $to->fecha; ?></td>
                             <td>
                             <a href="<?= base_url ?>pedido/darAlta&id=<?= $to->id_orden_atencion ?>"><button class="btn btn-success">Alta</button></a>

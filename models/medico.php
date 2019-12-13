@@ -116,11 +116,7 @@ class Medico{
 	}
 
 	public function edit(){
-		$sql = "UPDATE medicos SET apellido='{$this->getApellido()}', nombre='{$this->getNombre()}',dni={$this->getDni()},especialidad='{$this->getEspecialidad()}', matricula='{$this->getMatricula()}',domicilio='{$this->getDomicilio()}',telefono={$this->getTelefono()}, celular={$this->getCelular()} WHERE id=$this->id_medico";
-		
-		
-		// $sql .= " WHERE id={$this->id};";
-		
+		$sql = "UPDATE medicos SET apellido='{$this->getApellido()}', nombre='{$this->getNombre()}',dni={$this->getDni()},especialidad='{$this->getEspecialidad()}', matricula='{$this->getMatricula()}',domicilio='{$this->getDomicilio()}',telefono={$this->getTelefono()}, celular={$this->getCelular()} WHERE id_medico=$this->id_medico";
 		
 		$save = $this->db->query($sql);
 		

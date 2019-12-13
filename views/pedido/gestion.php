@@ -70,7 +70,7 @@
                             <td><?= $ped->medicoapellido . " " . $ped->mediconombre; ?></td>
                             <td><?= $ped->pacienteapellido . " ". $ped->pacientenombre; ?></td>
                             <td><?= $ped->descripcion; ?></td>
-                            <td><?= $ped->precio; ?></td>
+                            <td>$<?= $ped->precio; ?></td>
                             <td><?= $ped->fecha; ?></td>
                             <td>
                             <a href="<?= base_url ?>recibo/crear&id=<?= $ped->id_orden_atencion ?>"><button class="btn btn-success">Pago</button></a>
